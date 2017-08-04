@@ -11,6 +11,7 @@
         model.getAlbumByName = getAlbumByName;
         model.getArtistByName = getArtistByName;
         model.getTrackByName = getTrackByName;
+        model.findObjectById = findObjectById;
 
 
         function getAlbumByName(albumName) {
@@ -31,6 +32,28 @@
 
         function getTrackByName(trackName) {
             var url = "/api/trackName?trackName =" +trackName;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function findArtistById(id) {
+            var url = "/api/artist?id =" +id;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+        function findTrackById(id) {
+            var url = "/api/track?id =" +id;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+        function findAlbumById(id) {
+            var url = "/api/album?id =" +id;
             return $http.get(url)
                 .then(function (response) {
                     return response.data;
