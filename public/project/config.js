@@ -3,7 +3,7 @@
  */
 (function () {
     angular
-        .module("spotifyApp")
+        .module("Musiker")
         .config(configuration);
 
     function configuration($routeProvider) {

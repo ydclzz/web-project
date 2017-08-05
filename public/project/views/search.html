@@ -59,19 +59,31 @@
                 Search Artist
             </button>
         </div>
-        <table class="table">
-            <tr ng-repeat="content in model.search">
-                <div ng-switch="content.type">
-                    <div ng-switch-when="album">
-                        <ng-include src="'album.html'">
-                    </div>
-                    <div ng-switch-when="artist">
-                        <ng-include src="'artist.html'">
-                    </div>
-                    <div ng-switch-when="track">
-                        <ng-include src="'song.html'">
-                    </div>
-                </div>
+        <table ng-show="model.search" class="table">
+            <tr ng-repeat="song in model.search">
+                <td>
+                    <a href="#!/details/song/{{model.search.id}}">
+                        {{song.name}}
+                    </a>
+                </td>
+                <td>
+                    {{song.artists[0].name}}
+                </td>
+                <td>
+                    {{song.album.name}}
+                </td>
+                <!--<ng-include src="'views/song.html'">-->
+                <!--<div ng-switch="content.type">-->
+                    <!--<div ng-switch-when="album">-->
+                        <!--<ng-include src="'album.html'">-->
+                    <!--</div>-->
+                    <!--<div ng-switch-when="artist">-->
+                        <!--<ng-include src="'artist.html'">-->
+                    <!--</div>-->
+                    <!--<div ng-switch-when="track">-->
+
+                    <!--</div>-->
+                <!--</div>-->
             </tr>
         </table>
 

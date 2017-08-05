@@ -3,7 +3,7 @@
  */
 (function () {
     angular
-        .module("spotifyApp", ["ngRoute"])
+        .module("Musiker", ["ngRoute"])
 
 
     // function detailsController($routeParams, movieService) {
