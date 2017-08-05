@@ -7,6 +7,7 @@
         var model = this;
 
         model.searchTrack = searchTrack;
+        model.showDetails = showDetails;
 
         function searchTrack(song) {
             searchService.searchSong(song)
@@ -16,6 +17,10 @@
                         // console.log(model.search[u].name);
                     }
                 })
+        }
+
+        function showDetails(song) {
+            model.song = song;
         }
     }
 })();
