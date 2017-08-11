@@ -5,12 +5,12 @@ var app = require("../../express");
 var songModel = require("../model/song.model.server");
 
 
-app.post("/api/user/:userId/song", createSongForUser);
-app.get("/api/song", findSongBySongName);
-app.get("/api/user/:userId/song", findAllSongsByUser);
-app.get("/api/song/:songId", findSongById);
-app.put("/api/song/:songId", updateSong);
-app.delete("/api/song/:songId", deleteSong);
+app.post("/projectapi/user/:userId/song", createSongForUser);
+app.get("/projectapi/song", findSongBySongName);
+app.get("/projectapi/user/:userId/song", findAllSongsByUser);
+app.get("/projectapi/song/:songId", findSongById);
+app.put("/projectapi/song/:songId", updateSong);
+app.delete("/projectapi/song/:songId", deleteSong);
 
 
 function createSongForUser(req,res) {

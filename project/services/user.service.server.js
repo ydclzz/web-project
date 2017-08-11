@@ -5,15 +5,15 @@ var app = require("../../express");
 var userModel = require("../model/user.model.server");
 
 
-app.post("/api/user", createUser);
-app.get("/api/user", findUser);
-app.get("/api/user/:userId", findUserById);
-app.put("/api/user/:userId", updateUser);
-app.delete("/api/user/:userId", deleteUser);
-app.delete("/api/user/:userId/song/:songId", removeSong);
-app.post("/api/user/:userId/song/:songId", addSong);
-app.get("/api/user/:userId/following", findFollowingByUser);
-app.get("/api/user/:userId/follower", findFollowersByUser);
+app.post("/projectapi/user", createUser);
+app.get("/projectapi/user", findUser);
+app.get("/projectapi/user/:userId", findUserById);
+app.put("/projectapi/user/:userId", updateUser);
+app.delete("/projectapi/user/:userId", deleteUser);
+app.delete("/projectapi/user/:userId/song/:songId", removeSong);
+app.post("/projectapi/user/:userId/song/:songId", addSong);
+app.get("/projectapi/user/:userId/following", findFollowingByUser);
+app.get("/projectapi/user/:userId/follower", findFollowersByUser);
 
 function createUser(req,res) {
     var user = req.body;

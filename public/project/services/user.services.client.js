@@ -25,54 +25,54 @@
         return api;
 
         function findUserByCredentials(username,password) {
-            var url = "/api/user?username="+username+"&password="+password;
+            var url = "/projectapi/user?username="+username+"&password="+password;
             return $http.get(url);
         }
 
         function findUserById(userId) {
-            var url = "/api/user/" + userId;
+            var url = "/projectapi/user/" + userId;
             return $http.get(url);
 
         }
 
         function createUser(user) {
-            var url = "/api/user";
+            var url = "/projectapi/user";
             return $http.post(url,user);
         }
 
         function findUserByUsername(username) {
-            var url = "/api/user?username="+username;
+            var url = "/projectapi/user?username="+username;
             return $http.get(url);
         }
 
         function updateUser(userId,user){
-            var url = "/api/user/" + userId;
+            var url = "/projectapi/user/" + userId;
             return $http.put(url,user);
         }
 
         function deleteUser(userId){
-            var url = "/api/user/" + userId;
+            var url = "/projectapi/user/" + userId;
             return $http.delete(url);
 
         }
 
         function removeSong(userId, songId) {
-            var url = "/api/user/" + userId + "/song/" + songId;
+            var url = "/projectapi/user/" + userId + "/song/" + songId;
             return $http.delete(url);
         }
 
         function addSong(userId, songId) {
-            var url = "/api/user/" + userId + "/song/" + songId;
+            var url = "/projectapi/user/" + userId + "/song/" + songId;
             return $http.post(url);
         }
 
         function findFollowingByUser(userId) {
-            var url = "/api/user/" + userId + "/following";
+            var url = "/projectapi/user/" + userId + "/following";
             return $http.get(url);
         }
 
         function findFollowersByUser(userId) {
-            var url = "/api/user/" + userId + "/follower";
+            var url = "/projectapi/user/" + userId + "/follower";
             return $http.get(url);
         }
     }

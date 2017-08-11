@@ -22,33 +22,33 @@
 
 
         function findSongById(songId) {
-            var url = "/api/song/" + userId;
+            var url = "/projectapi/song/" + userId;
             return $http.get(url);
 
         }
 
         function findAllSongsByUser(userId) {
-            var url = "/api/user/" + userId + "/song";
+            var url = "/projectapi/user/" + userId + "/song";
             return $http.get(url);
         }
 
         function createSongForUser(userId, song) {
-            var url = "/api/user/" + userId + "/song";
+            var url = "/projectapi/user/" + userId + "/song";
             return $http.post(url,song);
         }
 
         function findSongBySongName(songname) {
-            var url = "/api/song?songname="+songname;
+            var url = "/projectapi/song?songname="+songname;
             return $http.get(url);
         }
 
         function updateSong(songId,song){
-            var url = "/api/song/" + songId;
+            var url = "/projectapi/song/" + songId;
             return $http.put(url,song);
         }
 
         function deleteSong(songId){
-            var url = "/api/song/" + songId;
+            var url = "/projectapi/song/" + songId;
             return $http.delete(url);
 
         }
