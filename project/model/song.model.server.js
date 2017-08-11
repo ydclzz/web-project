@@ -1,5 +1,5 @@
 var mongoose = require("mongoose");
-var songSchema = require("./song.schema.server");
+var songSchema = require("./song.schema.services");
 var songModel = mongoose.model("SongModel", songSchema);
 var userModel = require("./user.model.server")
 var db = require("./database");
