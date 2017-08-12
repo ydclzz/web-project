@@ -77,8 +77,8 @@ function deleteSong(req, res) {
     songModel
         .deleteSongById(songId)
         .then(function (song) {
-            res.json(song);
+            res.send("1");
         }, function (err) {
-            res.sendStatus(404).send(err);
+            res.send("0");
         });
 }

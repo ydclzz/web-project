@@ -12,7 +12,9 @@ app.put("/projectapi/user/:userId", updateUser);
 app.delete("/projectapi/user/:userId", deleteUser);
 app.delete("/projectapi/user/:userId/song/:songId", removeSong);
 app.post("/projectapi/user/:userId/song/:songId", addSong);
-app.get("/projectapi/user/:userId/following", findFollowingByUser);
+app.post("/projectapi/user/:userId/following", addFollowingByUser);
+app.post("/projectapi/user/:userId/follower/:followerId", addFollowerByUser);
+app.get("/projectapi/user/:userId/following/:followingId", findFollowingByUser);
 app.get("/projectapi/user/:userId/follower", findFollowersByUser);
 
 function createUser(req,res) {
@@ -84,9 +86,9 @@ function deleteUser(req,res) {
     userModel
         .deleteUserById(userId)
         .then(function (user) {
-            res.json(user);
+            res.send("1");
         }, function (err) {
-            res.sendStatus(404).send(err);
+            res.send("0");
         });
 }
 
@@ -96,7 +98,9 @@ function removeSong(req,res) {
     userModel
         .removeSong(userId,songId)
         .then(function (status) {
-            res.send(status);
+            res.send("1");
+        }, function (err) {
+            res.send("0");
         });
 }
 
@@ -106,9 +110,9 @@ function addSong(req,res) {
     userModel
         .addSong(userId,songId)
         .then(function (user) {
-            res.json(user);
+            res.send("1");
         }, function (err) {
-            res.sendStatus(404).send(err);
+            res.send("0");
         });
 }
 
@@ -131,5 +135,29 @@ function findFollowersByUser(req, res) {
             res.json(follwer);
         }, function (err) {
             res.sendStatus(404).send(err);
+        });
+}
+
+function addFollowerByUser(req, res) {
+    var userId = req.query.userId;
+    var followerId = req.params.followerId;
+    userModel
+        .addFollowerByUser(userId,followerId)
+        .then(function (user) {
+            res.send("1");
+        }, function (err) {
+            res.send("0");
+        });
+}
+
+function addFollowingByUser(req,res) {
+    var userId = req.query.userId;
+    var followeingId = req.params.followingId;
+    userModel
+        .addFollowingByUser(userId,followerId)
+        .then(function (user) {
+            res.send("1");
+        }, function (err) {
+            res.send("0");
         });
 }
