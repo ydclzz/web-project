@@ -11,6 +11,7 @@
         init();
 
         function register(user) {
+            console.log(user.username);
             if (model.user.password === model.verifypassword) {
                 userService.findUserByUsername(user.username)
                     .then(function (response) {
@@ -23,11 +24,11 @@
                         }
                     })
                     .then(function(response){
-                        if(response && response!="exist"){
+                        if(response && response!=="exist"){
                             user = response.data;
                             $location.url("/user/" + user._id);
                         }
-                        else if(response!="exist"){
+                        else if(response!=="exist"){
                             model.errorMessage = "something goes wrong";
                         }
 

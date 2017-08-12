@@ -13,16 +13,15 @@ app.get("/projectapi/user/:userId/song", findAllSongsByUser);
 app.get("/projectapi/song/:songId", findSongById);
 app.put("/projectapi/song/:songId", updateSong);
 app.post("/projectapi/upload", upload.single('myFile'), uploadSong);
-
 app.delete("/projectapi/song/:songId", deleteSong);
 
 function uploadSong(req, res) {
 
-
     var myFile = req.file;
 
     var userId = req.body.userId;
-
+    console.log("gagag");
+    console.log(userId);
     var originalname = myFile.originalname; // file name on user's computer
     var filename = myFile.filename;     // new file name in upload folder
     var path = myFile.path;         // full path of uploaded file
@@ -30,12 +29,14 @@ function uploadSong(req, res) {
     var size = myFile.size;
     var mimetype = myFile.mimetype;
 
-    var songurl = '/music/' + filename;
+    var song= { "url":'/music/' + filename,
+                "name": originalname
+    };
 
-    songModel.createSongForUser(widgetId,thiswidget)
+    songModel.createSongForUser(userId,song)
         .then(function () {
-            var callbackUrl = "/project/#!/user/" + userId + "/profile";
-            res.redirect(301, callbackUrl);
+            var callbackUrl = "/project/#!/user/" + userId;
+            res.redirect(callbackUrl);
         })
 }
 

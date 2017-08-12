@@ -14,7 +14,7 @@
                 controllerAs: "model"
             })
             .when("/play", {
-                templateUrl: "views/templates/play.html",
+                templateUrl: "views/templates/play.html"
             })
             .when("/register", {
                 templateUrl: "views/templates/register.html",

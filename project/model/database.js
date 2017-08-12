@@ -1,6 +1,6 @@
-// var q = require('q');
+var q = require('q');
 
-// var connectionString = 'mongodb://127.0.0.1:27017/project'; // for local
+var connectionString = 'mongodb://127.0.0.1:27017/project'; // for local
 // if(process.env.MLAB_USERNAME_WEBDEV) { // check if running remotely
 //     var username = process.env.MLAB_USERNAME_WEBDEV; // get from environment
 //     var password = process.env.MLAB_PASSWORD_WEBDEV;
@@ -10,8 +10,8 @@
 // Replace "@ds157268.mlab.com:57268/heroku_nh37fqq4"
 // above with your own URL given to you by mLab
 
-// var mongoose2 = require("mongoose").Mongoose;
+var mongoose2 = require("mongoose");
 // var instance2 = new Mongoose();
-// var db = instance2.connect(connectionString);
-// mongoose2.Promise = q.Promise;
-// module.exports = db;
+var db = mongoose2 .connect(connectionString);
+mongoose2.Promise = q.Promise;
+module.exports = db;

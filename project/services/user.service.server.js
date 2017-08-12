@@ -40,6 +40,7 @@ function findUserById(req,res) {
 function findUser(req,res) {
     var username = req.query.username;
     var password = req.query.password;
+    console.log(username);
     if(username && password) {
         userModel
             .findUserByCredentials(username, password)
@@ -54,11 +55,14 @@ function findUser(req,res) {
             });
     }
     else if(username) {
+        console.log(username);
         userModel
             .findUserByUsername(username)
             .then(function (user) {
-                if (user === null)
+                if (user === null){
+                    console.log("None");
                     return res.send("0");
+                }
                 else
                     return res.json(user);
 

@@ -43,6 +43,7 @@
         }
 
         function findUserByUsername(username) {
+            console.log("userService" + username);
             var url = "/projectapi/user?username="+username;
             return $http.get(url);
         }

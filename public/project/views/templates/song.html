@@ -20,6 +20,15 @@
         </button>
     </div>
 
+    <div>
+        <label for = "upload">Upload Song</label>
+        <form action="/projectapi/upload" id = "upload" method="post" enctype="multipart/form-data">
+            <input  name="myFile"    type="file" class="form-control"/>
+            <input  name="userId"    value="{{model.userId}}"   style="display: none"/>
+            <button type="submit"    class="btn btn-block btn-success">Upload Song</button>
+        </form>
+    </div>
+
     <h1>Your Favourite song List</h1>
     <ul class="list-group item-row">
         <li ng-repeat="song in model.songs" class="list-group-item content-list">
