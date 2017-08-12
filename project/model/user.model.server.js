@@ -15,6 +15,8 @@ userModel.addSong = addSong;
 userModel.removeSong = removeSong;
 userModel.findFollowingByUser = findFollowingByUser;
 userModel.findFollowersByUser = findFollowersByUser;
+userModel.addFollowingByUser = addFollowingByUser;
+userModel.addFollowerByUser = addFollowerByUser;
 module.exports = userModel;
 
 function findUserByCredentials(username, password) {
@@ -88,5 +90,21 @@ function findFollowersByUser(userId) {
                     return followers.indexOf(a._id) - followers.indexOf(b._id);
                 });
             });
+        })
+}
+
+function addFollowingByUser(userId, followingId) {
+    return userModel.findUserById(userId)
+        .then(function (user) {
+            user.following.push(followingId);
+            return user.save();
+        })
+}
+
+function addFollowerByUser(userId, followerId) {
+    return userModel.findUserById(userId)
+        .then(function (user) {
+            user.followers.push(followerId);
+            return user.save();
         })
 }
