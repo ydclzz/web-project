@@ -66,7 +66,7 @@ function findSongById(req,res) {
 function findSongBySongName(req, res) {
     var songname = req.query.songname;
     songModel
-        .findUserByUsername(songname)
+        .findSongBySongName(songname)
         .then(function (song) {
             if (song === null)
                 return res.send("0");

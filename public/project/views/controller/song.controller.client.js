@@ -25,7 +25,7 @@
 
         //functions
         function searchSong() {
-            songService.findAllSongsByUser(model.userId)
+            songService.findSongBySongName(model.searchContent)
                 .then(function (response) {
                     model.searchresult = response.data;
                 })
