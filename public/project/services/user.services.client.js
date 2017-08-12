@@ -20,8 +20,8 @@
             "addSong":addSong,
             "findFollowingByUser":findFollowingByUser,
             "findFollowersByUser":findFollowersByUser,
-            "addFollowingByUser":findFollowingByUser,
-            "addFollowersByUser":findFollowersByUser
+            "addFollowingByUser":addFollowingByUser,
+            "addFollowersByUser":addFollowersByUser
         };
 
         return api;
