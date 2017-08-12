@@ -1,0 +1,45 @@
+<div class="container full-height">
+    <form class="form-titled form-horizontal">
+        <h5>Username</h5>
+        <input type="text"
+               class="form-control input-block"
+               placeholder="username"
+               ng-model="model.user.username">
+        <h5>Password</h5>
+        <input type="Password"
+               class="form-control input-block"
+               placeholder="password"
+               ng-model="model.user.password"
+               id="pass"
+        >
+        <h5>First Name</h5>
+        <input type="text"
+               class="form-control input-block"
+               placeholder="first name"
+               ng-model="model.user.firstName"
+        >
+        <h5>Last Name</h5>
+        <input type="text"
+               class="form-control input-block"
+               placeholder="last name"
+               ng-model="model.user.lastName">
+        <a class="btn btn-primary btn-block"
+           role="button"
+           href="#!/user/{{model.user._id}}/song">Songs</a>
+        <a class="btn btn-primary btn-block"
+           role="button"
+           href="#!/user/{{model.user._id}}/follow">Follow List</a>
+        <a class="btn btn-primary btn-block"
+           role="button"
+           id="passbtn"
+           href=""
+           ng-click="model.showPassword()">Show Password</a>
+        <a class="btn btn-primary btn-block"
+           role="button"
+           ng-click="model.updateUser(model.user)">Update Profile</a>
+        <a class="btn btn-danger btn-block"
+           role="button"
+           ng-click="model.unregister()">Unregister</a>
+        <a class="btn btn-danger btn-block" href="#!/login" role="button">Log Out</a>
+    </form>
+</div>

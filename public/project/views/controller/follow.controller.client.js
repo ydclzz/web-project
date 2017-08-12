@@ -17,12 +17,16 @@
         function init() {
             userService.findFollowersByUser(model.userId)
                 .then(function (response) {
-                    model.followers = response.data;
+                    if(response) {
+                        model.followers = response.data;
+                    }
                 });
 
             userService.findFollowingByUser(model.userId)
                 .then(function (response) {
-                    model.followings = response.data;
+                    if(response) {
+                        model.followings = response.data;
+                    }
                 });
         }
         init();
@@ -36,9 +40,13 @@
         }
 
         function followUser() {
-            userService.findUserByUsername(userid)
+            userService.addFollowingByUser(model.userId, model.searchresult._id)
                 .then(function (response) {
-                    model.searchresult = response.data;
+                })
+            userService.addFollowersByUser(model.searchresult._id, model.userId)
+                .then(function (response) {
+                    alert("follow success");
+                    init();
                 })
         }
 

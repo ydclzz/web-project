@@ -36,6 +36,11 @@
                 controller: "followController",
                 controllerAs: "model"
             })
+            .when("/user/:uid/song", {
+                templateUrl: "views/templates/song.html",
+                controller: "songController",
+                controllerAs: "model"
+            })
 
 
     }

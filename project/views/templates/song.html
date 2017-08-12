@@ -1,0 +1,32 @@
+
+<div class="search">
+        <h1>MUSIKER</h1>
+        <p>search songs and add to your collection</p>
+        <div class="searchbar">
+            <input placeholder="Shape of You"
+                   ng-model = "model.searchContent"
+                   class="form-control"/>
+            <button ng-click="model.searchSong(model.searchContent)" class="btn btn-primary">
+                Search Song
+            </button>
+        </div>
+
+    <div ng-show="model.searchresult">
+        <h2>song Id: </h2>{{model.searchresult._id}}
+        <h2>song name: </h2>{{model.searchresult.name}}
+        <button ng-click="'model.addToList()'"
+                class="btn btn-info btn-block">
+            Add
+        </button>
+    </div>
+
+    <h1>Your Favourite song List</h1>
+    <ul class="list-group item-row">
+        <li ng-repeat="song in model.songs" class="list-group-item content-list">
+            <a href="/projectapi/music?id={{song._id}}">{{song.name}}</h5></a>
+            <!--<a href="">-->
+            <!--<span class="glyphicon glyphicon-cog icon-right"></span>-->
+            <!--</a>-->
+        </li>
+    </ul>
+</div>

@@ -80,12 +80,12 @@
 
         function addFollowingByUser(userId, followingId) {
             var url = "/projectapi/user/" + userId + "/following/" + followingId;
-            return $http.post(url);
+            return $http.put(url);
         }
 
         function addFollowersByUser(userId, followerId) {
             var url = "/projectapi/user/" + userId + "/follower/" + followerId;
-            return $http.post(url);
+            return $http.put(url);
         }
     }
 
