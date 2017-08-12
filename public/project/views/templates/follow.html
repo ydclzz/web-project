@@ -1,0 +1,39 @@
+<div class="container-fluid">
+    <h1>Followings</h1>
+    <ul class="list-group white-list item-row">
+        <li ng-repeat="following in model.followings" class="list-group-item">
+            <a href=""><h3>{{following.username}}</h3></a>
+            <a href="">
+                <span class="glyphicon glyphicon-cog icon-right"></span>
+            </a>
+        </li>
+    </ul>
+
+    <h1>Followers</h1>
+    <ul class="list-group white-list item-row">
+        <li ng-repeat="follower in model.followers" class="list-group-item">
+            <a href=""><h3>{{follower.username}}</h3></a>
+            <a href="">
+                <span class="glyphicon glyphicon-cog icon-right"></span>
+            </a>
+        </li>
+    </ul>
+    <div class="searchbar">
+        <input placeholder="type username"
+               ng-model = "model.searchContent"
+               class="form-control"/>
+        <button ng-click="model.searchUser(model.searchContent)" class="btn btn-primary btn-block">
+            Search User
+        </button>
+    </div>
+    <div ng-show="model.searchresult">
+        <h4>username: </h4>{{model.searchresult.username}}
+        <h4>first name: </h4>{{model.searchresult.firstName}}
+        <h4>last name: </h4>{{model.searchresult.lastName}}
+    </div>
+    <button ng-click="model.followUser()" class="btn btn-info">
+        Follow
+    </button>
+
+
+</div>

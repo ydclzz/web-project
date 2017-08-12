@@ -1,5 +1,5 @@
 var mongoose = require("mongoose");
-var songSchema = require("./song.schema.services");
+var songSchema = require("./song.schema.server");
 var songModel = mongoose.model("SongModel", songSchema);
 var userModel = require("./user.model.server")
 var db = require("./database");
@@ -16,7 +16,7 @@ module.exports = songModel;
 
 function createSongForUser(userId, song) {
     song._user = userId;
-    let songTmp = null;
+    var songTmp = null;
     return songModel
         .create(song)
         .then(function (songDoc) {
@@ -41,7 +41,7 @@ function findAllSongsByUser(userId) {
 }
 
 function deleteSong(userId, songId) {
-    let songTmp = null;
+    var songTmp = null;
     return songModel
         .remove({_id: songId})
         .then(function (song) {

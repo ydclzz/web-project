@@ -50,7 +50,7 @@ function removeSong(userId, songId) {
     return userModel
         .findById(userId)
         .then(function (user) {
-            let index = user.songs.indexOf(songId);
+            var index = user.songs.indexOf(songId);
             user.songs.splice(index, 1);
             return user.save();
         })
@@ -68,7 +68,7 @@ function addSong(userId, songId) {
 function findFollowingByUser(userId) {
     return userModel.findUserById(userId)
         .then(function (user) {
-            let following = user.following;
+            var following = user.following;
             return userModel.find({ _id: { $in: following } }).exec(function(err, docs) {
                 docs.sort(function(a, b) {
                     // Sort docs by the order of their index in widgets.
@@ -81,7 +81,7 @@ function findFollowingByUser(userId) {
 function findFollowersByUser(userId) {
     return userModel.findUserById(userId)
         .then(function (user) {
-            let followers = user.followers;
+            var followers = user.followers;
             return userModel.find({ _id: { $in: followers } }).exec(function(err, docs) {
                 docs.sort(function(a, b) {
                     // Sort docs by the order of their index in widgets.
