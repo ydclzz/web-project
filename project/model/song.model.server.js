@@ -10,7 +10,7 @@ songModel.findSongBySongName = findSongBySongName;
 songModel.findAllSongsByUser = findAllSongsByUser;
 songModel.deleteSong = deleteSong;
 songModel.updateSong = updateSong;
-
+songModel.getSongUrl = getSongUrl;
 
 module.exports = songModel;
 
@@ -57,4 +57,12 @@ function updateSong(songId, song) {
     return songModel
         .updateOne({_id: songId},
             {$set: song});
+}
+
+function getSongUrl(songId) {
+    return songModel
+        .findById(songId)
+        .then(function (song) {
+            return song.url;
+        })
 }

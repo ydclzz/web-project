@@ -24,8 +24,8 @@
         init();
 
         //functions
-        function searchSong() {
-            songService.findSongBySongName(model.searchContent)
+        function searchSong(searchContent) {
+            songService.findSongBySongName(searchContent)
                 .then(function (response) {
                     model.searchresult = response.data;
                 })

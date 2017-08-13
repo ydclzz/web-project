@@ -30,7 +30,11 @@ body {
     font-size: 30px;
 }
 
-
+.list-group-item{
+    background: transparent;
+    border-collapse: collapse;
+    border-color: transparent;
+}
 
 
 

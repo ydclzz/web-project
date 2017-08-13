@@ -9,16 +9,10 @@
             <button ng-click="model.searchTrack(model.searchContent)" class="btn btn-primary">
                 Search Song
             </button>
-            <button ng-click="model.searchAlbum(model.searchContent)" class="btn btn-primary">
-                Search Album
-            </button>
-            <button ng-click="model.searchArtist(model.searchContent)" class="btn btn-primary">
-                Search Artist
-            </button>
         </div>
 
         <div class = "search-table container-fluid">
-            <table ng-show = "model.search" class="col-lg-4 col-md-4 col-xs-4">
+            <table ng-show = "model.search" class="col-xs-4">
                 <tr class="search-table" ng-repeat="song in model.search">
                     <td>
                         <a ng-click="model.showDetails(song)">
@@ -31,21 +25,18 @@
                 </tr>
             </table>
 
-            <div ng-show="model.search" class="col-lg-8 col-md-8 col-xs-8">
+            <div ng-show="model.song" class="col-xs-8">
                 <ul class="list-group lch-list" style="text-align: center">
                     <li class="ng-binding list-group-item">
                         Artist:   {{model.song.artists[0].name}}
                     </li >
-
                     <li class="ng-binding list-group-item">
                         Album:    {{model.song.album.name}}
                     </li>
-
                     <li class="ng-binding list-group-item">
                         <img ng-src="{{model.song.album.cover}}"/>
                     </li>
                 </ul>
-
             </div>
         </div>
 

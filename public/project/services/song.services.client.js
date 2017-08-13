@@ -1,6 +1,3 @@
-/**
- * Created by Chuhan on 8/11/17.
- */
 (function () {
     angular
         .module("Musiker")
@@ -22,9 +19,8 @@
 
 
         function findSongById(songId) {
-            var url = "/projectapi/song/" + userId;
+            var url = "/projectapi/song/" + songId;
             return $http.get(url);
-
         }
 
         function findAllSongsByUser(userId) {
@@ -50,7 +46,6 @@
         function deleteSong(songId){
             var url = "/projectapi/song/" + songId;
             return $http.delete(url);
-
         }
 
     }

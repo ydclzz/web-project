@@ -1,6 +1,3 @@
-/**
- * Created by Chuhan on 8/11/17.
- */
 var app = require("../../express");
 var userModel = require("../model/user.model.server");
 

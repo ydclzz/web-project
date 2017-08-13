@@ -1,6 +1,3 @@
-/**
- * Created by Chuhan on 8/11/17.
- */
 var app = require("../../express");
 var songModel = require("../model/song.model.server");
 var multer = require('multer'); // npm install multer --save
@@ -29,7 +26,7 @@ function uploadSong(req, res) {
     var size = myFile.size;
     var mimetype = myFile.mimetype;
 
-    var song= { "url":'/music/' + filename,
+    var song= { "url":'/public/uploads/' + filename,
                 "name": originalname
     };
 
@@ -65,6 +62,7 @@ function findSongById(req,res) {
 
 function findSongBySongName(req, res) {
     var songname = req.query.songname;
+    songname += ".mp3";
     songModel
         .findSongBySongName(songname)
         .then(function (song) {
