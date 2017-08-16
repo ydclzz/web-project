@@ -14,8 +14,13 @@ userModel.removeSong = removeSong;
 userModel.findFollowingByUser = findFollowingByUser;
 userModel.findFollowersByUser = findFollowersByUser;
 userModel.addFollowingByUser = addFollowingByUser;
-userModel.addFollowerByUser = addFollowerByUser;
+userModel.addFollowersByUser = addFollowersByUser;
+userModel.addReview = addReview;
+userModel.removeReview = removeReview;
+userModel.addTransaction = addTransaction;
 module.exports = userModel;
+
+
 
 function findUserByCredentials(username, password) {
     return userModel.findOne({username: username, password: password});
@@ -46,6 +51,8 @@ function deleteUserById(userId) {
     return userModel.findOneAndRemove({_id: userId});
 }
 
+//song
+
 function removeSong(userId, songId) {
     return userModel
         .findById(userId)
@@ -65,6 +72,8 @@ function addSong(userId, songId) {
         });
 }
 
+
+//Follow
 function findFollowingByUser(userId) {
     return userModel.findUserById(userId)
         .then(function (user) {
@@ -99,10 +108,41 @@ function addFollowingByUser(userId, followingId) {
         })
 }
 
-function addFollowerByUser(userId, followerId) {
+function addFollowersByUser(userId, followerId) {
     return userModel.findUserById(userId)
         .then(function (user) {
             user.followers.push(followerId);
+            return user.save();
+        })
+}
+
+//review
+function addReview(userId, reviewId) {
+    return userModel
+        .findById(userId)
+        .then(function (user) {
+            user.reviews.push(reviewId);
+            return user.save();
+        });
+}
+
+function removeReview(userId, reviewId) {
+    return userModel
+        .findById(userId)
+        .then(function (user) {
+            var index = user.reviews.indexOf(reviewId);
+            user.reviews.splice(index, 1);
+            return user.save();
+        })
+}
+
+//transaction
+function addTransaction(userId, transactionId) {
+    return userModel
+        .findById(userId)
+        .then(function (user) {
+            var index = user.transactions.indexOf(transactionId);
+            user.transactions.splice(index, 1);
             return user.save();
         })
 }

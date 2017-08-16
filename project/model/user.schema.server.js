@@ -4,9 +4,12 @@ var userSchema = mongoose.Schema({
     password: String,
     firstName: String,
     lastName: String,
+    type: {type: String, enum: ['GENERAL', 'MUSICIAN', 'PUBLISHER', 'ADMIN', 'CRITIC']},
     songs: [{type: mongoose.Schema.Types.ObjectId, ref:"SongModel"}],
     following: [{type: mongoose.Schema.Types.ObjectId, ref:"ProjectUserModel"}],
     followers: [{type: mongoose.Schema.Types.ObjectId, ref:"ProjectUserModel"}],
-    isAdmin: Boolean
+    reviews: [{type: mongoose.Schema.Types.ObjectId, ref:"ReviewModel"}],
+    transactions: [{type: mongoose.Schema.Types.ObjectId, ref:"TransactionModel"}],
+    // isAdmin: Boolean
 }, {collection: "projectusers"});
 module.exports = userSchema;
