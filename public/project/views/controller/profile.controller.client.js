@@ -3,7 +3,7 @@
         .module("Musiker")
         .controller("profileController", profileController);
 
-    function profileController($routeParams,$location, userService, user) {
+    function profileController($location, userService, user) {
         //declare controller
         var model = this;
         //variable from path
