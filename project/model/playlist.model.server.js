@@ -7,9 +7,10 @@ var db = require("./database");
 
 playlistModel.createPlaylist = createPlaylist;
 playlistModel.findPlaylistById = findPlaylistById;
-playlistModel.findSongByListName = findSongByListName;
+playlistModel.findListByListName = findListByListName;
 playlistModel.findAllPlaylistsByUserId = findAllPlaylistsByUserId;
 playlistModel.deletePlaylist = deletePlaylist;
+playlistModel.updatePlaylist = updatePlaylist;
 
 playlistModel.addReview = addReview;
 playlistModel.removeReview = removeReview;
@@ -25,7 +26,7 @@ function findPlaylistById(playlistId) {
     return playlistModel.findOne({_id: playlistId});
 }
 
-function findSongByListName(playlistname) {
+function findListByListName(playlistname) {
     return playlistModel.find({name: playlistname});
 }
 
@@ -41,7 +42,25 @@ function deletePlaylist(playlistId) {
 function updatePlaylist(playlistId,playlist) {
     return playlistModel
         .updateOne({_id: playlistId},
-            {$set: song});
+            {$set: playlist});
+}
+
+function addSongToPlaylist(playlistId,songId) {
+    return playlistModel.findPlaylistById(playlistId)
+        .then(function (list) {
+            list.songlist.push(songId);
+            return user.save();
+        })
+}
+
+function removeSongFromPlaylist(playlistId, songId) {
+    return playlistModel
+        .findById(playlistId)
+        .then(function (list) {
+            var index = list.songlist.indexOf(songId);
+            list.songlist.splice(index, 1);
+            return list.save();
+        })
 }
 
 
