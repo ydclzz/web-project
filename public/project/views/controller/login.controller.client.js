@@ -14,12 +14,14 @@
             userService.findUserByCredentials(user.username, user.password)
                 .then(function(response){
                     var userDoc = response.data;
-                    if (!userDoc|| userDoc === "0") {
+                    if (!userDoc|| userDoc === false) {
                         model.errorMessage = "wrong username or password";
                     } else {
                         $rootScope.currentUser = userDoc;
                         $location.url("user/" + userDoc._id);
                     }
+                }, function() {
+                    model.errorMessage = "wrong username or password";
                 });
 
         }

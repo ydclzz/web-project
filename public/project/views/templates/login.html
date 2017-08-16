@@ -3,6 +3,9 @@
     <div class="mainhead">
         <h1>Login</h1>
     </div>
+    <div ng-show="model.errorMessage" class="alert alert-danger">
+        <div class="error-title">{{model.errorMessage}}</div>
+    </div>
     <div>
         <form class="form-horizontal">
             <input type="text"
@@ -19,9 +22,6 @@
             <a class="btn btn-success btn-block"
                href="#!/register"
                role="button">Register</a>
-            <div ng-show="model.errorMessage" class="alert alert-danger">
-                <h3 class="error-title">{{model.errorMessage}}</h3>
-            </div>
         </form>
     </div>
 </div>
