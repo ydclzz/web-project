@@ -68,10 +68,33 @@ body {
 
  }
 
-.left-menu .playlists{
+/*.left-menu .playlists{*/
+    /*overflow: auto;*/
+    /*height: 100%;*/
+    /*max-height: 400px;*/
+    /*!*overflow: auto;*!*/
+    /*!*position: relative;*!*/
+    /*!*padding: 20px;*!*/
+    /*!*background: #333;*!*/
+    /*!*margin: 10px;*!*/
+    /*!*width: 740px;*!*/
+    /*!*max-width: 97%;*!*/
+    /*!*height: 400px;*!*/
+    /*!*-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;*!*/
+/*}*/
+
+.content{
     overflow: auto;
-    height: 100%;
-    max-height: 400px;
+    position: relative;
+    /*padding: 20px;*/
+    /*background: #333;*/
+    /*margin: 10px;*/
+    /*width: 740px;*/
+    max-width: 100%;
+    height: -moz-calc(100% - 250px); /* Firefox */
+    height: -webkit-calc(100% - 250px); /* Chrome, Safari */
+    height: calc(100% - 250px); /* IE9+ and future browsers */
+    -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;
 }
 
 .user.navbar{
@@ -80,13 +103,47 @@ body {
 
 .navbar-nav.play-btn{
     /*float: right;*/
-    margin-left: 30%;
+    margin-left: 40%;
 }
 
-.foorter-mobile play-btn{
+.foorter-mobile .play-btn{
     margin-left: 0;
 }
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
+/*body {*/
+    /*margin: 0;*/
+    /*padding: 0;*/
+    /*!*  Background fallback in case of IE8 & down, or in case video doens't load, such as with slower connections  *!*/
+    /*background: #333;*/
+    /*background-attachment: fixed;*/
+    /*background-size: cover;*/
+/*}*/
+=======
+.black-btn{
+    background-color: black;
+    color: white;
+}
+
+.newPlaylist{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+<<<<<<< Updated upstream
+body {
+    margin: 0;
+    padding: 0;
+    /*  Background fallback in case of IE8 & down, or in case video doens't load, such as with slower connections  */
+    background: #333;
+    background-attachment: fixed;
+    background-size: cover;
+}
+>>>>>>> Stashed changes
+
+>>>>>>> Stashed changes
 /* The only rule that matters */
 #video-background {
     /*  making the video fullscreen  */
@@ -130,3 +187,10 @@ article {
     font-size: 16px;
     line-height: 24px;
 }
+
+
+=======
+/*.content{*/
+
+/*}*/
+>>>>>>> Stashed changes
