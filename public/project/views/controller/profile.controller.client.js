@@ -3,11 +3,11 @@
         .module("Musiker")
         .controller("profileController", profileController);
 
-    function profileController($routeParams,$location, userService) {
+    function profileController($routeParams,$location, userService, user) {
         //declare controller
         var model = this;
         //variable from path
-        model.userId = $routeParams["uid"];
+        model.userId = user._id;
         //declare function
         model.updateUser = updateUser;
         model.unregister = unregister;

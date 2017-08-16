@@ -1,6 +1,3 @@
-/**
- * Created by Chuhan on 8/4/17.
- */
 (function () {
     angular
         .module("Musiker")
@@ -26,10 +23,13 @@
                 controller: "loginController",
                 controllerAs: "model"
             })
-            .when("/user/:uid", {
+            .when("/profile", {
                 templateUrl: "views/templates/userHome.html",
                 controller: "profileController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    user: checkLogin
+                }
             })
             .when("/user/:uid/follow", {
                 templateUrl: "views/templates/follow.html",
@@ -42,7 +42,20 @@
                 controllerAs: "model"
             })
 
-
+        function checkLogin(userService, $q, $location) {
+            var deferred = $q.defer();
+            userService
+                .checkLogin()
+                .then(function (user) {
+                    if(user === '0') {
+                        deferred.reject();
+                        $location.url("/");
+                    } else {
+                        deferred.resolve(user);
+                    }
+                })
+            return deferred.promise;
+        }
     }
 }());
 

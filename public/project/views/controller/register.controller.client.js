@@ -11,7 +11,6 @@
         init();
 
         function register(user) {
-            console.log(user.username);
             if (model.user.password === model.verifypassword) {
                 userService.findUserByUsername(user.username)
                     .then(function (response) {

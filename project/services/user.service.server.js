@@ -1,7 +1,12 @@
 var app = require("../../express");
 var userModel = require("../model/user.model.server");
+var passport = require("passport");
+var LocalStrategy = require('passport-local').Strategy;
+passport.use(new LocalStrategy(localStrategy));
+passport.serializeUser(serializeUser);
+passport.deserializeUser(deserializeUser);
 
-
+// http handlers
 app.post("/projectapi/user", createUser);
 app.get("/projectapi/user", findUser);
 app.get("/projectapi/user/:userId", findUserById);
@@ -13,6 +18,8 @@ app.put("/projectapi/user/:userId/following/:followingId", addFollowingByUser);
 app.put("/projectapi/user/:userId/follower/:followerId", addFollowerByUser);
 app.get("/projectapi/user/:userId/following", findFollowingByUser);
 app.get("/projectapi/user/:userId/follower", findFollowersByUser);
+app.post("/projectapi/login", passport.authenticate('local'), login);
+app.get("/projectapi/checkLogin", checkLogin);
 
 function createUser(req,res) {
     var user = req.body;
@@ -37,7 +44,6 @@ function findUserById(req,res) {
 function findUser(req,res) {
     var username = req.query.username;
     var password = req.query.password;
-    console.log(username);
     if(username && password) {
         userModel
             .findUserByCredentials(username, password)
@@ -52,7 +58,6 @@ function findUser(req,res) {
             });
     }
     else if(username) {
-        console.log(username);
         userModel
             .findUserByUsername(username)
             .then(function (user) {
@@ -161,4 +166,48 @@ function addFollowingByUser(req,res) {
         }, function (err) {
             res.send("0");
         });
+}
+
+function login(req, res) {
+    var user = req.user;
+    res.json(user);
+}
+
+function localStrategy(username, password, done) {
+    userModel
+        .findUserByCredentials(username, password)
+        .then(
+            function(user) {
+                if (!user) {
+                    return done(null, false);
+                }
+                return done(null, user);
+            },
+            function(err) {
+                if (err) {
+                    return done(err);
+                }
+            }
+        );
+}
+
+function checkLogin(req, res) {
+    res.send(req.isAuthenticated() ? req.user : '0');
+}
+
+function serializeUser(user, done) {
+    done(null, user);
+}
+
+function deserializeUser(user, done) {
+    userModel
+        .findUserById(user._id)
+        .then(
+            function (user) {
+                done(null, user);
+            },
+            function (err) {
+                done(err, null);
+            }
+        );
 }

@@ -1,1 +1,1 @@
-web: node spotifyApiService.js
+web: node server.js
