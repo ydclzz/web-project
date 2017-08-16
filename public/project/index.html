@@ -11,32 +11,48 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!--my css -->
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.css" />
     <title>Index</title>
+
+
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../js/minified/jquery-1.11.0.min.js"><\/script>')</script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-route.min.js"></script>
+
+    <!--JQuery Scrollbar-->
+    <!--<script src="https://cdn.jsdelivr.net/jquery.mcustomscrollbar/3.0.6/jquery.mCustomScrollbar.min.css"></script>-->
+    <!--<script src="https://cdn.jsdelivr.net/jquery.mcustomscrollbar/3.0.6/jquery.mCustomScrollbar.concat.min.js"></script>-->
+    <script src="./js/jquery.mCustomScrollbar.js"></script>
+    <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
+
+
+    <!--my js-->
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+    <script src="./js/customScrollbar.js"></script>
+
+    <!--service-->
+    <script src="services/search.services.client.js"></script>
+    <script src="services/user.services.client.js"></script>
+    <script src="services/song.services.client.js"></script>
+
+    <!--controller-->
+    <script src="views/controller/search.controller.client.js"></script>
+    <script src="views/controller/login.controller.client.js"></script>
+    <script src="views/controller/register.controller.client.js"></script>
+    <script src="views/controller/profile.controller.client.js"></script>
+    <script src="views/controller/follow.controller.client.js"></script>
+    <script src="views/controller/song.controller.client.js"></script>
+
 </head>
 
 <body>
+<div class = "view" ng-view>
 
-<div ng-view></div>
+</div>
 </body>
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src = "https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.js"></script>
-<script src = "https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-route.min.js"></script>
-<!--my js-->
-<script src="app.js"></script>
-<script src="config.js"></script>
-
-<!--service-->
-<script src="services/search.services.client.js"></script>
-<script src="services/user.services.client.js"></script>
-<script src="services/song.services.client.js"></script>
-
-<!--controller-->
-<script src="views/controller/search.controller.client.js"></script>
-<script src="views/controller/login.controller.client.js"></script>
-<script src="views/controller/register.controller.client.js"></script>
-<script src="views/controller/profile.controller.client.js"></script>
-<script src="views/controller/follow.controller.client.js"></script>
-<script src="views/controller/song.controller.client.js"></script>
 </html>

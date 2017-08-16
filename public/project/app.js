@@ -3,7 +3,7 @@
  */
 (function () {
     angular
-        .module("Musiker", ["ngRoute"])
+        .module("Musiker", ["ngRoute", "customScrollbar"])
 
 
     // function detailsController($routeParams, movieService) {
