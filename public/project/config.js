@@ -5,7 +5,7 @@
 
     function configuration($routeProvider) {
         $routeProvider
-            .when("/", {
+            .when("/search", {
                 templateUrl: "views/templates/search.html",
                 controller: "searchController",
                 controllerAs: "model"
@@ -13,19 +13,22 @@
             .when("/play", {
                 templateUrl: "views/templates/play.html"
             })
-            .when("/register", {
-                templateUrl: "views/templates/register.html",
-                controller: "registerController",
-                controllerAs: "model"
-            })
-            .when("/login", {
+            .when("/", {
                 templateUrl: "views/templates/login.html",
                 controller: "loginController",
                 controllerAs: "model"
             })
             .when("/profile", {
-                templateUrl: "views/templates/userHome.html",
+                templateUrl: "views/templates/user-home.html",
                 controller: "profileController",
+                controllerAs: "model",
+                resolve: {
+                    user: checkLogin
+                }
+            })
+            .when("/home", {
+                templateUrl: "views/templates/home.html",
+                controller: "homeController",
                 controllerAs: "model",
                 resolve: {
                     user: checkLogin
