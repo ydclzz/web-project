@@ -6,10 +6,13 @@
     function loginController($location, $rootScope, userService) {
         var model = this;
         model.flag = false;
+        model.errorRegisterMessage = '1';
+        model.errorMessage = '1';
         model.login = login;
         model.toggle = toggle;
         model.register = register;
-
+        model.defaultRegisterMessage = defaultRegisterMessage;
+        model.defaultMessage = defaultMessage;
         function init() {
         }
         init();
@@ -22,7 +25,7 @@
                         model.errorMessage = "wrong username or password";
                     } else {
                         $rootScope.currentUser = userDoc;
-                        $location.url("user/" + userDoc._id);
+                        $location.url("/home");
                     }
                 }, function() {
                     model.errorMessage = "wrong username or password";
@@ -38,8 +41,16 @@
             }
         }
 
+        function defaultRegisterMessage() {
+            model.errorRegisterMessage = '1';
+        }
+
+        function defaultMessage() {
+            model.errorMessage = '1';
+        }
+
         function register(user) {
-            if (user.password === user.secondPassword) {
+            if (user.password === user.secondPassword && user.type != null) {
                 userService.findUserByUsername(user.username)
                     .then(function (response) {
                         if (!response.data || response.data === "0") {
@@ -50,17 +61,19 @@
                         }
                     })
                     .then(function(response){
-                        if(response && response !== "exist"){
+                        if(response && response !== "exist") {
                             user = response.data;
-                            $location.url("/user/" + user._id);
+                            $location.url("/home");
                         }
                         else if(response !== "exist"){
                             model.errorRegisterMessage = response;//"something goes wrong";
                         }
                     });
-            } else {
+            } else if(user.password !== user.secondPassword) {
                 model.errorRegisterMessage = "password do not match";
                 return;
+            } else {
+                model.errorRegisterMessage = "Please select your role";
             }
         }
 

@@ -48,7 +48,6 @@ function findUser(req,res) {
         .findUserByUsername(username)
         .then(function (user) {
             if (user === null){
-                console.log("None");
                 return res.send("0");
             }
             else

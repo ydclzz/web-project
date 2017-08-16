@@ -47,6 +47,9 @@ a:hover {
     padding-right: 20px;
     position: relative;
 }
+#roleSelect {
+    width: 200px;
+}
 .login-form-1 .form-group:last-child {
     border-bottom: 0;
 }
@@ -282,4 +285,10 @@ label:hover:before {
 
 .closebtn:hover {
     color: black;
+}
+
+.text-center {
+    position: absolute;
+    top: 60%;
+    width: 100%;
 }
