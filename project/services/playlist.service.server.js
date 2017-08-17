@@ -15,6 +15,7 @@ app.delete("/projectapi/playlist/:playlistId", deletePlaylist);
 function createPlaylistForUser(req,res) {
     var playlist = req.body;
     var userId = req.params.userId;
+    playlist._owner = userId;
     playlistModel
         .createPlaylistForUser(userId, playlist)
         .then(function (list) {
@@ -49,10 +50,13 @@ function findPlaylistByPlaylistName(req, res) {
 }
 
 function findAllPlaylistsByUser(req, res) {
+    console.log("gagagagagag");
     var userId = req.params.userId;
+    console.log(userId);
     playlistModel
         .findAllPlaylistsByUserId(userId)
         .then(function (lists) {
+            console.log(lists);
             res.json(lists);
         }, function (err) {
             res.sendStatus(404).send(err);

@@ -5,7 +5,7 @@ var userModel = require("./user.model.server")
 var songModel = require("./song.model.server")
 var db = require("./database");
 
-playlistModel.createPlaylist = createPlaylist;
+playlistModel.createPlaylistForUser = createPlaylistForUser;
 playlistModel.findPlaylistById = findPlaylistById;
 playlistModel.findListByListName = findListByListName;
 playlistModel.findAllPlaylistsByUserId = findAllPlaylistsByUserId;
@@ -19,9 +19,13 @@ playlistModel.removeSongFromPlaylist = removeSongFromPlaylist;
 
 module.exports = playlistModel;
 
-function createPlaylist(userId, playlist) {
+function createPlaylistForUser(userId, playlist) {
     playlist.owner = userId;
-    return playlistModel.create(playlist);
+    return playlistModel
+        .create(playlist)
+        .then(function (playlistDoc) {
+            return userModel.addPlaylist(userId, playlistDoc._id)
+        });
 }
 
 function findPlaylistById(playlistId) {
@@ -33,7 +37,10 @@ function findListByListName(playlistname) {
 }
 
 function findAllPlaylistsByUserId(userId) {
-    return playlistModel.find({_owner: userId});
+    return playlistModel
+        .find({_owner: userId})
+        .populate('_owner')
+        .exec();
 }
 
 function deletePlaylist(playlistId) {

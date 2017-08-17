@@ -11,8 +11,6 @@
         var vm = this;
         vm.userId = $routeParams["uid"];
         vm.createPlaylist = createPlaylist;
-        vm.wantCreatePlaylist = wantCreatePlaylist;
-        vm.new = "hahahahahah";
 
         // function init() {
         //     vm.websites = websiteService.findWebsitesByUser(vm.userId);

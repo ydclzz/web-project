@@ -1,7 +1,7 @@
 (function () {
     angular
         .module("Musiker")
-        .factory("playlistService", playlistService);
+        .service("playlistService", playlistService);
 
 
     function playlistService($http) {
@@ -24,6 +24,7 @@
         }
 
         function findAllPlaylistsByUser(userId) {
+            console.log(userId);
             var url = "/projectapi/user/" + userId + "/playlist";
             return $http.get(url);
         }

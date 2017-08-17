@@ -26,8 +26,8 @@
                     user: checkLogin
                 }
             })
-            .when("/profile", {
-                templateUrl: "views/templates/user-home.html",
+            .when("/user/edit", {
+                templateUrl: "views/templates/profile.html",
                 controller: "profileController",
                 controllerAs: "model",
                 resolve: {

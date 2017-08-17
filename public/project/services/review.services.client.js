@@ -1,7 +1,7 @@
 (function () {
     angular
         .module("Musiker")
-        .factory("reviewService", reviewService);
+        .service("reviewService", reviewService);
 
 
     function reviewService($http) {

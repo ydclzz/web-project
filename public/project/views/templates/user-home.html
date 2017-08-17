@@ -17,8 +17,10 @@
                 <!--<li><a href="#!/play">PLAY</a></li>-->
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#!/user/{{model.userId}}/edit"><span class="glyphicon glyphicon-user"></span> {{model.user.username}}</a></li>
-                <li><a href="#!/login"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
+
+                <li><a href="#!/user/edit"><span class="glyphicon glyphicon-user"></span> {{model.user.username}}</a></li>
+                <li><a href="#!/"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
+
             </ul>
         </div>
     </div>
@@ -42,61 +44,58 @@
             </ul>
         </div>
         Playlists
-        {{model.new}}
-        <a ng-click="model.wantCreatePlaylist()" href="">
+        <a ng-click="model.changeRightPanel('create-playlist')" href="">
             <span class="glyphicon glyphicon-plus pull-right"></span>
         </a>
         <div class="content mCustomScrollbar playlists ">
-            <!--<ul ng-repeat="playlist in model.user.playlists" class="list-group">-->
+            <div ng-show= "model.playlists" ng-repeat="playlist in model.playlists" class="list-group">
+                <div class="list-group-item">
+                    <a href="">{{playlist.name}}</a>
+                </div >
+            </div>
+            <!--<ul class="list-group">-->
                 <!--<li class="list-group-item">-->
-                    <!--<a href="#">playlist.name</a>-->
+                    <!--playlist1-->
                 <!--</li >-->
+                <!--<li class="list-group-item">-->
+                    <!--playlist2-->
+                <!--</li >-->
+                <!--<li class="ng-binding list-group-item">-->
+                    <!--playlist3-->
+                <!--</li>-->
+                <!--<li class="ng-binding list-group-item">-->
+                    <!--playlist3-->
+                <!--</li>-->
+                <!--<li class="ng-binding list-group-item">-->
+                    <!--playlist3-->
+                <!--</li>-->
+                <!--<li class="ng-binding list-group-item">-->
+                    <!--playlist3-->
+                <!--</li>-->
+                <!--<li class="ng-binding list-group-item">-->
+                    <!--playlist3-->
+                <!--</li>-->
+                <!--<li class="ng-binding list-group-item">-->
+                    <!--playlist3-->
+                <!--</li>-->
+                <!--<li class="ng-binding list-group-item">-->
+                    <!--playlist3-->
+                <!--</li>-->
+                <!--<li class="ng-binding list-group-item">-->
+                    <!--playlist3-->
+                <!--</li>-->
+                <!--<li class="ng-binding list-group-item">-->
+                    <!--playlist3-->
+                <!--</li>-->
             <!--</ul>-->
-            <ul class="list-group">
-                <li class="list-group-item">
-                    playlist1
-                </li >
-                <li class="list-group-item">
-                    playlist2
-                </li >
-                <li class="ng-binding list-group-item">
-                    playlist3
-                </li>
-                <li class="ng-binding list-group-item">
-                    playlist3
-                </li>
-                <li class="ng-binding list-group-item">
-                    playlist3
-                </li>
-                <li class="ng-binding list-group-item">
-                    playlist3
-                </li>
-                <li class="ng-binding list-group-item">
-                    playlist3
-                </li>
-                <li class="ng-binding list-group-item">
-                    playlist3
-                </li>
-                <li class="ng-binding list-group-item">
-                    playlist3
-                </li>
-                <li class="ng-binding list-group-item">
-                    playlist3
-                </li>
-                <li class="ng-binding list-group-item">
-                    playlist3
-                </li>
-            </ul>
 
         </div>
     </div>
 
     <div class="right-table col-xs-7 col-sm-9 col-md-9 col-lg-9">
-        <div ng-include="'views/templates/search.html'"></div>
 
-        <div ng-show="model.new">
-            <div ng-include="'views/templates/playlist-new.html'"></div>
-        </div>
+        <div ng-show="model.rightPanel==='search'" ng-include src="'views/templates/search.html'"></div>
+        <div ng-show="model.rightPanel === 'create-playlist'" ng-include src="'views/templates/playlist-new.html'"></div>
 
     </div>
 

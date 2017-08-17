@@ -13,6 +13,7 @@
         model.unregister = unregister;
         model.showPassword = showPassword;
 
+
         //initial function
         function init() {
             userService.findUserById(model.userId)
@@ -51,7 +52,6 @@
             }
 
         }
-
 
 
     }
