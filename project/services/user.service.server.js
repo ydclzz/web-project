@@ -8,18 +8,18 @@ passport.deserializeUser(deserializeUser);
 
 // http handlers
 app.post("/projectapi/user", createUser);
+app.post("/projectapi/login", passport.authenticate('local'), login);
 app.get("/projectapi/user", findUser);
 app.get("/projectapi/user/:userId", findUserById);
-app.put("/projectapi/user/:userId", updateUser);
-app.delete("/projectapi/user/:userId", deleteUser);
-app.delete("/projectapi/user/:userId/song/:songId", removeSong);
-app.put("/projectapi/user/:userId/song/:songId", addSong);
-app.put("/projectapi/user/:userId/following/:followingId", addFollowingByUser);
-app.put("/projectapi/user/:userId/follower/:followerId", addFollowerByUser);
-app.get("/projectapi/user/:userId/following", findFollowingByUser);
-app.get("/projectapi/user/:userId/follower", findFollowersByUser);
-app.post("/projectapi/login", passport.authenticate('local'), login);
+app.get("/projectapi/following", findFollowingByUser);
+app.get("/projectapi/follower", findFollowersByUser);
 app.get("/projectapi/checkLogin", checkLogin);
+app.put("/projectapi/user/:userId", updateUser);
+app.put("/projectapi/user/:userId/song/:songId", addSong);
+app.put("/projectapi/user/userId/following/:followingId", addFollowingByUser);
+app.put("/projectapi/user/userId/follower/:followerId", addFollowerByUser);
+app.delete("/projectapi/user/:userId", deleteUser);
+// app.delete("/projectapi/user/song/:songId", removeSong);
 
 
 function createUser(req,res) {
@@ -48,6 +48,7 @@ function findUser(req,res) {
         .findUserByUsername(username)
         .then(function (user) {
             if (user === null){
+                console.log("None");
                 return res.send("0");
             }
             else

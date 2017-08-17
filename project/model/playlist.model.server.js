@@ -14,6 +14,8 @@ playlistModel.updatePlaylist = updatePlaylist;
 
 playlistModel.addReview = addReview;
 playlistModel.removeReview = removeReview;
+playlistModel.addSongToPlaylist = addSongToPlaylist;
+playlistModel.removeSongFromPlaylist = removeSongFromPlaylist;
 
 module.exports = playlistModel;
 

@@ -12,10 +12,14 @@ transactionModel.findTransactionByBuyer = findTransactionByBuyer;
 transactionModel.updateTransaction = updateTransaction;
 module.exports = transactionModel;
 
-function createTransaction(buyerId, sellerId, songId, transaction) {
+function createTransaction(buyerId, songId, transaction) {
     transaction._buyer = buyerId;
-    transaction._seller = sellerId;
+    songModel.findSongById(songId)
+        .then(function (song) {
+            transaction._seller = song._owner;
+        })
     transaction._songId = songId;
+
     var transactionTemp = null;
     return transactionModel
         .create(transaction)

@@ -13,6 +13,7 @@ reviewModel.findReviewById = findReviewById;
 reviewModel.findReviewBySongId = findReviewBySongId;
 reviewModel.findReviewByPlaylistId = findReviewByPlaylistId;
 reviewModel.findReviewByMusicianId = findReviewByMusicianId;
+reviewModel.findAllReviewsByUser = findAllReviewsByUser;
 reviewModel.deleteReview = deleteReview;
 reviewModel.updateReview = updateReview;
 
@@ -78,6 +79,11 @@ function findReviewByPlaylistId(playlistId) {
 
 function findReviewByMusicianId(musicianId) {
     return reviewModel.find({_musician: musicianId});
+}
+
+
+function findAllReviewsByUser(userId) {
+    return reviewModel.find({_critic: userId});
 }
 
 function deleteReview(reviewId, targetId) {

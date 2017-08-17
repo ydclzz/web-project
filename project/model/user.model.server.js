@@ -18,6 +18,8 @@ userModel.addFollowersByUser = addFollowersByUser;
 userModel.addReview = addReview;
 userModel.removeReview = removeReview;
 userModel.addTransaction = addTransaction;
+userModel.addPlaylist = addPlaylist;
+userModel.removePlaylist = removePlaylist;
 module.exports = userModel;
 
 
@@ -141,8 +143,27 @@ function addTransaction(userId, transactionId) {
     return userModel
         .findById(userId)
         .then(function (user) {
-            var index = user.transactions.indexOf(transactionId);
-            user.transactions.splice(index, 1);
+            user.transactions.push(transactionId);
+            return user.save();
+        })
+}
+
+//playlist
+function addPlaylist(userId, playlistId) {
+    return userModel
+        .findById(userId)
+        .then(function (user) {
+            user.playlists.push(playlistId);
+            return user.save();
+        })
+}
+
+function removePlaylist(userId, playlistId) {
+    return userModel
+        .findById(userId)
+        .then(function (user) {
+            var index = user.transactions.indexOf(playlistId);
+            user.playlists.splice(index, 1);
             return user.save();
         })
 }
