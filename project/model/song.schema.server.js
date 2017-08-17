@@ -4,6 +4,9 @@ var songSchema = mongoose.Schema({
     _owner: {type: mongoose.Schema.Types.ObjectId, ref: "ProjectUserModel"},
     name: String,
     url: String,
+    type: ["",""],
+    artist: String,
+    coverUrl: String,
     description: String,
     reviews: {type: mongoose.Schema.Types.ObjectId, ref: "ReviewModel"},
     dateCreated: {type: Date, default: Date.now}

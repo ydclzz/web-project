@@ -1,0 +1,16 @@
+<div class="container-fluid">
+    <h2>Followers</h2>
+    <ul class="list-group list-div active">
+        <li ng-repeat="follower in model.followers" class="list-group-item">
+            <div class="row" ng-show="musician">
+                <div class="song-info-div">
+                    <div>
+                        <label class="explore-label">Name:</label>
+                        <span></span>
+                        <a class="song-name">{{follower.username}}</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

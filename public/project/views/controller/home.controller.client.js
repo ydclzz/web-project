@@ -14,13 +14,12 @@
         model.searchTrack = searchTrack;
         model.showDetails = showDetails;
         model.getAllSongsFromPlaylist = getAllSongsFromPlaylist;
+        model.findFollowers = findFollowers;
         // model.findSongById = findSongById;
-
 
 
         function init() {
             findMusicians();
-            // findFollowers();
             findPlaylists();
         }
         init();
@@ -30,7 +29,16 @@
             userService.findFollowingByTypeByUser(user._id, 'MUSICIAN')
                 .then(function (response) {
                     model.followingMusicians = response.data;
-                    console.log(model.followingMusicians);
+                    // console.log(model.followingMusicians);
+                })
+        }
+
+        function findFollowers() {
+            model.rightPanel = 'followers';
+            userService.findFollowersByUser(user._id)
+                .then(function (response) {
+                    model.followers = response.data;
+                    console.log(model.followers);
                 })
         }
 
@@ -43,13 +51,6 @@
                     // console.log(model.playlists);
                 });
         }
-
-        // function findMusicians() {
-        //     // playlistService.findAllPlaylistsByUser(user._id)
-        //     //     .then(function (response) {
-        //     //         model.playlists = response.data;
-        //     //     });
-        // }
 
         function changeRightPanel(mode) {
             model.rightPanel = mode;

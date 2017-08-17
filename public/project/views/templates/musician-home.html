@@ -33,7 +33,7 @@
                     Musicians
                 </li >
                 <li class="ng-binding list-group-item">
-                    Followers
+                    <a ng-click="model.findFollowers()" href="">Followers</a>
                 </li>
             </ul>
         </div>
@@ -42,33 +42,6 @@
             <ul class="list-group">
                 <li class="list-group-item">
                     playlist1
-                </li >
-                <li class="list-group-item">
-                    playlist2
-                </li >
-                <li class="list-group-item">
-                    playlist2
-                </li >
-                <li class="list-group-item">
-                    playlist2
-                </li >
-                <li class="list-group-item">
-                    playlist2
-                </li >
-                <li class="list-group-item">
-                    playlist2
-                </li >
-                <li class="list-group-item">
-                    playlist2
-                </li >
-                <li class="list-group-item">
-                    playlist2
-                </li >
-                <li class="list-group-item">
-                    playlist2
-                </li >
-                <li class="list-group-item">
-                    playlist2
                 </li >
             </ul>
         </div>
@@ -91,6 +64,7 @@
     <div class="right-table col-xs-8 col-sm-10">
         <div ng-show="model.rightPanel==='search'" ng-include="'views/templates/search.html'"></div>
         <div ng-show="model.rightPanel==='upload'" ng-include="'views/templates/upload-song.html'"></div>
+        <div ng-show="model.rightPanel === 'followers'" ng-include src="'views/templates/follower-users.html'"></div>
     </div>
 </div>
 
