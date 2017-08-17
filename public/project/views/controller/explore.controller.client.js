@@ -12,6 +12,7 @@
         model.findAllCritics = findAllCritics;
         model.addSongToPlaylist = addSongToPlaylist;
         model.favouriteSong = favouriteSong;
+        model.dislike = dislike;
         model.getSongCreator = getSongCreator;
         model.getPlaylist = getPlaylist;
 
@@ -64,6 +65,10 @@
                     // console.log("model.playlists")
                     // console.log(model.playlists);
                 });
+        }
+
+        function dislike() {
+            model.favourite = "dontlike";
         }
     }
 
