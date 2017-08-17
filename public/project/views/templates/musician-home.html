@@ -25,46 +25,25 @@
 
 <div class="user-home container-fluid ">
     <div class="left-menu col-xs-4 col-sm-2">
-        <h5>My Account</h5>
-        People
-        <div class="people">
+        <div class="list-menu">
             <ul class="list-group">
-                <li class="list-group-item">
-                    Musicians
-                </li >
-                <li class="ng-binding list-group-item">
-                    <a ng-click="model.findFollowers()" href="">Followers</a>
-                </li>
-            </ul>
-        </div>
-        Playlists
-        <div class="playlists content mCustomScrollbar">
-            <ul class="list-group">
-                <li class="list-group-item">
-                    playlist1
-                </li >
-            </ul>
-        </div>
-        Songs
-        <button ng-click="model.changeRightPanel('upload')" class="btn btn-success">
-            Upload my song
-        </button>
-        <div class="songs">
-            <ul class="list-group">
-                <li class="list-group-item">
-                    Musicians
-                </li >
-                <li class="ng-binding list-group-item">
-                    Followers
-                </li>
+                <a ng-click="model.changeRightPanel('upload')">
+                    <li class="list-group-item">Upload</li >
+                </a>
+                <a ng-click="model.findSongsByMusician()">
+                    <li class="list-group-item">My Songs</li >
+                </a>
+                <a ng-click="model.findFollowers()">
+                    <li class="ng-binding list-group-item">Followers</li>
+                </a>
             </ul>
         </div>
     </div>
 
     <div class="right-table col-xs-8 col-sm-10">
-        <div ng-show="model.rightPanel==='search'" ng-include="'views/templates/search.html'"></div>
         <div ng-show="model.rightPanel==='upload'" ng-include="'views/templates/upload-song.html'"></div>
         <div ng-show="model.rightPanel === 'followers'" ng-include src="'views/templates/follower-users.html'"></div>
+        <div ng-show="model.rightPanel === 'my-songs'" ng-include src="'views/templates/songs-musician.html'"></div>
     </div>
 </div>
 

@@ -15,7 +15,7 @@
         model.showDetails = showDetails;
         model.getAllSongsFromPlaylist = getAllSongsFromPlaylist;
         model.findFollowers = findFollowers;
-        // model.findSongById = findSongById;
+        model.findSongsByMusician = findSongsByMusician;
 
 
         function init() {
@@ -88,15 +88,15 @@
                 })
         }
 
-        // function findSongById(songId) {
-        //     songService.findSongById(songId)
-        //         .then(function (response) {
-        //             model.songInPlaylist = response.data;
-        //             console.log("findSongById");
-        //             console.log(model.songInPlaylist);
-        //         })
-        //
-        // }
+        function findSongsByMusician() {
+            model.rightPanel = 'my-songs';
+            songService.findAllSongsByUser(model.user._id)
+                .then(function (response) {
+                    model.musicianSongs = response.data;
+                    console.log("findSongById");
+                    console.log(model.musicianSongs);
+                })
+        }
 
 
 

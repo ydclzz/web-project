@@ -68,6 +68,9 @@ body {
 
  }
 
+.list-menu {
+    margin-top: 10px;
+}
 
 .content{
     overflow: auto;
@@ -296,4 +299,8 @@ label.musician-detail-label {
 
 .btn.btn-primary.btn-block {
     margin-top: 5px;
+}
+
+.row {
+    margin: 5px;
 }
