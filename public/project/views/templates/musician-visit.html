@@ -1,0 +1,60 @@
+<div class="visible-xs" ng-include="'views/templates/footer-explore-mobile.html'"></div>
+<nav class="user navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#!/home">Musician</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li><a href="#">Home</a></li>
+                <!--<li><a href="#!/play">PLAY</a></li>-->
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#!/profile"><span class="glyphicon glyphicon-user"></span> {{model.user.username}}</a></li>
+                <li><a href="#!/"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="musician-detail-div container-fluid">
+    <div class="musician-detail-header-div">
+        <div class="musician-detail-header-img-div">
+            <img class="musician-photo-large" ng-src="https://static1.squarespace.com/static/5391fac1e4b07b6926545c34/t/54b948f4e4b0567044b6c023/1421428991081/">
+        </div>
+    </div>
+    <div class="musician-detail-header-div">
+        <div class="musician-detail-header-description-div">
+            <div>
+                <label class="musician-detail-label">Musician Name:</label><span></span>
+                <span>{{model.musician.username}}</span>
+            </div>
+        </div>
+        <div class="musician-detail-header-control-div">
+            <div>
+                <a ng-click="model.modifymusician(musician)" class="detail-operator">
+                    <span class="glyphicon glyphicon-heart"></span></a>
+            </div>
+        </div>
+    </div>
+    <div class="musician-detail-conntent-div">
+        <ul class="list-group list-div active">
+            <li ng-repeat="song in model.songs" class="list-group-item col-sm-6">
+                <div class="row">
+                    <div class="song-info-div">
+                        <div>
+                            <label class="explore-label">Name:</label><span></span>
+                            <a href="#!/song/{{song._id}}"
+                               class="song-name">{{song.name}}</a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

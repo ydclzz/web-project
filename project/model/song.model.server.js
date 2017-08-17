@@ -44,7 +44,7 @@ function findSongBySongName(songname) {
 }
 
 function findAllSongsByUser(userId) {
-    return songModel.find({_user: userId});
+    return songModel.find({_creator: userId});
 }
 
 function deleteSong(userId, songId) {

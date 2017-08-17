@@ -238,10 +238,42 @@ a.song-name:hover {
     float: left;
 }
 
-.song-artist-photo-large.btn-default{
+.song-artist-photo-large{
     background: transparent;
 }
 
 .song-detail-header-description-div {
     margin-left: 20px
+}
+
+.musician-detail-div {
+    margin: 20px;
+}
+
+.musician-detail-header-div {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+}
+
+label.musician-detail-label {
+    font-weight: 100;
+}
+
+.musician-photo-large {
+    width: 200px;
+    height: 200px;
+    float: left;
+}
+
+.detail-operator {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.detail-operator:hover {
+    font-size: 30px;
+    color: white;
 }

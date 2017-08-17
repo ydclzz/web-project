@@ -55,6 +55,14 @@
                     user: checkLogin
                 }
             })
+            .when("/musician/:musicianId", {
+                templateUrl: "views/templates/musician-visit.html",
+                controller: "musicianVisitController",
+                controllerAs: "model",
+                resolve: {
+                    user: checkLogin
+                }
+            })
 
         function checkLogin(userService, $q, $location) {
             var deferred = $q.defer();
