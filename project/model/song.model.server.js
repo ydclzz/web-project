@@ -11,7 +11,7 @@ songModel.findAllSongsByUser = findAllSongsByUser;
 songModel.deleteSong = deleteSong;
 songModel.updateSong = updateSong;
 songModel.getSongUrl = getSongUrl;
-
+songModel.findAllSongs = findAllSongs;
 songModel.addReview = addReview;
 songModel.removeReview = removeReview;
 
@@ -88,4 +88,11 @@ function removeReview(songId, reviewId) {
             song.reviews.splice(index, 1);
             return song.save();
         })
+}
+
+function findAllSongs() {
+    return songModel
+        .find()
+        .populate('_creator')
+        .exec();
 }

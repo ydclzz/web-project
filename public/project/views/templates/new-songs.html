@@ -1,0 +1,15 @@
+<div>
+    <h2>Songs</h2>
+    <ul class="list-group active">
+        <li ng-repeat="song in model.songs" class="list-group-item">
+            <div class="row">
+                <div>
+                    <label>Name:</label>
+                    <a>{{song.name}}</a></div>
+                <div>
+                    <label>Artist:</label>
+                    {{song._creator.username}}</div>
+            </div>
+        </li>
+    </ul>
+</div>

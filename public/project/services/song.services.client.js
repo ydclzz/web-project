@@ -12,9 +12,9 @@
             "findSongBySongName":findSongBySongName,
             "findAllSongsByUser": findAllSongsByUser,
             "updateSong": updateSong,
-            "deleteSong": deleteSong
+            "deleteSong": deleteSong,
+            "findAllSongs": findAllSongs
         };
-
         return api;
 
 
@@ -46,6 +46,11 @@
         function deleteSong(songId){
             var url = "/projectapi/song/" + songId;
             return $http.delete(url);
+        }
+
+        function findAllSongs() {
+            var url = "/projectapi/songs";
+            return $http.get(url);
         }
 
     }

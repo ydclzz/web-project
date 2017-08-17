@@ -10,16 +10,18 @@ app.get("/projectapi/user/:userId/song", findAllSongsByUser);
 app.get("/projectapi/song/:songId", findSongById);
 app.put("/projectapi/song/:songId", updateSong);
 app.post("/projectapi/upload", upload.single('myFile'), uploadSong);
-app.delete("/projectapi/song/:songId", deleteSong);
+app.delete("/projectapi/user/:userId/song/:songId", deleteSong);
+app.get("/projectapi/songs", findAllSongs);
 
 function uploadSong(req, res) {
 
     var myFile = req.file;
 
     var userId = req.body.userId;
-    console.log("gagag");
     console.log(userId);
     var originalname = myFile.originalname; // file name on user's computer
+    var index = originalname.indexOf(".");
+    originalname = originalname.substring(0, index);
     var filename = myFile.filename;     // new file name in upload folder
     var path = myFile.path;         // full path of uploaded file
     var destination = myFile.destination;  // folder where file is saved to
@@ -27,12 +29,13 @@ function uploadSong(req, res) {
     var mimetype = myFile.mimetype;
 
     var song= { "url":'/public/uploads/' + filename,
-                "name": originalname
+                "name": originalname,
+                "_creator" : userId,
     };
 
     songModel.createSongForUser(userId,song)
         .then(function () {
-            var callbackUrl = "/project/#!/user/" + userId;
+            var callbackUrl = "/project/#!/home";
             res.redirect(callbackUrl);
         })
 }
@@ -101,11 +104,21 @@ function updateSong(req, res){
 
 function deleteSong(req, res) {
     var songId = req.params.songId;
+    var userId = req.params.userId;
     songModel
-        .deleteSongById(songId)
+        .deleteSong(userId, songId)
         .then(function (song) {
-            res.send("1");
+            res.json(song);
         }, function (err) {
-            res.send("0");
+            res.sendStatus(500).send(err);
         });
+}
+
+function findAllSongs(req, res) {
+    return songModel.findAllSongs()
+        .then(function (songs) {
+            res.json(songs);
+        }, function (err) {
+            res.sendStatus(500).send(err);
+        })
 }

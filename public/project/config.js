@@ -21,7 +21,10 @@
             .when("/explore", {
                 templateUrl: "views/templates/explore.html",
                 controller: "exploreController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    user: checkLogin
+                }
             })
             .when("/profile", {
                 templateUrl: "views/templates/user-home.html",
