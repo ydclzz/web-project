@@ -39,16 +39,16 @@
         </div>
         <div class="song-detail-header-control-div">
             <div ng-show="model.user.type === 'CRITIC'">
-                <a class="detail-operator ng-click="model.reviewSong(song)"><span class="glyphicons glyphicons-pencil"></span></a>
+                <a class="detail-operator" ng-click="model.reviewSong(song)"><span class="glyphicons glyphicons-pencil"></span></a>
             </div>
             <div ng-show="model.user._id === model.song._creator._id">
-                <a class="detail-operator ng-click="model.addSong()"><span class="glyphicon glyphicon-cog"></span></a>
+                <a class="detail-operator" ng-click="model.editSong()"><span class="glyphicon glyphicon-cog"></span></a>
             </div>
             <div ng-show="model.user.type === 'GENERAL'">
-                <a class="detail-operator ng-click="model.favouriteSong('yes')"><span class="glyphicon glyphicon-plus"></span></a>
+                <a class="detail-operator" ng-click="model.favouriteSong('yes')"><span class="glyphicon glyphicon-plus"></span></a>
             </div>
         </div>
     </div>
     <div ng-show="model.favourite === 'yes'" ng-include src="'views/templates/favourite-song.html'"></div>
-    <div ng-show="model.edit === 'yes'" ng-include src="'views/templates/favourite-song.html'"></div>
+    <div ng-show="model.edit === 'yes'" ng-include src="'views/templates/edit-song.html'"></div>
 </div>

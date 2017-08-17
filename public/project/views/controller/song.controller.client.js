@@ -9,12 +9,13 @@
         model.findSongInfo = findSongInfo;
         model.addSong = addSong;
         model.reviewSong = reviewSong;
-        model.modifySong = modifySong;
+        model.editSong = editSong;
+        model.updateSong = updateSong;
         model.addSongToPlaylist = addSongToPlaylist;
         model.favouriteSong = favouriteSong;
         model.getSongCreator = getSongCreator;
         model.getPlaylist = getPlaylist;
-
+        model.deleteSong = deleteSong;
         var songId = $routeParams["songId"];
         model.favourite = "no";
         model.playlistId = "";
@@ -35,8 +36,8 @@
 
         }
 
-        function modifySong(song) {
-
+        function editSong() {
+            model.edit = 'yes';
         }
 
         function reviewSong(review) {
@@ -63,13 +64,27 @@
                 })
         }
 
+        function updateSong(songname) {
+            model.song.name = songname;
+            songService.updateSong(model.song._id, model.song)
+                .then(function (response) {
+                    model.edit = 'no';
+                    return init();
+                })
+        }
+
+        function deleteSong(song) {
+            return songService.deleteSong(model.user._id, song._id)
+                .then(function (response) {
+                    $location.url("/home");
+                })
+        }
+
         function getPlaylist() {
             playlistService.findAllPlaylistsByUser(user._id)
                 .then(function (response) {
                     // console.log(response);
                     model.playlists = response.data;
-                    // console.log("model.playlists")
-                    // console.log(model.playlists);
                 });
         }
     }

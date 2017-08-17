@@ -44,8 +44,8 @@
             return $http.put(url,song);
         }
 
-        function deleteSong(songId){
-            var url = "/projectapi/song/" + songId;
+        function deleteSong(userId, songId){
+            var url = "/projectapi/user/" + userId + "/song/" + songId;
             return $http.delete(url);
         }
 
