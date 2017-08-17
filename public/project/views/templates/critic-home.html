@@ -1,30 +1,12 @@
 <div class="visible-lg visible-md visible-sm" ng-include="'views/templates/footer-explore.html'"></div>
 <div class="visible-xs" ng-include="'views/templates/footer-explore-mobile.html'"></div>
-<nav class="user navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#!/home">Critic</a>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav">
-                <li><a href="#">Home</a></li>
-                <!--<li><a href="#!/play">PLAY</a></li>-->
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#!/profile"><span class="glyphicon glyphicon-user"></span> {{model.user.username}}</a></li>
-                <li><a href="#!/"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<div ng-include="'views/templates/header.html'"></div>
 
-<div class="user-home container-fluid ">
-    <div class="left-menu col-xs-4 col-sm-2">
+
+<div class="main-wrap">
+    <input id="slide-sidebar" type="checkbox" role="button" />
+    <label for="slide-sidebar"><span class="glyphicon glyphicon-align-justify"></span></label>
+    <div class="mysidebar">
         <h5>My Account</h5>
         People
         <div class="people">
@@ -49,10 +31,10 @@
             </ul>
         </div>
     </div>
-
-    <div class="right-table col-xs-8 col-sm-10">
+    <div class="portfolio">
         <div ng-include="'views/templates/search.html'"></div>
     </div>
+</div>
 
 
 </div>
