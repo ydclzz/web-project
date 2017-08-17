@@ -13,8 +13,8 @@ userModel.addSong = addSong;
 userModel.removeSong = removeSong;
 userModel.findFollowingByUser = findFollowingByUser;
 userModel.findFollowingByTypeByUser = findFollowingByTypeByUser;
-// userModel.findFollowersByUser = findFollowersByUser;
-// userModel.addFollowingByUser = addFollowingByUser;
+userModel.findFollowersByUser = findFollowersByUser;
+userModel.addFollowingByUser = addFollowingByUser;
 userModel.addFollowersByUser = addFollowersByUser;
 userModel.addReview = addReview;
 userModel.removeReview = removeReview;
@@ -90,6 +90,16 @@ function findFollowingByUser(userId) {
 
 }
 
+function findFollowersByUser(userId) {
+    return userModel.findUserById(userId)
+        .populate('followers')
+        .exec()
+        .then(function (user) {
+            return user.followers;
+        })
+
+}
+
 function findFollowingByTypeByUser(userId, usertype){
     return userModel.findUserById(userId)
         .populate('following')
@@ -105,6 +115,14 @@ function addFollowersByUser(userId, followerId) {
     return userModel.findUserById(userId)
         .then(function (user) {
             user.followers.push(followerId);
+            return user.save();
+        })
+}
+
+function addFollowingByUser(userId, followingId) {
+    return userModel.findUserById(userId)
+        .then(function (user) {
+            user.following.push(followingId);
             return user.save();
         })
 }
