@@ -63,7 +63,7 @@
                     .then(function(response){
                         if(response && response !== "exist") {
                             user = response.data;
-                            $location.url("/home");
+                            login(user);
                         }
                         else if(response !== "exist"){
                             model.errorRegisterMessage = response;//"something goes wrong";
