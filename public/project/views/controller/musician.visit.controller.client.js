@@ -9,6 +9,7 @@
         var musicianId = $routeParams["musicianId"];
         model.findMusicianInfo = findMusicianInfo;
         model.findMusicianSongs = findMusicianSongs;
+        model.followMusician = followMusician;
         function init() {
             findMusicianSongs();
             findMusicianInfo();
@@ -26,6 +27,13 @@
             userService.findUserById(musicianId)
                 .then(function (response) {
                     model.musician = response.data;
+                })
+        }
+        
+        function followMusician() {
+            userService.addFollowingByUser(model.user._id, musicianId)
+                .then(function (response) {
+                    alert("follow scceuss")
                 })
         }
     }

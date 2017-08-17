@@ -33,7 +33,7 @@
         <div class="people">
             <ul class="list-group">
                 <li class="list-group-item">
-                    Musicians
+                    <a ng-click="model.changeRightPanel('musicians')" href="">Musicians</a>
                 </li >
                 <li class="list-group-item">
                     Critics
@@ -53,41 +53,6 @@
                     <a ng-click="model.getAllSongsFromPlaylist(playlist._id)" href="">{{playlist.name}}</a>
                 </div >
             </div>
-            <!--<ul class="list-group">-->
-                <!--<li class="list-group-item">-->
-                    <!--playlist1-->
-                <!--</li >-->
-                <!--<li class="list-group-item">-->
-                    <!--playlist2-->
-                <!--</li >-->
-                <!--<li class="ng-binding list-group-item">-->
-                    <!--playlist3-->
-                <!--</li>-->
-                <!--<li class="ng-binding list-group-item">-->
-                    <!--playlist3-->
-                <!--</li>-->
-                <!--<li class="ng-binding list-group-item">-->
-                    <!--playlist3-->
-                <!--</li>-->
-                <!--<li class="ng-binding list-group-item">-->
-                    <!--playlist3-->
-                <!--</li>-->
-                <!--<li class="ng-binding list-group-item">-->
-                    <!--playlist3-->
-                <!--</li>-->
-                <!--<li class="ng-binding list-group-item">-->
-                    <!--playlist3-->
-                <!--</li>-->
-                <!--<li class="ng-binding list-group-item">-->
-                    <!--playlist3-->
-                <!--</li>-->
-                <!--<li class="ng-binding list-group-item">-->
-                    <!--playlist3-->
-                <!--</li>-->
-                <!--<li class="ng-binding list-group-item">-->
-                    <!--playlist3-->
-                <!--</li>-->
-            <!--</ul>-->
 
         </div>
     </div>
@@ -97,6 +62,7 @@
         <div ng-show="model.rightPanel==='search'" ng-include src="'views/templates/search.html'"></div>
         <div ng-show="model.rightPanel === 'create-playlist'" ng-include src="'views/templates/playlist-new.html'"></div>
         <div ng-show="model.rightPanel === 'songlist'" ng-include src="'views/templates/playlist-detail.html'"></div>
+        <div ng-show="model.rightPanel === 'musicians'" ng-include src="'views/templates/following-musicians.html'"></div>
 
     </div>
 

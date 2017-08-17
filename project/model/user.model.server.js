@@ -111,8 +111,20 @@ function findFollowingByTypeByUser(userId, usertype){
         .populate('following')
         .exec()
         .then(function (user) {
-            var following = user.following;
-            return _.where(following,{type: usertype});
+            var allFollowing = user.following;
+            var specificFollowing = [];
+            for (i =0; i < allFollowing.length; i++){
+                if (allFollowing[i].type === usertype){
+                    specificFollowing.push(allFollowing[i]);
+                }
+            }
+            // console.log("specificFollowing");
+            // console.log(specificFollowing);
+            return specificFollowing;
+            // var f = _.where(following,{type: usertype});
+            // console.log("artist");
+            // console.log(f);
+            // return f;
         })
 }
 

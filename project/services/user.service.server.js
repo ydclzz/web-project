@@ -34,12 +34,11 @@ app.get("/projectapi/user/:userId/following/:followingtype", findFollowingByType
 app.get("/projectapi/user/:userId/following", findFollowingByUser);
 app.get("/projectapi/user/:userId/following", findFollowingByUser);
 app.get("/projectapi/user/:userId/follower", findFollowersByUser);
-app.get("/projectapi/")
 app.get("/projectapi/checkLogin", checkLogin);
 app.put("/projectapi/user/:userId", updateUser);
 app.put("/projectapi/user/:userId/song/:songId", addSong);
-app.put("/projectapi/user/userId/following/:followingId", addFollowingByUser);
-app.put("/projectapi/user/userId/follower/:followerId", addFollowerByUser);
+app.put("/projectapi/user/:userId/following/:followingId", addFollowingByUser);
+app.put("/projectapi/user/:userId/follower/:followerId", addFollowerByUser);
 app.delete("/projectapi/user/:userId", deleteUser);
 app.post("/projectapi/avatar", upload.single('avatar'), uploadAvatar);
 // app.delete("/projectapi/user/song/:songId", removeSong);
@@ -163,9 +162,11 @@ function findFollowingByUser(req, res) {
 function findFollowingByTypeByUser(req,res){
     var userId = req.params.userId;
     var type = req.params.followingtype;
+    console.log(type);
     userModel
         .findFollowingByTypeByUser(userId,type)
         .then(function (follwings) {
+            console.log(follwings);
             res.json(follwings);
         }, function (err) {
             res.sendStatus(404).send(err);
@@ -186,6 +187,7 @@ function findFollowersByUser(req, res) {
 function addFollowerByUser(req, res) {
     var userId = req.params.userId;
     var followerId = req.params.followerId;
+    console.log(userId);
     userModel
         .addFollowerByUser(userId,followerId)
         .then(function (user) {
