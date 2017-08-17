@@ -16,14 +16,15 @@
            value="{{model.song._creator.username}}">
     <h5>Add to Playlist</h5>
     <select ng-model="model.playlistId"
-            ng-repeat=" playlist in model.playlists"
             class="form-control">
-        <option value="{{playlist._id}}">{{playlist.name}}</option>
+        <option ng-repeat=" playlist in model.playlists"
+                value="{{playlist._id}}">{{playlist.name}}
+        </option>
     </select>
     <a class="btn btn-primary btn-block"
        role="button"
        ng-click="model.addSongToPlaylist()">Confirm</a>
     <a class="btn btn-success btn-block"
        role="button"
-       ng-click="model.dislike()">Cancel</a>
+       ng-click="model.favouriteSong('no')">Cancel</a>
 </form>

@@ -23,7 +23,7 @@
 </nav>
 
 <div class="song-detail-div container-fluid">
-    <div class="song-detail-header-div">
+    <div ng-show="model.favourite === 'no'" class="song-detail-header-div">
         <div class="song-detail-header-img-div">
             <img class="song-artist-photo-large" ng-src="https://static1.squarespace.com/static/5391fac1e4b07b6926545c34/t/54b948f4e4b0567044b6c023/1421428991081/">
         </div>
@@ -45,8 +45,9 @@
                 <a ng-click="model.addSong()"><span class="btn glyphicon glyphicon-cog"></span></a>
             </div>
             <div ng-show="model.user.type === 'GENERAL'">
-                <a ng-click="model.modifySong(song)"><span class="btn glyphicon glyphicon-plus"></span></a>
+                <a ng-click="model.favouriteSong('yes')"><span class="btn glyphicon glyphicon-plus"></span></a>
             </div>
         </div>
     </div>
+    <div ng-show="model.favourite === 'yes'" ng-include src="'views/templates/favourite-song.html'"></div>
 </div>
