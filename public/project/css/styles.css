@@ -110,18 +110,6 @@ body {
     margin-left: 0;
 }
 
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-/*body {*/
-    /*margin: 0;*/
-    /*padding: 0;*/
-    /*!*  Background fallback in case of IE8 & down, or in case video doens't load, such as with slower connections  *!*/
-    /*background: #333;*/
-    /*background-attachment: fixed;*/
-    /*background-size: cover;*/
-/*}*/
-=======
 .black-btn{
     background-color: black;
     color: white;
@@ -132,18 +120,6 @@ body {
     margin-right: 10%;
 }
 
-<<<<<<< Updated upstream
-body {
-    margin: 0;
-    padding: 0;
-    /*  Background fallback in case of IE8 & down, or in case video doens't load, such as with slower connections  */
-    background: #333;
-    background-attachment: fixed;
-    background-size: cover;
-}
->>>>>>> Stashed changes
-
->>>>>>> Stashed changes
 /* The only rule that matters */
 #video-background {
     /*  making the video fullscreen  */
@@ -187,10 +163,3 @@ article {
     font-size: 16px;
     line-height: 24px;
 }
-
-
-=======
-/*.content{*/
-
-/*}*/
->>>>>>> Stashed changes
