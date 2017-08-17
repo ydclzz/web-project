@@ -189,7 +189,7 @@ function addFollowerByUser(req, res) {
     var followerId = req.params.followerId;
     console.log(userId);
     userModel
-        .addFollowerByUser(userId,followerId)
+        .addFollowersByUser(userId,followerId)
         .then(function (user) {
             res.send("1");
         }, function (err) {

@@ -33,7 +33,11 @@
         function followMusician() {
             userService.addFollowingByUser(model.user._id, musicianId)
                 .then(function (response) {
-                    alert("follow scceuss")
+                    userService.addFollowersByUser(musicianId, model.user._id)
+                        .then(function () {
+                            alert("follow scceuss");
+                        })
+
                 })
         }
     }
