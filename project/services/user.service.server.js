@@ -56,7 +56,7 @@ function uploadAvatar(req, res) {
     var size = myFile.size;
     var mimetype = myFile.mimetype;
 
-    var avatarUrl = '/avatar/' + filename;
+    var avatarUrl = '/avatar/upload/' + filename;
     userModel.updateUserAvatar(userId, avatarUrl)
         .then(function () {
             var callbackUrl = "/project/#!/profile";
