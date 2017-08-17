@@ -50,7 +50,7 @@
         <div class="content mCustomScrollbar playlists ">
             <div ng-show= "model.playlists" ng-repeat="playlist in model.playlists" class="list-group">
                 <div class="list-group-item">
-                    <a ng-click="getAllSongsFromPlaylist(playlist._id)" href="">{{playlist.name}}</a>
+                    <a ng-click="model.getAllSongsFromPlaylist(playlist._id)" href="">{{playlist.name}}</a>
                 </div >
             </div>
             <!--<ul class="list-group">-->
@@ -96,6 +96,7 @@
 
         <div ng-show="model.rightPanel==='search'" ng-include src="'views/templates/search.html'"></div>
         <div ng-show="model.rightPanel === 'create-playlist'" ng-include src="'views/templates/playlist-new.html'"></div>
+        <div ng-show="model.rightPanel === 'songlist'" ng-include src="'views/templates/playlist-detail.html'"></div>
 
     </div>
 

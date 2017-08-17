@@ -10,6 +10,7 @@ app.get("/projectapi/playlist/:playlistId", findPlaylistById);
 app.put("/projectapi/playlist/:playlistId", updatePlaylist);
 app.delete("/projectapi/playlist/:playlistId", deletePlaylist);
 app.put("/projectapi/playlist/:playlistId/song/:songId", addSongToPlaylist);
+app.get("/projectapi/playlist/:playlistId/song", getAllSongsFromPlaylist);
 
 
 
@@ -51,13 +52,13 @@ function findPlaylistByPlaylistName(req, res) {
 }
 
 function findAllPlaylistsByUser(req, res) {
-    console.log("gagagagagag");
+    // console.log("gagagagagag");
     var userId = req.params.userId;
-    console.log(userId);
+    // console.log(userId);
     playlistModel
         .findAllPlaylistsByUserId(userId)
         .then(function (lists) {
-            console.log(lists);
+            // console.log(lists);
             res.json(lists);
         }, function (err) {
             res.sendStatus(404).send(err);
@@ -90,9 +91,9 @@ function deletePlaylist(req, res) {
 function addSongToPlaylist(req,res) {
     var playlistId = req.params.playlistId;
     var songId = req.params.songId;
-    console.log("playlist server");
-    console.log(playlistId);
-    console.log(songId);
+    // console.log("playlist server");
+    // console.log(playlistId);
+    // console.log(songId);
     playlistModel
         .addSongToPlaylist(playlistId, songId)
         .then(function (list) {
@@ -100,4 +101,15 @@ function addSongToPlaylist(req,res) {
         }, function (err) {
             res.sendStatus(404).send(err);
         });
-};
+}
+
+function getAllSongsFromPlaylist(req,res){
+    var playlistId = req.params.playlistId;
+    playlistModel
+        .getAllSongsFromPlaylist(playlistId)
+        .then(function (songlist) {
+            res.json(songlist)
+        }, function (err) {
+            res.sendStatus(404).send(err);
+        });
+}

@@ -13,7 +13,8 @@
             "findAllPlaylistsByUser": findAllPlaylistsByUser,
             "updatePlaylist": updatePlaylist,
             "deletePlaylist": deletePlaylist,
-            "addSongToPlaylist":addSongToPlaylist
+            "addSongToPlaylist":addSongToPlaylist,
+            "getAllSongsFromPlaylist":getAllSongsFromPlaylist
         };
 
         return api;
@@ -25,7 +26,7 @@
         }
 
         function findAllPlaylistsByUser(userId) {
-            console.log(userId);
+            // console.log(userId);
             var url = "/projectapi/user/" + userId + "/playlist";
             return $http.get(url);
         }
@@ -51,9 +52,14 @@
         }
 
         function addSongToPlaylist(playlistId, songId) {
-            console.log(playlistId);
+            // console.log(playlistId);
             var url = "/projectapi/playlist/" + playlistId + "/song/" + songId;
             return $http.put(url);
+        }
+
+        function getAllSongsFromPlaylist(playlistId) {
+            var url = "/projectapi/playlist/" + playlistId + "/song/";
+            return $http.get(url);
         }
 
     }

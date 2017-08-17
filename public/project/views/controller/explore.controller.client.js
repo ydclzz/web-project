@@ -24,7 +24,7 @@
         function getAllSongs() {
             songService.findAllSongs()
                 .then(function (response) {
-                    console.log(response.data);
+                    // console.log(response.data);
                     return model.songs = response.data;
                 })
         }
@@ -43,15 +43,15 @@
         function favouriteSong(song) {
             model.favourite = "like";
             model.song = song;
-            console.log("song");
-            console.log(model.song);
+            // console.log("song");
+            // console.log(model.song);
 
         }
 
         function getSongCreator() {
             songService.getSongCreator(model.song._id)
                 .then(function (response) {
-                    console.log(response.data);
+                    // console.log(response.data);
                     return model.creator = response.data;
                 })
         }
