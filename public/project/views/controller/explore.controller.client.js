@@ -12,6 +12,7 @@
         model.findAllCritics = findAllCritics;
         model.addSongToPlaylist = addSongToPlaylist;
         model.favouriteSong = favouriteSong;
+        model.dislike = dislike;
         model.getSongCreator = getSongCreator;
         model.getPlaylist = getPlaylist;
 
@@ -24,7 +25,7 @@
         function getAllSongs() {
             songService.findAllSongs()
                 .then(function (response) {
-                    console.log(response.data);
+                    // console.log(response.data);
                     return model.songs = response.data;
                 })
         }
@@ -43,15 +44,15 @@
         function favouriteSong(song) {
             model.favourite = "like";
             model.song = song;
-            console.log("song");
-            console.log(model.song);
+            // console.log("song");
+            // console.log(model.song);
 
         }
 
         function getSongCreator() {
             songService.getSongCreator(model.song._id)
                 .then(function (response) {
-                    console.log(response.data);
+                    // console.log(response.data);
                     return model.creator = response.data;
                 })
         }
@@ -64,6 +65,10 @@
                     // console.log("model.playlists")
                     // console.log(model.playlists);
                 });
+        }
+
+        function dislike() {
+            model.favourite = "dontlike";
         }
     }
 

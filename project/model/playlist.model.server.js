@@ -14,8 +14,11 @@ playlistModel.updatePlaylist = updatePlaylist;
 
 playlistModel.addReview = addReview;
 playlistModel.removeReview = removeReview;
+
 playlistModel.addSongToPlaylist = addSongToPlaylist;
 playlistModel.removeSongFromPlaylist = removeSongFromPlaylist;
+playlistModel.getAllSongsFromPlaylist = getAllSongsFromPlaylist;
+
 
 module.exports = playlistModel;
 
@@ -54,6 +57,8 @@ function updatePlaylist(playlistId,playlist) {
             {$set: playlist});
 }
 
+
+//song
 function addSongToPlaylist(playlistId,songId) {
     return playlistModel.findPlaylistById(playlistId)
         .then(function (list) {
@@ -72,7 +77,16 @@ function removeSongFromPlaylist(playlistId, songId) {
         })
 }
 
+function getAllSongsFromPlaylist(playlistId) {
+    return playlistModel
+        .findById(playlistId)
+        .populate('songlist')
+        .exec()
+        .then(function (playlist) {
+            return playlist.songlist;
+        });
 
+}
 
 //review
 function addReview(playlistId, reviewId) {

@@ -1,19 +1,15 @@
 <div class="container-fluid">
     <h2>Songs</h2>
-    {{model.favourite}}
     <ul ng-show="model.favourite === 'dontlike'" class="list-group list-div active">
         <li ng-repeat="song in model.songs" class="list-group-item">
             <div class="row">
                 <div class="song-info-div">
                     <div>
-                        <label class="explore-label">Name:</label>
-                        <span></span>
+                        <label class="explore-label">Name:</label><span></span>
                         <a href="#!/song/{{song._id}}"
                            class="song-name">{{song.name}}</a>
                     </div>
-                    <div>
                         <label class="explore-label">Artist:</label>
-                        <span></span>
                         {{song._creator.username}}
                     </div>
                 </div>
