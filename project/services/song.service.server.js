@@ -18,7 +18,6 @@ function uploadSong(req, res) {
     var myFile = req.file;
 
     var userId = req.body.userId;
-    console.log(userId);
     var originalname = myFile.originalname; // file name on user's computer
     var index = originalname.indexOf(".");
     originalname = originalname.substring(0, index);

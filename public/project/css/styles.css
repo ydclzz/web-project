@@ -163,3 +163,31 @@ article {
     font-size: 16px;
     line-height: 24px;
 }
+
+.list-div {
+    margin: 5px;
+}
+
+.row {
+    display: flex;
+}
+
+li:hover {
+    background: #777777;
+    opacity: 0.5;
+}
+
+.song-artist-photo {
+    width: 50px;
+    height: 50px;
+    float: right;
+    margin-right: 2px;
+    margin-top: 2px;
+}
+
+.song-artist-photo-div {
+    margin-right: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    flex: auto;
+}
