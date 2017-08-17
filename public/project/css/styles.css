@@ -204,6 +204,10 @@ label.explore-label {
     font-weight: 100;
 }
 
+label.song-detail-label {
+    font-weight: 100;
+}
+
 span.separator {
     border-top: 1px solid #333;
     width: 100%;
@@ -221,6 +225,33 @@ a.song-name:hover {
     color: aquamarine;
     font-size: x-large;
 }
+
 .song-artist-photo.btn-default{
     background: transparent;
  }
+
+.song-detail-div {
+    margin: 20px;
+}
+
+.song-detail-header-div {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+}
+
+.song-artist-photo-large {
+    width: 200px;
+    height: 200px;
+    float: left;
+}
+
+.song-artist-photo-large.btn-default{
+    background: transparent;
+}
+
+.song-detail-header-description-div {
+    margin-left: 20px
+}

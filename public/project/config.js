@@ -47,10 +47,13 @@
                 controller: "followController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/song", {
+            .when("/song/:songId", {
                 templateUrl: "views/templates/song.html",
                 controller: "songController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    user: checkLogin
+                }
             })
 
         function checkLogin(userService, $q, $location) {

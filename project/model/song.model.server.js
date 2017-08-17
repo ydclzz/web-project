@@ -33,7 +33,10 @@ function createSongForUser(userId, song) {
 }
 
 function findSongById(songId) {
-    return songModel.findOne({_id: songId});
+    return songModel
+        .findOne({_id: songId})
+        .populate('_creator')
+        .exec();
 }
 
 function findSongBySongName(songname) {

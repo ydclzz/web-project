@@ -3,48 +3,36 @@
         .module("Musiker")
         .controller("songController", songController);
 
-    function songController(songService, userService, $routeParams) {
-        //declare controller
+    function songController(songService, $routeParams, user) {
         var model = this;
-        //variable from path
-        model.userId = $routeParams["uid"];
-
-        //declare function
-        model.searchSong = searchSong;
-        model.addToList = addToList;
-        //initial function
+        model.user = user;
+        model.findSongInfo = findSongInfo;
+        model.addSong = addSong;
+        model.reviewSong = reviewSong;
+        model.modifySong = modifySong;
+        var songId = $routeParams["songId"];
         function init() {
-            songService.findAllSongsByUser(model.userId)
-                .then(function (response) {
-                    if(response) {
-                        model.mysongs = response.data;
-                    }
-                });
+            findSongInfo();
         }
         init();
 
-        //functions
-        function searchSong(searchContent) {
-            songService.findSongBySongName(searchContent)
+        function findSongInfo() {
+            songService.findSongById(songId)
                 .then(function (response) {
-                    model.searchresult = response.data;
+                    model.song = response.data;
                 })
         }
 
-        function addToList() {
-            userService.addSong(model.searchresult._id)
-                .then(function (response) {
-                    // model.searchresult = response.data;
-                })
+        function addSong(song) {
+
         }
 
-        function uploadSong(songId) {
-            songService.uploadSong(songId)
-                .then(function (response) {
-                    // model.searchresult = response.data;
-                })
+        function modifySong(song) {
+
         }
 
+        function reviewSong(review) {
 
+        }
     }
 })();
