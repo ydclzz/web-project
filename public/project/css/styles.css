@@ -277,3 +277,23 @@ label.musician-detail-label {
     font-size: 30px;
     color: white;
 }
+
+.user-photo-large {
+    width: 250px;
+    height: 250px;
+    float: left;
+}
+
+.user-detail-div {
+    margin: 5px;
+}
+
+.user-detail-header-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn.btn-primary.btn-block {
+    margin-top: 5px;
+}

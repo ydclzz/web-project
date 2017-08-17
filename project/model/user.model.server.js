@@ -22,6 +22,7 @@ userModel.addTransaction = addTransaction;
 userModel.addPlaylist = addPlaylist;
 userModel.removePlaylist = removePlaylist;
 userModel.findUserByGoogleId = findUserByGoogleId;
+userModel.updateUserAvatar = updateUserAvatar;
 module.exports = userModel;
 
 function findUserByGoogleId(googleId) {
@@ -39,6 +40,11 @@ function findUserByUsername(username) {
 function updateUser(userId, user) {
     return userModel.updateOne({_id: userId},
         {$set: user});
+}
+
+function updateUserAvatar(userId, avatarUrl) {
+    return userModel.updateOne({_id: userId},
+        {avatar: avatarUrl});
 }
 
 function createUser(user) {

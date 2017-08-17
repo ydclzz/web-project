@@ -14,7 +14,6 @@ app.delete("/projectapi/user/:userId/song/:songId", deleteSong);
 app.get("/projectapi/songs", findAllSongs);
 app.get("/projectapi/song/:songId/creator", getSongCreator);
 
-
 function uploadSong(req, res) {
 
     var myFile = req.file;
@@ -40,8 +39,6 @@ function uploadSong(req, res) {
             res.redirect(callbackUrl);
         })
 }
-
-
 
 function createSongForUser(req,res) {
     var song = req.body;
@@ -82,6 +79,7 @@ function findSongBySongName(req, res) {
 
 function findAllSongsByUser(req, res) {
     var userId = req.params.userId;
+    console.log(userId);
     songModel
         .findAllSongsByUser(userId)
         .then(function (songs) {

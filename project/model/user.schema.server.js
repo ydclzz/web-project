@@ -8,6 +8,10 @@ var userSchema = mongoose.Schema({
         id:    String,
         token: String
     },
+    avatar: {
+        type: String,
+        default: "/avatar/default-avatar.png",
+    },
     type: {type: String, enum: ['GENERAL', 'MUSICIAN', 'PUBLISHER', 'ADMIN', 'CRITIC']},
     songs: [{type: mongoose.Schema.Types.ObjectId, ref:"SongModel"}],
     playlists: [{type: mongoose.Schema.Types.ObjectId, ref:"PlaylistModel"}],

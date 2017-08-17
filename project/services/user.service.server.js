@@ -1,5 +1,8 @@
 var app = require("../../express");
 var userModel = require("../model/user.model.server");
+var multer = require('multer'); // npm install multer --save
+var upload = multer({dest: __dirname + '/../../public/avatar'});
+var fs = require('fs');
 var passport = require("passport");
 var LocalStrategy = require('passport-local').Strategy;
 passport.use(new LocalStrategy(localStrategy));
@@ -12,6 +15,8 @@ var googleConfig = {
     callbackURL  : "http://127.0.0.1:3000/auth/google/callback",//process.env.GOOGLE_CALLBACK_URL
 };
 passport.use(new GoogleStrategy(googleConfig, googleStrategy));
+
+
 // http handlers
 app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
 app.get('/auth/google/callback',
@@ -36,9 +41,29 @@ app.put("/projectapi/user/:userId/song/:songId", addSong);
 app.put("/projectapi/user/userId/following/:followingId", addFollowingByUser);
 app.put("/projectapi/user/userId/follower/:followerId", addFollowerByUser);
 app.delete("/projectapi/user/:userId", deleteUser);
-
+app.post("/projectapi/avatar", upload.single('avatar'), uploadAvatar);
 // app.delete("/projectapi/user/song/:songId", removeSong);
 
+
+function uploadAvatar(req, res) {
+    var myFile = req.file;
+    var userId = req.body.userId;
+    var originalname = myFile.originalname; // file name on user's computer
+    var index = originalname.indexOf(".");
+    originalname = originalname.substring(0, index);
+    var filename = myFile.filename;     // new file name in upload folder
+    var path = myFile.path;         // full path of uploaded file
+    var destination = myFile.destination;  // folder where file is saved to
+    var size = myFile.size;
+    var mimetype = myFile.mimetype;
+
+    var avatarUrl = '/avatar/' + filename;
+    userModel.updateUserAvatar(userId, avatarUrl)
+        .then(function () {
+            var callbackUrl = "/project/#!/home";
+            res.redirect(callbackUrl);
+        })
+}
 
 function createUser(req,res) {
     var user = req.body;
