@@ -1,7 +1,7 @@
 var app = require("../../express");
 var userModel = require("../model/user.model.server");
 var multer = require('multer'); // npm install multer --save
-var upload = multer({dest: __dirname + '/../../public/avatar'});
+var upload = multer({dest: __dirname + '/../../public/avatar/upload'});
 var fs = require('fs');
 var passport = require("passport");
 var LocalStrategy = require('passport-local').Strategy;
@@ -59,7 +59,7 @@ function uploadAvatar(req, res) {
     var avatarUrl = '/avatar/' + filename;
     userModel.updateUserAvatar(userId, avatarUrl)
         .then(function () {
-            var callbackUrl = "/project/#!/home";
+            var callbackUrl = "/project/#!/profile";
             res.redirect(callbackUrl);
         })
 }
