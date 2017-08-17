@@ -6,15 +6,15 @@
 
 <div class="main-wrap">
     <input id="slide-sidebar" type="checkbox" role="button" />
-    <label for="slide-sidebar"><span class="glyphicon glyphicon-align-justify"></span></label>
+    <label class="myslide-label" for="slide-sidebar"><span class="glyphicon glyphicon-align-justify"></span></label>
     <div class="mysidebar">
         <div class="list-menu">
             <ul class="list-group">
-                <a ng-click="model.changeRightPanel('upload')">
-                    <li class="list-group-item">Upload</li >
-                </a>
                 <a ng-click="model.findSongsByMusician()">
                     <li class="list-group-item">My Songs</li >
+                </a>
+                <a ng-click="model.changeRightPanel('upload')">
+                    <li class="list-group-item">Upload</li >
                 </a>
                 <a ng-click="model.findFollowers()">
                     <li class="ng-binding list-group-item">Followers</li>

@@ -39,7 +39,7 @@ input:checked ~ label {
     left: 0;
 }
 
-label {
+label.myslide-label {
     z-index: 2;
     position: absolute;
     top: 50px;

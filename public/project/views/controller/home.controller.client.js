@@ -19,6 +19,9 @@
 
 
         function init() {
+            if(model.user.type === 'MUSICIAN') {
+                model.rightPanel = 'my-songs';
+            }
             findMusicians();
             findPlaylists();
         }

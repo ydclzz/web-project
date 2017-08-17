@@ -55,7 +55,7 @@
                ng-model="model.user.lastName">
     </form>
     <div class="upload">
-        <label for = "upload">Upload Avatar</label>
+        <h5>Upload Avatar</h5>
         <form action="/projectapi/avatar" id = "upload" method="post" enctype="multipart/form-data">
             <input  name="avatar" type="file" class="form-control"/>
             <input  name="userId" value="{{model.user._id}}"   style="display: none"/>
