@@ -5,8 +5,21 @@ var LocalStrategy = require('passport-local').Strategy;
 passport.use(new LocalStrategy(localStrategy));
 passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
-
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var googleConfig = {
+    clientID     : "1007887171981-db9d5lqrpl5s0difp3vje5dfrsnrijmi.apps.googleusercontent.com",//process.env.GOOGLE_CLIENT_ID,
+    clientSecret : "EjaLWYKzCsEHgH6bpG97CojL",//process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL  : "http://127.0.0.1:3000/auth/google/callback",//process.env.GOOGLE_CALLBACK_URL
+};
+passport.use(new GoogleStrategy(googleConfig, googleStrategy));
 // http handlers
+app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+app.get('/auth/google/callback',
+    passport.authenticate('google', {
+        successRedirect: '/project/#!/home',
+        failureRedirect: '/project/#!/'
+    }));
+
 app.post("/projectapi/user", createUser);
 app.post("/projectapi/login", passport.authenticate('local'), login);
 app.get("/projectapi/user", findUser);
@@ -19,6 +32,7 @@ app.put("/projectapi/user/:userId/song/:songId", addSong);
 app.put("/projectapi/user/userId/following/:followingId", addFollowingByUser);
 app.put("/projectapi/user/userId/follower/:followerId", addFollowerByUser);
 app.delete("/projectapi/user/:userId", deleteUser);
+
 // app.delete("/projectapi/user/song/:songId", removeSong);
 
 
@@ -48,7 +62,6 @@ function findUser(req,res) {
         .findUserByUsername(username)
         .then(function (user) {
             if (user === null){
-                console.log("None");
                 return res.send("0");
             }
             else
@@ -195,4 +208,43 @@ function deserializeUser(user, done) {
                             done(err, null);
                         }
                 );
+}
+
+function googleStrategy(token, refreshToken, profile, done) {
+    // console.log(profile);
+    userModel
+        .findUserByGoogleId(profile.id)
+        .then(
+            function(user) {
+                if(user) {//.length !== 0
+                    return done(null, user);
+                } else {
+                    var email = profile.emails[0].value;
+                    var emailParts = email.split("@");
+                    var newGoogleUser = {
+                        username:  emailParts[0],
+                        firstName: profile.name.givenName,
+                        lastName:  profile.name.familyName,
+                        google: {
+                            id:    profile.id,
+                            token: token
+                        },
+                        type: "GENERAL"
+                    };
+                    return userModel.create(newGoogleUser);
+                }
+            },
+            function(err) {
+                console.log("errrrrrrr");
+                if (err) { return done(err); }
+            }
+        )
+        .then(
+            function(user){
+                return done(null, user);
+            },
+            function(err){
+                if (err) { return done(err); }
+            }
+        );
 }

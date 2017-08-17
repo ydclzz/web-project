@@ -4,6 +4,10 @@ var userSchema = mongoose.Schema({
     password: String,
     firstName: String,
     lastName: String,
+    google: {
+        id:    String,
+        token: String
+    },
     type: {type: String, enum: ['GENERAL', 'MUSICIAN', 'PUBLISHER', 'ADMIN', 'CRITIC']},
     songs: [{type: mongoose.Schema.Types.ObjectId, ref:"SongModel"}],
     playlists: [{type: mongoose.Schema.Types.ObjectId, ref:"PlaylistModel"}],

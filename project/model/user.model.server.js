@@ -20,9 +20,12 @@ userModel.removeReview = removeReview;
 userModel.addTransaction = addTransaction;
 userModel.addPlaylist = addPlaylist;
 userModel.removePlaylist = removePlaylist;
+userModel.findUserByGoogleId = findUserByGoogleId;
 module.exports = userModel;
 
-
+function findUserByGoogleId(googleId) {
+    return userModel.findOne({'google.id': googleId});
+}
 
 function findUserByCredentials(username, password) {
     return userModel.findOne({username: username, password: password});
