@@ -24,8 +24,12 @@ app.post("/projectapi/user", createUser);
 app.post("/projectapi/login", passport.authenticate('local'), login);
 app.get("/projectapi/user", findUser);
 app.get("/projectapi/user/:userId", findUserById);
-app.get("/projectapi/following", findFollowingByUser);
-app.get("/projectapi/follower", findFollowersByUser);
+app.get("/projectapi/user/:userId/following", findFollowingByUser);
+app.get("/projectapi/user/:userId/following/:followingtype", findFollowingByTypeByUser);
+app.get("/projectapi/user/:userId/following", findFollowingByUser);
+app.get("/projectapi/user/:userId/following", findFollowingByUser);
+app.get("/projectapi/user/:userId/follower", findFollowersByUser);
+app.get("/projectapi/")
 app.get("/projectapi/checkLogin", checkLogin);
 app.put("/projectapi/user/:userId", updateUser);
 app.put("/projectapi/user/:userId/song/:songId", addSong);
@@ -126,6 +130,18 @@ function findFollowingByUser(req, res) {
         .findFollowingByUser(userId)
         .then(function (follwing) {
             res.json(follwing);
+        }, function (err) {
+            res.sendStatus(404).send(err);
+        });
+}
+
+function findFollowingByTypeByUser(req,res){
+    var userId = req.params.userId;
+    var type = req.params.followingtype;
+    userModel
+        .findFollowingByTypeByUser(userId,type)
+        .then(function (follwings) {
+            res.json(follwings);
         }, function (err) {
             res.sendStatus(404).send(err);
         });

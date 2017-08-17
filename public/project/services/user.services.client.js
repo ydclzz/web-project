@@ -15,6 +15,7 @@
             "removeSong":removeSong,
             "addSong":addSong,
             "findFollowingByUser":findFollowingByUser,
+            "findFollowingByTypeByUser":findFollowingByTypeByUser,
             "findFollowersByUser":findFollowersByUser,
             "addFollowingByUser":addFollowingByUser,
             "addFollowersByUser":addFollowersByUser,
@@ -68,6 +69,11 @@
 
         function findFollowingByUser(userId) {
             var url = "/projectapi/user/" + userId + "/following";
+            return $http.get(url);
+        }
+
+        function findFollowingByTypeByUser(userId, type) {
+            var url = "/projectapi/user/" + userId + "/following/" + type;
             return $http.get(url);
         }
 

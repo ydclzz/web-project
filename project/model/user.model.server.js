@@ -12,6 +12,7 @@ userModel.deleteUserById = deleteUserById;
 userModel.addSong = addSong;
 userModel.removeSong = removeSong;
 userModel.findFollowingByUser = findFollowingByUser;
+userModel.findFollowingByTypeByUser = findFollowingByTypeByUser;
 userModel.findFollowersByUser = findFollowersByUser;
 userModel.addFollowingByUser = addFollowingByUser;
 userModel.addFollowersByUser = addFollowersByUser;
@@ -81,37 +82,24 @@ function addSong(userId, songId) {
 //Follow
 function findFollowingByUser(userId) {
     return userModel.findUserById(userId)
+        .populate('following')
+        .exec()
+        .then(function (user) {
+           return user.following;
+        })
+
+}
+
+function findFollowingByTypeByUser(userId, usertype){
+    return userModel.findUserById(userId)
+        .populate('following')
+        .exec()
         .then(function (user) {
             var following = user.following;
-            return userModel.find({ _id: { $in: following } }).exec(function(err, docs) {
-                docs.sort(function(a, b) {
-                    // Sort docs by the order of their index in widgets.
-                    return following.indexOf(a._id) - following.indexOf(b._id);
-                });
-            });
+            return _.where(following,{type: usertype});
         })
 }
 
-function findFollowersByUser(userId) {
-    return userModel.findUserById(userId)
-        .then(function (user) {
-            var followers = user.followers;
-            return userModel.find({ _id: { $in: followers } }).exec(function(err, docs) {
-                docs.sort(function(a, b) {
-                    // Sort docs by the order of their index in widgets.
-                    return followers.indexOf(a._id) - followers.indexOf(b._id);
-                });
-            });
-        })
-}
-
-function addFollowingByUser(userId, followingId) {
-    return userModel.findUserById(userId)
-        .then(function (user) {
-            user.following.push(followingId);
-            return user.save();
-        })
-}
 
 function addFollowersByUser(userId, followerId) {
     return userModel.findUserById(userId)
