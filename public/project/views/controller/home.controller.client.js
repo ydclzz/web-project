@@ -13,6 +13,7 @@
         model.createPlaylistForUser = createPlaylistForUser;
         model.searchTrack = searchTrack;
         model.showDetails = showDetails;
+        model.getAllSongsFromPlaylist = getAllSongsFromPlaylist;
 
 
 
@@ -72,6 +73,10 @@
                     model.rightPanel = 'search';
                     $location.url('/home');
                 })
+        }
+
+        function getAllSongsFromPlaylist(playlistId) {
+            
         }
 
 

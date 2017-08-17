@@ -9,6 +9,7 @@ app.get("/projectapi/user/:userId/playlist", findAllPlaylistsByUser);
 app.get("/projectapi/playlist/:playlistId", findPlaylistById);
 app.put("/projectapi/playlist/:playlistId", updatePlaylist);
 app.delete("/projectapi/playlist/:playlistId", deletePlaylist);
+app.put("/projectapi/playlist/:playlistId/song/:songId", addSongToPlaylist);
 
 
 
@@ -85,3 +86,18 @@ function deletePlaylist(req, res) {
             res.send("0");
         });
 }
+
+function addSongToPlaylist(req,res) {
+    var playlistId = req.params.playlistId;
+    var songId = req.params.songId;
+    console.log("playlist server");
+    console.log(playlistId);
+    console.log(songId);
+    playlistModel
+        .addSongToPlaylist(playlistId, songId)
+        .then(function (list) {
+            res.json(list);
+        }, function (err) {
+            res.sendStatus(404).send(err);
+        });
+};

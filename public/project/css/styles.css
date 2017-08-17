@@ -221,3 +221,6 @@ a.song-name:hover {
     color: aquamarine;
     font-size: x-large;
 }
+.song-artist-photo.btn-default{
+    background: transparent;
+ }

@@ -12,7 +12,8 @@
             "findPlaylistByPlaylistName":findPlaylistByPlaylistName,
             "findAllPlaylistsByUser": findAllPlaylistsByUser,
             "updatePlaylist": updatePlaylist,
-            "deletePlaylist": deletePlaylist
+            "deletePlaylist": deletePlaylist,
+            "addSongToPlaylist":addSongToPlaylist
         };
 
         return api;
@@ -47,6 +48,12 @@
         function deletePlaylist(playlistId){
             var url = "/projectapi/playlist/" + playlistId;
             return $http.delete(url);
+        }
+
+        function addSongToPlaylist(playlistId, songId) {
+            console.log(playlistId);
+            var url = "/projectapi/playlist/" + playlistId + "/song/" + songId;
+            return $http.put(url);
         }
 
     }

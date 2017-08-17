@@ -13,7 +13,8 @@
             "findAllSongsByUser": findAllSongsByUser,
             "updateSong": updateSong,
             "deleteSong": deleteSong,
-            "findAllSongs": findAllSongs
+            "findAllSongs": findAllSongs,
+            "getSongCreator":getSongCreator
         };
         return api;
 
@@ -50,6 +51,11 @@
 
         function findAllSongs() {
             var url = "/projectapi/songs";
+            return $http.get(url);
+        }
+
+        function getSongCreator(songId) {
+            var url = "/projectapi/song/" + songId + "/creator";
             return $http.get(url);
         }
 

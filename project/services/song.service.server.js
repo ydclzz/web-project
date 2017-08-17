@@ -12,6 +12,8 @@ app.put("/projectapi/song/:songId", updateSong);
 app.post("/projectapi/upload", upload.single('myFile'), uploadSong);
 app.delete("/projectapi/user/:userId/song/:songId", deleteSong);
 app.get("/projectapi/songs", findAllSongs);
+app.get("/projectapi/song/:songId/creator", getSongCreator);
+
 
 function uploadSong(req, res) {
 
@@ -117,6 +119,17 @@ function findAllSongs(req, res) {
     return songModel.findAllSongs()
         .then(function (songs) {
             res.json(songs);
+        }, function (err) {
+            res.sendStatus(500).send(err);
+        })
+}
+
+function getSongCreator(req,res) {
+    var songId = req.params.songId;
+    return songModel
+        .getSongCreator(songId)
+        .then(function (creator) {
+            res.json(creator);
         }, function (err) {
             res.sendStatus(500).send(err);
         })

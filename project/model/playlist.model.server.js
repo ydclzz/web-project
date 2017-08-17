@@ -58,7 +58,7 @@ function addSongToPlaylist(playlistId,songId) {
     return playlistModel.findPlaylistById(playlistId)
         .then(function (list) {
             list.songlist.push(songId);
-            return user.save();
+            return list.save();
         })
 }
 

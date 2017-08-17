@@ -11,6 +11,7 @@ songModel.findAllSongsByUser = findAllSongsByUser;
 songModel.deleteSong = deleteSong;
 songModel.updateSong = updateSong;
 songModel.getSongUrl = getSongUrl;
+songModel.getSongCreator = getSongCreator;
 songModel.findAllSongs = findAllSongs;
 songModel.addReview = addReview;
 songModel.removeReview = removeReview;
@@ -68,6 +69,18 @@ function getSongUrl(songId) {
         .then(function (song) {
             return song.url;
         })
+}
+
+function getSongCreator(songId) {
+    return songModel
+        .findById(songId)
+        .populate('_creator')
+        .exec();
+        // .then(function (song) {
+        //     return song._creator
+        //         .populate('_creator')
+        //         .exec();
+        // })
 }
 
 //review

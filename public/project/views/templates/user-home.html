@@ -50,7 +50,7 @@
         <div class="content mCustomScrollbar playlists ">
             <div ng-show= "model.playlists" ng-repeat="playlist in model.playlists" class="list-group">
                 <div class="list-group-item">
-                    <a href="">{{playlist.name}}</a>
+                    <a ng-click="getAllSongsFromPlaylist(playlist._id)" href="">{{playlist.name}}</a>
                 </div >
             </div>
             <!--<ul class="list-group">-->
