@@ -5,10 +5,10 @@
 
     function homeController(user, userService) {
         var model = this;
+        model.rightPanel = 'search';
         model.user = user;
-
         model.findFollower = findFollower;
-
+        model.changeRightPanel = changeRightPanel;
         function init() {
             model.followers = findFollower();
         }
@@ -17,6 +17,10 @@
 
         function findFollower() {
             return userService.findFollowersByUser(user._id);
+        }
+
+        function changeRightPanel(mode) {
+            model.rightPanel = mode;
         }
     }
 })();

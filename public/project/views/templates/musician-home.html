@@ -1,0 +1,72 @@
+<div class="visible-lg visible-md visible-sm" ng-include="'views/templates/footer-explore.html'"></div>
+<div class="visible-xs" ng-include="'views/templates/footer-explore-mobile.html'"></div>
+<nav class="user navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#!/home">Musician</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li><a href="#">Home</a></li>
+                <!--<li><a href="#!/play">PLAY</a></li>-->
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#!/profile"><span class="glyphicon glyphicon-user"></span> {{model.user.username}}</a></li>
+                <li><a href="#!/"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="user-home container-fluid ">
+    <div class="left-menu col-xs-4 col-sm-2">
+        <h5>My Account</h5>
+        People
+        <div class="people">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    Musicians
+                </li >
+                <li class="ng-binding list-group-item">
+                    Followers
+                </li>
+            </ul>
+        </div>
+        Playlists
+        <div class="playlists content mCustomScrollbar">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    playlist1
+                </li >
+                <li class="list-group-item">
+                    playlist2
+                </li >
+            </ul>
+        </div>
+        Songs
+        <button ng-click="model.changeRightPanel('upload')" class="btn btn-success">
+            Upload my song
+        </button>
+        <div class="songs">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    Musicians
+                </li >
+                <li class="ng-binding list-group-item">
+                    Followers
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="right-table col-xs-8 col-sm-10">
+        <div ng-show="model.rightPanel==='search'" ng-include="'views/templates/search.html'"></div>
+        <div ng-show="model.rightPanel==='upload'" ng-include="'views/templates/upload-song.html'"></div>
+    </div>
+</div>
+
