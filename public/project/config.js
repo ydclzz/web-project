@@ -26,7 +26,7 @@
                     user: checkLogin
                 }
             })
-            .when("/user/edit", {
+            .when("/profile", {
                 templateUrl: "views/templates/profile.html",
                 controller: "profileController",
                 controllerAs: "model",

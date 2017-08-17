@@ -72,7 +72,7 @@
                     model.playlists = response.data;
                     // console.log(model.playlists);
                     model.rightPanel = 'search';
-                    $location.url('/home');
+                    $location.url('#!/home');
                 })
         }
 
