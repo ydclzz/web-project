@@ -14,7 +14,18 @@ app.delete("/projectapi/user/:userId/song/:songId", deleteSong);
 app.get("/projectapi/songs", findAllSongs);
 app.get("/projectapi/song/:songId/creator", getSongCreator);
 app.put("/projectapi/song/:songId/owner/:ownerId/price/:priceNum", addSongOwner);
-app.post("/projectapi/song/api", createSongFromApi)
+app.post("/projectapi/song/api", createSongFromApi);
+app.get("/projectapi/review/song/:songId", findSongByIdWithReview);
+
+function findSongByIdWithReview(req, res) {
+    var songId = req.params.songId;
+    songModel.findSongByIdWithReview(songId)
+        .then(function (songs) {
+            res.json(songs);
+        }, function (err) {
+            res.sendStatus(500).send(err);
+        })
+}
 
 function uploadSong(req, res) {
 

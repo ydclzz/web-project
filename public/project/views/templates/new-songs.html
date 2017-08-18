@@ -9,12 +9,18 @@
                         <a href="#!/song/{{song._id}}"
                            class="song-name">{{song.name}}</a>
                     </div>
+                    <div ng-show="song._creator">
                         <label class="explore-label">Artist:</label>
                         <a href="#!/musician/{{song._creator._id}}"
                            class="song-name">{{song._creator.username}}</a>
                     </div>
+                    <div ng-hide="song._creator">
+                        <label class="explore-label">Artist:</label>
+                        {{song.artist}}
+                    </div>
+                </div>
                 <div class="song-artist-photo-div">
-                    <img class="song-artist-photo" ng-src="{{song._creator.avatar}}">
+                    <img class="song-artist-photo" ng-src="{{song.cover}}">
                 </div>
             </div>
         </li>

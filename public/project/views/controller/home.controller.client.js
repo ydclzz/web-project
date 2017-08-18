@@ -4,9 +4,9 @@
         .controller("homeController", homeController);
 
 
-    function homeController(songService,user,$location,userService,searchService, playlistService,transactionService) {
+    function homeController(songService,user,$location,userService, reviewService,searchService, playlistService,transactionService) {
         var model = this;
-        model.rightPanel = 'search';
+        model.rightPanel = 'musicians';
         model.user = user;
         model.findMusicians = findMusicians;
         model.findCritics = findCritics;
@@ -18,6 +18,7 @@
         model.findFollowers = findFollowers;
         model.unFollow = unFollow;
         model.findSongsByMusician = findSongsByMusician;
+        model.findReviewsByCritic = findReviewsByCritic;
         model.findMusicianAvatar = findMusicianAvatar;
         model.findTransactionsByPublisher = findTransactionsByPublisher;
         model.findTransactionsByMusician = findTransactionsByMusician;
@@ -40,7 +41,7 @@
             findMusicians();
             findPlaylists();
             findCritics();
-            findAllUsers();
+            // findAllUsers();
             findAllSongs();
         }
         init();
@@ -144,6 +145,14 @@
                 })
         }
 
+        function findReviewsByCritic() {
+            model.rightPanel = 'my-reviews';
+            reviewService.findAllReviewsByUser(model.user._id)
+                .then(function (response) {
+                    model.reviews = response.data;
+                })
+        }
+
         function findTransactionsByPublisher() {
             model.rightPanel = 'transactions';
             transactionService.findTransactionsByBuyer(model.user._id)
@@ -194,7 +203,9 @@
                 "name": song.name,
                 "artist" : song.artists[0].name,
                 "cover" : song.album.cover,
-                "thridPartyId": ""+song.id
+                "thridPartyId": ""+song.id,
+                "_owner" : model.user._id,
+                "url" : "http://music.163.com/#/song?id="+song.id
             };
             return songService.createSongFromApi(newSong)
                 .then(function (response) {

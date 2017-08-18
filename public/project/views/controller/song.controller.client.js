@@ -22,6 +22,7 @@
         model.purchaseSong = purchaseSong;
         model.cancelPurchase = cancelPurchase;
         model.defaultMessage = defaultMessage;
+        model.findSongReviews = findSongReviews;
         var songId = $routeParams["songId"];
         var hasreviewed = false;
         model.favourite = "no";
@@ -29,6 +30,7 @@
         model.playlistId = "";
         function init() {
             findSongInfo();
+            findSongReviews();
             getPlaylist();
         }
         init();
@@ -153,6 +155,14 @@
                     // console.log(response);
                     model.playlists = response.data;
                 });
+        }
+
+        function findSongReviews() {
+            songService.findSongByIdWithReview(songId)
+                .then(function (response) {
+                    console.log(response.data);
+                    model.reviews = response.data[0].reviews;
+                })
         }
     }
 })();

@@ -16,10 +16,15 @@
             "findAllSongs": findAllSongs,
             "getSongCreator":getSongCreator,
             "addSongOwner": addSongOwner,
-            "createSongFromApi": createSongFromApi
+            "createSongFromApi": createSongFromApi,
+            "findSongByIdWithReview": findSongByIdWithReview
         };
         return api;
 
+        function findSongByIdWithReview(songId) {
+            var url = "/projectapi/review/song/" + songId;
+            return $http.get(url);
+        }
 
         function findSongById(songId) {
             var url = "/projectapi/search/song/" + songId;

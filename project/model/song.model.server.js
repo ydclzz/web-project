@@ -16,6 +16,7 @@ songModel.addReview = addReview;
 songModel.removeReview = removeReview;
 songModel.findSongByThridPartyId = findSongByThridPartyId;
 songModel.createSongFromApi = createSongFromApi;
+songModel.findSongByIdWithReview = findSongByIdWithReview;
 module.exports = songModel;
 
 function createSongForUser(userId, song) {
@@ -119,6 +120,11 @@ function findSongByThridPartyId(thirdPartyId) {
 }
 
 function createSongFromApi(song) {
-    console.log(song);
     return songModel.create(song);
+}
+
+function findSongByIdWithReview(songId) {
+    return songModel.find({_id: songId})
+        .populate('reviews')
+        .exec();
 }
