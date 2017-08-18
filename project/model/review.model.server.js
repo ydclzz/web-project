@@ -4,7 +4,7 @@ var reviewModel = mongoose.model("ReviewModel", reviewSchema);
 var songModel = require("./song.model.server");
 var userModel = require("./user.model.server");
 var playlistModel = require("./playlist.model.server");
-var db = require("./database");
+// var db = require("./database");
 
 reviewModel.createReviewForSong = createReviewForSong;
 reviewModel.createReviewForPlaylist = createReviewForPlaylist;
