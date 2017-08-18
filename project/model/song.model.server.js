@@ -1,7 +1,8 @@
 var mongoose = require("mongoose");
 var songSchema = require("./song.schema.server");
 var songModel = mongoose.model("SongModel", songSchema);
-var userModel = require("./user.model.server")
+var userModel = require("./user.model.server");
+
 
 songModel.createSongForUser = createSongForUser;
 songModel.findSongById = findSongById;

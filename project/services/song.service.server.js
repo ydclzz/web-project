@@ -120,6 +120,13 @@ function updateSong(req, res){
 function deleteSong(req, res) {
     var songId = req.params.songId;
     var userId = req.params.userId;
+    songModel.findSongById(songId)
+        .then(function (song) {
+            var filePath = __dirname + '/../../'
+            filePath += song.url;
+            fs.unlinkSync(filePath);
+            console.log('successfully deleted ');
+        })
     songModel
         .deleteSong(userId, songId)
         .then(function (song) {
