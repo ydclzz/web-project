@@ -17,7 +17,9 @@
         model.getPlaylist = getPlaylist;
         model.deleteSong = deleteSong;
         model.addReviewToSong = addReviewToSong;
+        model.getReview = getReview;
         var songId = $routeParams["songId"];
+        var hasreviewed = false;
         model.favourite = "no";
         model.playlistId = "";
         function init() {
@@ -26,6 +28,15 @@
         }
         init();
 
+        function getReview() {
+            reviewService.isReviewed(user._id, model.song._id)
+                .then(function (response) {
+                    if(response.data != "0"){
+                        model.newreview = response.data;
+                        hasreviewed = true;
+                    }
+                })
+        }
         function findSongInfo() {
             songService.findSongById(songId)
                 .then(function (response) {
@@ -42,16 +53,26 @@
         }
 
         function reviewSong(review) {
+            model.getReview();
             model.editreview = 'yes';
         }
 
         function addReviewToSong(){
             if(model.newreview.title && model.newreview.comment){
+                if(hasreviewed === true){
+                    reviewService.updateReview(model.newreview._id, model.newreview)
+                        .then(function (res) {
+                            alert("success")
+                            $location.url('/explore');
+                        })
+                }
+                else{
                 reviewService.createReviewForSong(user._id, model.song._id, model.newreview)
                     .then(function (res) {
                         alert("success")
                         $location.url('/explore');
                     })
+                }
             }else{
                 alert("please fill in review");
             }

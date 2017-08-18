@@ -18,7 +18,8 @@
             "findReviewById": findReviewById,
 
             "updateReview": updateReview,
-            "deleteReview": deleteReview
+            "deleteReview": deleteReview,
+            "isReviewed": isReviewed
         };
 
         return api;
@@ -57,6 +58,11 @@
         function deleteReview(reviewId){
             var url = "/projectapi/review/" + reviewId;
             return $http.delete(url);
+        }
+
+        function isReviewed(userId, songId){
+            var url = "/projectapi/userreview/"+ userId + "/" + songId;
+            return $http.get(url);
         }
 
     }

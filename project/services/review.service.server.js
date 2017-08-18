@@ -13,7 +13,7 @@ app.get("/projectapi/song/:songId/review", findReviewBySongId);
 app.get("/projectapi/user/:userId/review", findAllReviewsByUser);
 app.put("/projectapi/review/:reviewId", updateReview);
 app.delete("/projectapi/review/:reviewId", deleteReview);
-
+app.get("/projectapi/userreview/:userid/:songid", isReviewed);
 
 
 function createReviewForSong(req,res) {
@@ -125,4 +125,22 @@ function deleteReview(req, res) {
         }, function (err) {
             res.send("0");
         });
+}
+
+function isReviewed(req,res){
+    var userid = req.params.userid;
+    var songid = req.params.songid;
+    reviewModel
+        .findReviewBySongId(songid)
+        .then(function (reviews) {
+            if(reviews) {
+                reviews.forEach(function(review) {
+                    if(review._critic == userid){
+                        res.json(review);
+                        return;
+                    }
+                });
+            }
+            res.send("0");
+        })
 }

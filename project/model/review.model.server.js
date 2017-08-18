@@ -22,12 +22,17 @@ module.exports = reviewModel;
 function createReviewForSong(userId, songId, review) {
     review._critic = userId;
     review._song = songId;
+    var reviewId = null;
     var reviewTemp = null;
     return reviewModel
         .create(review)
         .then(function (newreview) {
             reviewTemp = newreview;
-            return songModel.addReview(songId, newreview._id)
+            reviewId = newreview._id;
+            songModel.addReview(songId, newreview._id)
+        })
+        .then(function (r) {
+            return userModel.addReview(userId, reviewId);
         })
         .then(function (res) {
             return reviewTemp;
