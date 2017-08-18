@@ -4,7 +4,7 @@
         .controller("homeController", homeController);
 
 
-    function homeController(user,$location,userService,searchService, playlistService, songService) {
+    function homeController(user,$location,userService,searchService,transactionService, playlistService, songService) {
         var model = this;
         model.rightPanel = 'search';
         model.user = user;
@@ -18,12 +18,20 @@
         model.findSongsByMusician = findSongsByMusician;
         model.findAllUsers = findAllUsers;
         model.findAllSongs = findAllSongs;
-
+        model.findTransactionsByPublisher = findTransactionsByPublisher;
+        model.findTransactionsByMusician = findTransactionsByMusician;
+        model.accecptTransaction = accecptTransaction;
+        model.rejectTransaction = rejectTransaction;
+        model.cancelTransaction = cancelTransaction;
 
         function init() {
             if(model.user.type === 'MUSICIAN') {
                 model.rightPanel = 'my-songs';
                 findSongsByMusician();
+            }
+            if(model.user.type === 'PUBLISHER') {
+                model.rightPanel = 'transactions';
+                findTransactionsByPublisher();
             }
             findMusicians();
             findPlaylists();
@@ -122,7 +130,49 @@
                 })
         }
 
+        function findTransactionsByPublisher() {
+            model.rightPanel = 'transactions';
+            transactionService.findTransactionsByBuyer(model.user._id)
+                .then(function (response) {
+                    model.transactions = response.data;
+                })
+            console.log(model.transactions)
+        }
 
+        function findTransactionsByMusician() {
+            model.rightPanel = 'transactions';
+            transactionService.findTransactionsBySeller(model.user._id)
+                .then(function (response) {
+                    model.transactions = response.data;
+                })
+            console.log(model.transactions)
+        }
 
+        function accecptTransaction(transaction) {
+            transaction.status = 'DONE';
+            transactionService.updateTransaction(transaction._id, transaction)
+                .then(function (response) {
+                    songService.addSongOwner(transaction._song, transaction._buyer._id, transaction.price)
+                        .then(function (response) {
+                            $location.url("/home");
+                        })
+                })
+        }
+
+        function rejectTransaction(transaction) {
+            transaction.status = 'REJECTED';
+            transactionService.updateTransaction(transaction._id, transaction)
+                .then(function (response) {
+                    $location.url("/home");
+                })
+        }
+
+        function cancelTransaction(transaction) {
+            transaction.status = 'CANCELED';
+            transactionService.updateTransaction(transaction._id, transaction)
+                .then(function (response) {
+                    $location.url("/home");
+                })
+        }
     }
 })();

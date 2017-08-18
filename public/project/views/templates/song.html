@@ -25,7 +25,7 @@
 <div class="song-detail-div container-fluid">
     <div ng-show="model.favourite === 'no'" class="song-detail-header-div">
         <div class="song-detail-header-img-div">
-            <img class="song-artist-photo-large" ng-src="https://static1.squarespace.com/static/5391fac1e4b07b6926545c34/t/54b948f4e4b0567044b6c023/1421428991081/">
+            <img class="song-artist-photo-large" ng-src="{{model.song._creator.avatar}}">
         </div>
         <div class="song-detail-header-description-div">
             <div>
@@ -40,17 +40,20 @@
         <div class="song-detail-header-control-div">
             <div ng-show="model.user.type === 'CRITIC'">
                 <a class="detail-operator" ng-click="model.reviewSong(song)"><span class="glyphicon glyphicon-pencil"></span></a>
-                <a class="detail-operator" ng-click="model.favouriteSong('yes')"><span class="glyphicon glyphicon-plus"></span></a>
             </div>
             <div ng-show="model.user._id === model.song._creator._id">
-                <a class="detail-operator" ng-click="model.editSong()"><span class="glyphicon glyphicon-cog"></span></a>
+                <a class="detail-operator" ng-click="model.edit = 'yes'"><span class="glyphicon glyphicon-cog"></span></a>
             </div>
             <div ng-show="model.user.type === 'GENERAL'">
-                <a class="detail-operator" ng-click="model.favouriteSong('yes')"><span class="glyphicon glyphicon-plus"></span></a>
+                <a class="detail-operator" ng-click="model.favourite = 'yes'"><span class="glyphicon glyphicon-plus"></span></a>
+            </div>
+            <div ng-show="model.user.type === 'PUBLISHER'">
+                <a class="detail-operator" ng-click="model.buy = 'yes'"><span class="glyphicon glyphicon-envelope"></span></a>
             </div>
         </div>
     </div>
     <div ng-show="model.favourite === 'yes'" ng-include src="'views/templates/favourite-song.html'"></div>
     <div ng-show="model.edit === 'yes'" ng-include src="'views/templates/edit-song.html'"></div>
     <div ng-show="model.editreview === 'yes'" ng-include src="'views/templates/edit-review.html'"></div>
+    <div ng-show="model.buy === 'yes'" ng-include src="'views/templates/buy-song.html'"></div>
 </div>

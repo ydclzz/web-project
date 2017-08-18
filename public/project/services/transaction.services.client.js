@@ -21,8 +21,8 @@
 
 
         function createTransaction(buyerId,songId, transaction) {
-            var url = "/projectapi/transaction/" + buyerId + "/" + songId;
-            return $http.post(url,transaction);
+            var url = "/projectapi/transaction/" + buyerId + "/song/" + songId;
+            return $http.post(url, transaction);
         }
 
 
@@ -33,6 +33,7 @@
 
         function findTransactionsByBuyer(buyerId) {
             var url = "/projectapi/transaction/buyer/" + buyerId;
+            console.log(url);
             return $http.get(url);
         }
 

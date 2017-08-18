@@ -3,9 +3,10 @@
         .module("Musiker")
         .controller("songController", songController);
 
-    function songController(songService, playlistService,reviewService, $routeParams,$location, user) {
+    function songController(songService, playlistService,transactionService,reviewService, $routeParams,$location, user) {
         var model = this;
         model.user = user;
+        model.errorPurchaseMessage = '1';
         model.findSongInfo = findSongInfo;
         model.addSong = addSong;
         model.reviewSong = reviewSong;
@@ -18,10 +19,16 @@
         model.deleteSong = deleteSong;
         model.addReviewToSong = addReviewToSong;
         model.getReview = getReview;
+        model.purchaseSong = purchaseSong;
+        model.cancelPurchase = cancelPurchase;
+        model.defaultMessage = defaultMessage;
+
         var songId = $routeParams["songId"];
         var hasreviewed = false;
         model.favourite = "no";
         model.playlistId = "";
+        model.buy = "no";
+
         function init() {
             findSongInfo();
             getPlaylist();
@@ -78,6 +85,34 @@
             }
         }
 
+        function defaultMessage() {
+            model.errorPurchaseMessage = '1';
+        }
+
+        function purchaseSong(price) {
+            if(model.song._owner) {
+                model.errorPurchaseMessage = "Alreay purchased by another publisher";
+            } else if(!price) {
+                model.errorPurchaseMessage = "Please offer your price";
+            }
+            else {
+                var transaction = {};
+                transaction._buyer = model.user._id;
+                transaction._seller = model.song._creator._id;
+                transaction._song = model.song._id;
+                transaction.price = price;
+                transaction.status = "PENDING";
+                transactionService.createTransaction(model.user._id, model.song._id, transaction)
+                    .then(function (response) {
+                        $location.url('/explore');
+                    })
+            }
+        }
+
+        function cancelPurchase() {
+            model.buy = "no";
+        }
+
         function addSongToPlaylist() {
             playlistService.addSongToPlaylist(model.playlistId, songId)
                 .then(function (response) {
@@ -121,5 +156,6 @@
                     model.playlists = response.data;
                 });
         }
+
     }
 })();

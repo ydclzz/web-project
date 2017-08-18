@@ -304,3 +304,43 @@ label.musician-detail-label {
 .row {
     margin: 5px;
 }
+
+.transaction-operator-combination {
+    position: absolute;
+    right: 10px;
+    padding: 10px;
+}
+
+.transaction-operator {
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.transaction-operator:hover {
+    font-size: 30px;
+}
+
+.transaction-operator-buyer-combination {
+    position: absolute;
+    right: 10px;
+    padding: 10px;
+    font-size: 24px;
+}
+
+.transaction-operator-buyer {
+    margin-top: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.transaction-operator-buyer:hover {
+    font-size: 35px;
+}
+
+.glyphicon.glyphicon-ok {
+    color: #2ecc71;
+}
+
+.glyphicon.glyphicon-remove {
+    color: #e74c3c;
+}

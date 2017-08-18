@@ -13,6 +13,9 @@
                 <a ng-click="model.findSongsByMusician()">
                     <li class="list-group-item">My Songs</li >
                 </a>
+                <a ng-click="model.findTransactionsByMusician()">
+                    <li class="list-group-item">My Transactions</li >
+                </a>
                 <a ng-click="model.changeRightPanel('upload')">
                     <li class="list-group-item">Upload</li >
                 </a>
@@ -28,6 +31,7 @@
         <div ng-show="model.rightPanel==='upload'" ng-include="'views/templates/upload-song.html'"></div>
         <div ng-show="model.rightPanel === 'followers'" ng-include src="'views/templates/follower-users.html'"></div>
         <div ng-show="model.rightPanel === 'my-songs'" ng-include src="'views/templates/songs-musician.html'"></div>
+        <div ng-show="model.rightPanel==='transactions'" ng-include="'views/templates/transactions-seller.html'"></div>
     </div>
 
 </div>

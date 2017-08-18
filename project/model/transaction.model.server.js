@@ -1,5 +1,5 @@
 var mongoose = require("mongoose");
-var reviewSchema = require("./review.schema.server");
+var transactionSchema = require("./transaction.schema.server");
 var transactionModel = mongoose.model("TransactionModel", transactionSchema);
 var songModel = require("./song.model.server");
 var userModel = require("./user.model.server");
@@ -8,7 +8,7 @@ var db = require("./database");
 transactionModel.createTransaction = createTransaction;
 transactionModel.findTransactionById = findTransactionById;
 transactionModel.findTransactionBySeller = findTransactionBySeller;
-transactionModel.findTransactionByBuyer = findTransactionByBuyer;
+transactionModel.findTransactionsByBuyer = findTransactionsByBuyer;
 transactionModel.updateTransaction = updateTransaction;
 module.exports = transactionModel;
 
@@ -16,10 +16,11 @@ function createTransaction(buyerId, songId, transaction) {
     transaction._buyer = buyerId;
     songModel.findSongById(songId)
         .then(function (song) {
-            transaction._seller = song._owner;
+            transaction._seller = song._creator;
         })
-    transaction._songId = songId;
-
+    transaction._song = songId;
+    var sellerId = transaction._seller;
+    console.log(transaction);
     var transactionTemp = null;
     return transactionModel
         .create(transaction)
@@ -41,11 +42,15 @@ function findTransactionById(transactionId) {
 }
 
 function findTransactionBySeller(sellerId) {
-    return transactionModel.find({_seller: sellerId});
+    return transactionModel.find({_seller: sellerId})
+        .populate('_buyer')
+        .exec();
 }
 
-function findTransactionByBuyer(buyerId) {
-    return transactionModel.find({_buyer: buyerId});
+function findTransactionsByBuyer(buyerId) {
+    return transactionModel.find({_buyer: buyerId})
+        .populate('_seller')
+        .exec();
 }
 
 function updateTransaction(transactionId, transaction){
