@@ -256,19 +256,25 @@
         }
 
         function deletePlaylistForUser(playlistId) {
-            playlistService
-                .deletePlaylist(playlistId)
-                .then(
-                    function (status) {
-                        model.user = user;
-                        init();
+            userService
+                .removePlaylist(user._id,playlistId)
+                .then(function (status) {
+                    model.user = user;
+                    init();
+                })
+            // playlistService
+            //     .deletePlaylist(playlistId)
+            //     .then(
+            //         function (status) {
+            //             model.user = user;
+            //             init();
                         // userService.removePlaylist(user._id, playlistId)
                         //     .then(function (user) {
                         //         model.user = user;
                         //         init();
                         //     })
-                    }
-                )
+                    // }
+                // )
         }
 
     }

@@ -1,5 +1,6 @@
 var app = require("../../express");
 var userModel = require("../model/user.model.server");
+var playlistModel = require("../model/playlist.model.server");
 var multer = require('multer'); // npm install multer --save
 var upload = multer({dest: __dirname + '/../../public/avatar/upload'});
 var fs = require('fs');
@@ -43,7 +44,7 @@ app.put("/projectapi/user/:userId/follower/:followerId", addFollowerByUser);
 app.put("/projectapi/user/:userId/unfollowuser/:followingId", unFollowUser);
 app.delete("/projectapi/user/:userId", deleteUser);
 app.post("/projectapi/avatar", upload.single('avatar'), uploadAvatar);
-app.delete("/projectapi/user/:userId/playlist/:playlistId:", removePlaylist);
+app.delete("/projectapi/user/:userId/playlist/:playlistId", removePlaylist);
 // app.delete("/projectapi/user/song/:songId", removeSong);
 
 function findAllUsers(req,res) {
@@ -176,11 +177,18 @@ function removePlaylist(req, res) {
     console.log(playlistId);
     userModel
         .removePlaylist(userId, playlistId)
-        .then(function (user) {
-            res.json(user);
+        .then(function (res) {
+            // res.json(user)
+            return playlistModel.deletePlaylist(playlistId);
         }, function (err) {
             res.send("0");
-        });
+        })
+
+        .then(function (res) {
+            res.json("1");
+        }, function (err) {
+            res.send("0");
+        })
 }
 
 function addSong(req,res) {

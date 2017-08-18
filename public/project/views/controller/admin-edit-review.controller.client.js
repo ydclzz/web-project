@@ -1,6 +1,3 @@
-/**
- * Created by Chuhan on 8/18/17.
- */
 (function () {
     angular
         .module("Musiker")

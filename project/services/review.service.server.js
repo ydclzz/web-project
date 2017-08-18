@@ -52,7 +52,6 @@ function createReviewForMusician(req,res) {
 }
 
 function findReviewById(req,res) {
-    console.log("aaaaa");
     var reviewId = req.params.reviewId;
     reviewModel
         .findReviewById(reviewId)
