@@ -4,7 +4,7 @@
         .controller("homeController", homeController);
 
 
-    function homeController(user,$location,userService,searchService, playlistService,transactionService, songService) {
+    function homeController(songService,user,$location,userService,searchService, playlistService,transactionService) {
         var model = this;
         model.rightPanel = 'search';
         model.user = user;
@@ -18,12 +18,13 @@
         model.findFollowers = findFollowers;
         model.unFollow = unFollow;
         model.findSongsByMusician = findSongsByMusician;
-
+        model.findMusicianAvatar = findMusicianAvatar;
         model.findTransactionsByPublisher = findTransactionsByPublisher;
         model.findTransactionsByMusician = findTransactionsByMusician;
         model.accecptTransaction = accecptTransaction;
         model.rejectTransaction = rejectTransaction;
         model.cancelTransaction = cancelTransaction;
+        model.addSongToLocal = addSongToLocal;
 
         function init() {
             if(model.user.type === 'MUSICIAN') {
@@ -122,6 +123,13 @@
                 })
         }
 
+        function findMusicianAvatar(musicianId) {
+            return userService.findUserById(musicianId)
+                .then(function (response) {
+                    return response.data.avatar;
+                })
+        }
+
         function findSongsByMusician() {
             model.rightPanel = 'my-songs';
             songService.findAllSongsByUser(model.user._id)
@@ -177,7 +185,26 @@
                 })
         }
 
-
+        function addSongToLocal(song) {
+            var newSong= {
+                // "url":'/public/uploads/' + filename,
+                "name": song.name,
+                "artist" : song.artists[0].name,
+                "cover" : song.album.cover,
+                "thridPartyId": ""+song.id
+            };
+            return songService.createSongFromApi(newSong)
+                .then(function (response) {
+                    return response.data;
+                })
+            // songService.findSongById(newSong._id)
+            //     .then(function (response) {
+            //         if(response.data.length == 0) {
+            //             songService.createSongFromApi(song);
+            //         }
+            //         console.log(response.data);
+            //     })
+        }
 
     }
 })();

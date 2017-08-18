@@ -5,6 +5,8 @@ var songSchema = mongoose.Schema({
     name: String,
     url: String,
     artist: String,
+    cover: String,
+    thridPartyId: String,
     playlists: {type: mongoose.Schema.Types.ObjectId, ref: "PlaylistModel"},
     coverUrl: String,
     description: String,

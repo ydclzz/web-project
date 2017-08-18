@@ -6,6 +6,9 @@
     <div class="mysidebar">
         <div class="list-menu">
             <ul class="list-group">
+                <a ng-click="model.changeRightPanel('search')">
+                    <li class="list-group-item">Search</li >
+                </a>
                 <a ng-click="model.findTransactionsByPublisher()">
                     <li class="list-group-item">My Transactions</li >
                 </a>
@@ -16,6 +19,7 @@
         </div>
     </div>
     <div class="portfolio">
+        <div ng-show="model.rightPanel==='search'" ng-include src="'views/templates/search.html'"></div>
         <div ng-show="model.rightPanel==='transactions'" ng-include="'views/templates/transactions-buyer.html'"></div>
         <div ng-show="model.rightPanel === 'following'" ng-include src="'views/templates/following-musicians.html'"></div>
     </div>

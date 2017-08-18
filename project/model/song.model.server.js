@@ -2,7 +2,6 @@ var mongoose = require("mongoose");
 var songSchema = require("./song.schema.server");
 var songModel = mongoose.model("SongModel", songSchema);
 var userModel = require("./user.model.server")
-var db = require("./database");
 
 songModel.createSongForUser = createSongForUser;
 songModel.findSongById = findSongById;
@@ -15,7 +14,8 @@ songModel.getSongCreator = getSongCreator;
 songModel.findAllSongs = findAllSongs;
 songModel.addReview = addReview;
 songModel.removeReview = removeReview;
-
+songModel.findSongByThridPartyId = findSongByThridPartyId;
+songModel.createSongFromApi = createSongFromApi;
 module.exports = songModel;
 
 function createSongForUser(userId, song) {
@@ -112,4 +112,13 @@ function findAllSongs() {
         .find()
         .populate('_creator')
         .exec();
+}
+
+function findSongByThridPartyId(thirdPartyId) {
+    return songModel.findOne({'thridPartyId': thirdPartyId});
+}
+
+function createSongFromApi(song) {
+    console.log(song);
+    return songModel.create(song);
 }

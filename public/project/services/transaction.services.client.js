@@ -33,7 +33,6 @@
 
         function findTransactionsByBuyer(buyerId) {
             var url = "/projectapi/transaction/buyer/" + buyerId;
-            console.log(url);
             return $http.get(url);
         }
 

@@ -167,7 +167,7 @@ function findFollowingByTypeByUser(req,res){
     userModel
         .findFollowingByTypeByUser(userId,type)
         .then(function (follwings) {
-            console.log(follwings);
+            // console.log(follwings);
             res.json(follwings);
         }, function (err) {
             res.sendStatus(404).send(err);

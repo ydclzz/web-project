@@ -361,11 +361,28 @@ label.musician-detail-label {
     color: #e74c3c;
 }
 
-
-.delete-follow{
+.delete-follow {
     position: absolute;
     right: 10px;
-    margin-top:30px;
+    margin-top: 30px;
+}
 
+a.tag-icon {
+    color: #efefef;
+    cursor: pointer;
+}
 
+a.tag-icon:hover {
+    font-size: 30px;
+    color: #efefef;
+}
+
+a.api-song-name {
+    color: lightgoldenrodyellow;
+    cursor: pointer;
+}
+
+a.api-song-name:hover {
+    font-size: 20px;
+    color: lightgoldenrodyellow;
 }

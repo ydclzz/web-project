@@ -15,13 +15,14 @@
             "deleteSong": deleteSong,
             "findAllSongs": findAllSongs,
             "getSongCreator":getSongCreator,
-            "addSongOwner": addSongOwner
+            "addSongOwner": addSongOwner,
+            "createSongFromApi": createSongFromApi
         };
         return api;
 
 
         function findSongById(songId) {
-            var url = "/projectapi/song/" + songId;
+            var url = "/projectapi/search/song/" + songId;
             return $http.get(url);
         }
 
@@ -35,6 +36,11 @@
             return $http.post(url, song);
         }
 
+        function createSongFromApi(song) {
+            var url = "/projectapi/song/api/";
+            return $http.post(url, song);
+        }
+
         function findSongBySongName(songname) {
             var url = "/projectapi/song?songname="+songname;
             return $http.get(url);
@@ -42,7 +48,7 @@
 
         function updateSong(songId,song){
             var url = "/projectapi/song/" + songId;
-            return $http.put(url,song);
+            return $http.put(url, song);
         }
 
         function deleteSong(userId, songId){

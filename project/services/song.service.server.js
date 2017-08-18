@@ -7,19 +7,22 @@ var fs = require('fs');
 app.post("/projectapi/user/:userId/song", createSongForUser);
 app.get("/projectapi/song", findSongBySongName);
 app.get("/projectapi/user/:userId/song", findAllSongsByUser);
-app.get("/projectapi/song/:songId", findSongById);
+app.get("/projectapi/search/song/:songId", findSongById);
 app.put("/projectapi/song/:songId", updateSong);
 app.post("/projectapi/upload", upload.single('myFile'), uploadSong);
 app.delete("/projectapi/user/:userId/song/:songId", deleteSong);
 app.get("/projectapi/songs", findAllSongs);
 app.get("/projectapi/song/:songId/creator", getSongCreator);
 app.put("/projectapi/song/:songId/owner/:ownerId/price/:priceNum", addSongOwner);
+app.post("/projectapi/song/api", createSongFromApi)
 
 function uploadSong(req, res) {
 
     var myFile = req.file;
 
     var userId = req.body.userId;
+    var cover = req.body.cover;
+    var songName = req.body.songName;
     var originalname = myFile.originalname; // file name on user's computer
     var index = originalname.indexOf(".");
     originalname = originalname.substring(0, index);
@@ -30,8 +33,9 @@ function uploadSong(req, res) {
     var mimetype = myFile.mimetype;
 
     var song= { "url":'/public/uploads/' + filename,
-                "name": originalname,
+                "name": songName,
                 "_creator" : userId,
+                "cover" : cover,
     };
 
     songModel.createSongForUser(userId,song)
@@ -148,4 +152,28 @@ function addSongOwner(req, res) {
         .then(function (songDoc) {
             res.json(songDoc);
         })
+}
+
+function createSongFromApi(req, res) {
+    var song = req.body;
+    // console.log(song);
+    songModel
+        .findOne({thirdPartyApi: 451703096})
+        // .findOne({'thirdPartyApi': song.thridPartyId})
+        // .findSongByThridPartyId(song.thirdPartyId)
+        .then(
+            function (user) {
+                console.log("user:")
+                console.log(user);
+                if (user) {//.length !== 0
+                    console.log(user);
+                    res.json(user);
+                } else {
+                    console.log("creating");
+                    // songModel.createSongFromApi(song)
+                    //     .then(function (songTmp) {
+                    //         res.json(songTmp);
+                    //     })
+                }
+            })
 }

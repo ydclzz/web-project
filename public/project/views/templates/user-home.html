@@ -1,37 +1,30 @@
 <div  ng-include="'views/templates/footer-explore.html'"></div>
 <div ng-include="'views/templates/header.html'"></div>
 
-
-
 <div class="main-wrap">
     <input id="slide-sidebar" type="checkbox" role="button" />
     <label class="myslide-label" for="slide-sidebar"><span class="glyphicon glyphicon-align-justify"></span></label>
     <div class="mysidebar">
-        <h5>My Account</h5>
-        People
-        <div class="people">
+        <div class="list-menu">
             <ul class="list-group">
-                <li class="list-group-item">
-                    <a ng-click="model.changeRightPanel('musicians')" href="">Musicians</a>
-                </li >
-                <li class="list-group-item">
-                    <a ng-click="model.changeRightPanel('critics')" href="">Critics</a>
-                </li >
+                <a ng-click="model.changeRightPanel('search')">
+                    <li class="list-group-item">Search</li >
+                </a>
+                <a ng-click="model.changeRightPanel('musicians')">
+                    <li class="list-group-item">Musicians</li >
+                </a>
+                <li class="list-group-item"><a ng-click="model.changeRightPanel('create-playlist')" href="">
+                    <span class="glyphicon glyphicon-plus pull-right"></span>
+                </a>Playlists</li >
+                <div ng-show= "model.playlists" ng-repeat="playlist in model.playlists" class="list-group">
+                    <li class="list-group-item">
+                        <a ng-click="model.getAllSongsFromPlaylist(playlist._id)" href="">{{playlist.name}}</a>
+                    </li>
+                </div>
             </ul>
         </div>
-        Playlists
-        <a ng-click="model.changeRightPanel('create-playlist')" href="">
-            <span class="glyphicon glyphicon-plus pull-right"></span>
-        </a>
-        <div class="content mCustomScrollbar playlists ">
-            <div ng-show= "model.playlists" ng-repeat="playlist in model.playlists" class="list-group">
-                <div class="list-group-item">
-                    <a ng-click="model.getAllSongsFromPlaylist(playlist._id)" href="">{{playlist.name}}</a>
-                </div >
-            </div>
-        </div>
-    </div>
 
+    </div>
 
     <div class="portfolio">
         <div ng-show="model.rightPanel==='search'" ng-include src="'views/templates/search.html'"></div>
