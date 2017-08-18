@@ -143,7 +143,8 @@ function removeSong(userId, songId) {
         .then(function (user) {
             var index = user.songs.indexOf(songId);
             user.songs.splice(index, 1);
-            return user.save();
+            user.save();
+            return playlistModel.removeSongFromAllPlaylists(songId);
         })
 }
 
@@ -261,7 +262,7 @@ function removePlaylist(userId, playlistId) {
     return userModel
         .findById(userId)
         .then(function (user) {
-            var index = user.transactions.indexOf(playlistId);
+            var index = user.playlists.indexOf(playlistId);
             user.playlists.splice(index, 1);
             user.save();
             return playlistModel.deletePlaylist(playlistId);

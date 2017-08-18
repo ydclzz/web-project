@@ -32,25 +32,27 @@
         model.addSongToLocal = addSongToLocal;
         model.deletePlaylistForUser = deletePlaylistForUser;
         model.removeSongFromPlaylist = removeSongFromPlaylist;
+        model.deleteSong = deleteSong;
 
         function init() {
-            if(model.user.type === 'MUSICIAN') {
+            if (model.user.type === 'MUSICIAN') {
                 model.rightPanel = 'my-songs';
                 findSongsByMusician();
             }
-            if(model.user.type === 'PUBLISHER') {
+            if (model.user.type === 'PUBLISHER') {
                 model.rightPanel = 'transactions';
                 findTransactionsByPublisher();
             }
             findMusicians();
             findPlaylists();
-            if(model.user.type === 'ADMIN') {
+            if (model.user.type === 'ADMIN') {
                 findCritics();
                 findAllUsers();
                 findAllSongs();
                 findAllReviews();
             }
         }
+
         init();
 
 
@@ -82,7 +84,7 @@
         function unFollow(followingid) {
             userService.unFollow(user._id, followingid)
                 .then(function (response) {
-                    if(response){
+                    if (response) {
                         findMusicians();
                         findCritics();
                     }
@@ -121,8 +123,9 @@
                     // model.playlists = response.data;
                     model.rightPanel = 'search';
                 }, function (err) {
-            });
+                });
             $route.reload();
+
         }
 
         function getAllSongsFromPlaylist(playlistId) {
@@ -207,13 +210,13 @@
         }
 
         function addSongToLocal(song) {
-            var newSong= {
+            var newSong = {
                 "name": song.name,
-                "artist" : song.artists[0].name,
-                "cover" : song.album.cover,
-                "thridPartyId": ""+song.id,
-                "_owner" : model.user._id,
-                "url" : "http://music.163.com/#/song?id="+song.id
+                "artist": song.artists[0].name,
+                "cover": song.album.cover,
+                "thridPartyId": "" + song.id,
+                "_owner": model.user._id,
+                "url": "http://music.163.com/#/song?id=" + song.id
             };
             return songService.createSongFromApi(newSong)
                 .then(function (response) {
@@ -244,10 +247,9 @@
 
         function removeSongFromPlaylist(songId) {
             playlistService
-                .removeSongFromPlaylist(model.currentPlaylistId,songId)
+                .removeSongFromPlaylist(model.currentPlaylistId, songId)
                 .then(function (res) {
-                    if(res.data != "0")
-                    {
+                    if (res.data !== "0") {
                         getAllSongsFromPlaylist(model.currentPlaylistId);
                     }
 
@@ -256,12 +258,21 @@
 
         function deletePlaylistForUser(playlistId) {
             userService
-                .removePlaylist(user._id,playlistId)
+                .deletePlaylistForUser(user._id, playlistId)
                 .then(function (status) {
                 }, function (err) {
                 });
             $route.reload();
         }
 
+        function deleteSong(songId){
+            userService
+                .removeSong(user._id, songId)
+                .then(function (res) {
+                    if (res.data !== "0")
+                        findSongsByMusician();
+                })
+        }
     }
+
 })();

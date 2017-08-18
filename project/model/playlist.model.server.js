@@ -18,6 +18,7 @@ playlistModel.removeReview = removeReview;
 playlistModel.addSongToPlaylist = addSongToPlaylist;
 playlistModel.removeSongFromPlaylist = removeSongFromPlaylist;
 playlistModel.getAllSongsFromPlaylist = getAllSongsFromPlaylist;
+playlistModel.removeSongFromAllPlaylists = removeSongFromAllPlaylists;
 
 
 module.exports = playlistModel;
@@ -83,6 +84,25 @@ function removeSongFromPlaylist(playlistId, songId) {
             var index = list.songlist.indexOf(songId);
             list.songlist.splice(index, 1);
             return list.save();
+        })
+}
+
+function removeSongFromAllPlaylists(songId){
+    return playlistModel.find()
+        .then(function (allPlaylists) {
+            allPlaylists
+                .forEach(function (playlist) {
+                    removeSongFromPlaylist(playlist._id, songId);
+                    // var songlist = playlist.songlist;
+                    // for (i = 0 ; i< songlist.length; i++){
+                    //     if (songlist[i] === songId){
+                    //         playlist.songlist.splice(i,1);
+                    //         playlist.save();
+                    //         break;
+                    //     }
+                    // }
+                }
+            )
         })
 }
 

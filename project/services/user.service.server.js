@@ -45,7 +45,7 @@ app.put("/projectapi/user/:userId/unfollowuser/:followingId", unFollowUser);
 app.delete("/projectapi/user/:userId", deleteUser);
 app.post("/projectapi/avatar", upload.single('avatar'), uploadAvatar);
 app.delete("/projectapi/user/:userId/playlist/:playlistId", removePlaylist);
-// app.delete("/projectapi/user/song/:songId", removeSong);
+app.delete("/projectapi/user/song/:songId", removeSong);
 
 function findAllUsers(req,res) {
     var publicUsers = [];
@@ -160,7 +160,7 @@ function deleteUser(req,res) {
 }
 
 function removeSong(req,res) {
-    var userId = req.query.userId;
+    var userId = req.params.userId;
     var songId = req.params.songId;
     userModel
         .removeSong(userId,songId)

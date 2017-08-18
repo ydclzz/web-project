@@ -13,7 +13,6 @@
             "updateUser": updateUser,
             "deleteUser": deleteUser,
             "removeSong":removeSong,
-            "removePlaylist":removePlaylist,
             "addSong":addSong,
             "findFollowingByUser":findFollowingByUser,
             "findFollowingByTypeByUser":findFollowingByTypeByUser,
@@ -22,7 +21,8 @@
             "addFollowersByUser":addFollowersByUser,
             "unFollow": unFollow,
             "findAllUsers": findAllUsers,
-            "checkLogin": checkLogin
+            "checkLogin": checkLogin,
+            "deletePlaylistForUser":deletePlaylistForUser
         };
 
         return api;
@@ -65,7 +65,7 @@
             return $http.delete(url);
         }
 
-        function removePlaylist(userId, playlistId) {
+        function deletePlaylistForUser(userId, playlistId) {
             var url = "/projectapi/user/" + userId + "/playlist/" + playlistId;
             return $http.delete(url);
         }
