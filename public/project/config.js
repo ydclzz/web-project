@@ -47,6 +47,22 @@
                 controller: "followController",
                 controllerAs: "model"
             })
+            .when("/user/:uid/edit", {
+                templateUrl: "views/templates/admin-edit-user.html",
+                controller: "adminEditUserController",
+                controllerAs: "model",
+                resolve: {
+                    user: checkLogin
+                }
+            })
+            .when("/review/:rid/edit", {
+                templateUrl: "views/templates/admin-edit-review.html",
+                controller: "adminEditReviewController",
+                controllerAs: "model",
+                resolve: {
+                    user: checkLogin
+                }
+            })
             .when("/song/:songId", {
                 templateUrl: "views/templates/song.html",
                 controller: "songController",

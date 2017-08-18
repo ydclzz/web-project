@@ -13,6 +13,7 @@
             "updateUser": updateUser,
             "deleteUser": deleteUser,
             "removeSong":removeSong,
+            "removePlaylist":removePlaylist,
             "addSong":addSong,
             "findFollowingByUser":findFollowingByUser,
             "findFollowingByTypeByUser":findFollowingByTypeByUser,
@@ -61,6 +62,11 @@
 
         function removeSong(userId, songId) {
             var url = "/projectapi/user/" + userId + "/song/" + songId;
+            return $http.delete(url);
+        }
+
+        function removePlaylist(userId, playlistId) {
+            var url = "/projectapi/user/" + userId + "/playlist/" + playlistId;
             return $http.delete(url);
         }
 

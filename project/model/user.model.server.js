@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var userSchema = require("./user.schema.server");
+var songModel = require("./song.model.server");
 var userModel = mongoose.model("ProjectUserModel", userSchema);
 
 userModel.createUser = createUser;
@@ -26,6 +27,7 @@ userModel.updateUserAvatar = updateUserAvatar;
 userModel.removeFollowingUser = removeFollowingUser;
 userModel.removeFollowerUser  = removeFollowerUser;
 userModel.deleteUserFromOthers = deleteUserFromOthers;
+userModel.deleteUserSongFromOthers = deleteUserSongFromOthers;
 module.exports = userModel;
 
 function findUserByGoogleId(googleId) {
@@ -88,6 +90,49 @@ function deleteUserFromOthers(userId) {
             console.log(user);
             return user.save();
         })
+}
+
+function deleteUserSongFromOthers(userId){
+    return userModel
+            .findUserById(userId)
+            .then(function (user) {
+                if (user.type === 'MUSICIAN'){
+                    var songs = user.songs;
+                    console.log("hahahha");
+                    console.log("user");
+                    console.log(songs);
+                    for (i = 0; i < songs.length; i++) {
+                        var song = songs[0];
+                        console.log("song");
+                        console.log(song);
+                        return songModel
+                            .findById(song)
+                            .populate('playlists')
+                            .exec()
+                            .then(function (song2) {
+                                console.log("song2");
+                                console.log(song2);
+                                var playlists = song2.playlists;
+                                console.log("playlists");
+                                console.log(playlists);
+                                for (j = 0; j < playlists.length; j++){
+                                    var playlist = playlists[j];
+                                    var index = playlist.songlist.indexOf(song._id);
+                                    playlist.songlist.splice(index, 1);
+                                    console.log(playlist);
+                                    playlist.save();
+                                }
+                            });
+                    }
+                    user.songs = [];
+                    console.log(user);
+                    return user.save();
+                }
+                else{
+                    return user;
+                }
+
+            })
 }
 //song
 

@@ -27,7 +27,9 @@
         model.cancelTransaction = cancelTransaction;
         model.findAllUsers = findAllUsers;
         model.findAllSongs = findAllSongs;
+        model.findAllReviews = findAllReviews;
         model.addSongToLocal = addSongToLocal;
+        model.deletePlaylistForUser = deletePlaylistForUser;
 
         function init() {
             if(model.user.type === 'MUSICIAN') {
@@ -41,8 +43,9 @@
             findMusicians();
             findPlaylists();
             findCritics();
-            // findAllUsers();
+            findAllUsers();
             findAllSongs();
+            findAllReviews();
         }
         init();
 
@@ -227,6 +230,30 @@
                     model.allSongs = response.data;
                     console.log(response);
                 })
+        }
+
+        function findAllReviews() {
+            reviewService.findAllReviews()
+                .then(function (response) {
+                    model.allReviews = response.data;
+                    console.log(response);
+                })
+        }
+
+        function deletePlaylistForUser(playlistId) {
+            playlistService
+                .deletePlaylist(playlistId)
+                .then(
+                    function (status) {
+                        model.user = user;
+                        init();
+                        // userService.removePlaylist(user._id, playlistId)
+                        //     .then(function (user) {
+                        //         model.user = user;
+                        //         init();
+                        //     })
+                    }
+                )
         }
 
     }

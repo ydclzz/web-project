@@ -43,6 +43,7 @@ app.put("/projectapi/user/:userId/follower/:followerId", addFollowerByUser);
 app.put("/projectapi/user/:userId/unfollowuser/:followingId", unFollowUser);
 app.delete("/projectapi/user/:userId", deleteUser);
 app.post("/projectapi/avatar", upload.single('avatar'), uploadAvatar);
+app.delete("/projectapi/user/:userId/playlist/:playlistId:", removePlaylist);
 // app.delete("/projectapi/user/song/:songId", removeSong);
 
 function findAllUsers(req,res) {
@@ -142,8 +143,19 @@ function deleteUser(req,res) {
                 }, function (err) {
                     res.send("0");
                 });
-        })
+            // userModel
+            //     .deleteUserSongFromOthers(userId)
+            //     .then(function (user) {
+            //         userModel
+            //             .deleteUserById(userId)
+            //             .then(function (user) {
+            //                 res.send("1");
+            //             }, function (err) {
+            //                 res.send("0");
+            //             });
+            //     })
 
+        })
 }
 
 function removeSong(req,res) {
@@ -153,6 +165,19 @@ function removeSong(req,res) {
         .removeSong(userId,songId)
         .then(function (status) {
             res.send("1");
+        }, function (err) {
+            res.send("0");
+        });
+}
+
+function removePlaylist(req, res) {
+    var userId = req.params.userId;
+    var playlistId = req.params.playlistId;
+    console.log(playlistId);
+    userModel
+        .removePlaylist(userId, playlistId)
+        .then(function (user) {
+            res.json(user);
         }, function (err) {
             res.send("0");
         });

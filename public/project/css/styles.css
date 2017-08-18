@@ -114,6 +114,10 @@ body {
     margin-bottom: 10%;
 }
 
+.review-name{
+    padding-right: 20px;
+}
+
 /* The only rule that matters */
 #video-background {
     /*  making the video fullscreen  */
