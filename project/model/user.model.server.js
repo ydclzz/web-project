@@ -254,6 +254,7 @@ function addPlaylist(userId, playlistId) {
         .findById(userId)
         .then(function (user) {
             user.playlists.push(playlistId);
+            console.log(user.playlists);
             return user.save();
         })
 }

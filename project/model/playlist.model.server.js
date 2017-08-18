@@ -27,8 +27,8 @@ function createPlaylistForUser(userId, playlist) {
     playlist.owner = userId;
     return playlistModel
         .create(playlist)
-        .then(function (playlistDoc) {
-            return userModel.addPlaylist(userId, playlistDoc._id)
+        .then(function (list) {
+            return list;
         });
 }
 

@@ -38,6 +38,7 @@ app.get("/projectapi/user/:userId/follower", findFollowersByUser);
 app.get("/projectapi/users", findAllUsers);
 app.get("/projectapi/checkLogin", checkLogin);
 app.put("/projectapi/user/:userId", updateUser);
+app.put("/projectapi/user/:userId/playlist/:playlistId", addPlaylistToUser);
 app.put("/projectapi/user/:userId/song/:songId", addSong);
 app.put("/projectapi/user/:userId/following/:followingId", addFollowingByUser);
 app.put("/projectapi/user/:userId/follower/:followerId", addFollowerByUser);
@@ -169,6 +170,18 @@ function removeSong(req,res) {
         }, function (err) {
             res.send("0");
         });
+}
+
+function addPlaylistToUser(req,res) {
+    var userId = req.params.userId;
+    var playlistId = req.params.playlistId;
+    userModel
+        .addPlaylist(userId, playlistId)
+        .then(function (res) {
+            res.json(user)
+        }, function (err) {
+            res.send("0");
+        })
 }
 
 function removePlaylist(req, res) {
