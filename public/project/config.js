@@ -42,6 +42,14 @@
                     user: checkLogin
                 }
             })
+            .when("/user/:uid/edit", {
+                templateUrl: "views/templates/admin-edit-user.html",
+                controller: "adminEditUserController",
+                controllerAs: "model",
+                resolve: {
+                    user: checkLogin
+                }
+            })
             .when("/user/:uid/follow", {
                 templateUrl: "views/templates/follow.html",
                 controller: "followController",

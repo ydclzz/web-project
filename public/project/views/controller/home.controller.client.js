@@ -16,6 +16,8 @@
         model.getAllSongsFromPlaylist = getAllSongsFromPlaylist;
         model.findFollowers = findFollowers;
         model.findSongsByMusician = findSongsByMusician;
+        model.findAllUsers = findAllUsers;
+        model.findAllSongs = findAllSongs;
 
 
         function init() {
@@ -25,6 +27,8 @@
             }
             findMusicians();
             findPlaylists();
+            findAllUsers();
+            findAllSongs();
         }
         init();
 
@@ -99,6 +103,22 @@
                     model.musicianSongs = response.data;
                     console.log("findSongById");
                     console.log(model.musicianSongs);
+                })
+        }
+
+        function findAllUsers() {
+            userService.findAllUsers()
+                .then(function (response) {
+                    model.allUsers = response.data;
+                    console.log(response);
+                })
+        }
+
+        function findAllSongs() {
+            songService.findAllSongs()
+                .then(function (response) {
+                    model.allSongs = response.data;
+                    console.log(response);
                 })
         }
 

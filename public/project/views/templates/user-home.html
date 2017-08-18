@@ -44,7 +44,7 @@
         <a ng-click="model.changeRightPanel('create-playlist')" href="">
             <span class="glyphicon glyphicon-plus pull-right"></span>
         </a>
-        <div class="content mCustomScrollbar playlists ">
+        <div class=" playlists ">
             <div ng-show= "model.playlists" ng-repeat="playlist in model.playlists" class="list-group">
                 <div class="list-group-item">
                     <a ng-click="model.getAllSongsFromPlaylist(playlist._id)" href="">{{playlist.name}}</a>
