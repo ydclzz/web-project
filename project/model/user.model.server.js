@@ -25,6 +25,7 @@ userModel.findUserByGoogleId = findUserByGoogleId;
 userModel.updateUserAvatar = updateUserAvatar;
 userModel.removeFollowingUser = removeFollowingUser;
 userModel.removeFollowerUser  = removeFollowerUser;
+userModel.deleteUserFromOthers = deleteUserFromOthers;
 module.exports = userModel;
 
 function findUserByGoogleId(googleId) {
@@ -64,7 +65,30 @@ function findAllUsers() {
 function deleteUserById(userId) {
     return userModel.findOneAndRemove({_id: userId});
 }
-
+function deleteUserFromOthers(userId) {
+    return userModel
+        .findUserById(userId)
+        .populate('followers')
+        .exec()
+        .then(function (user) {
+            var followers = user.followers;
+            console.log("user");
+            console.log(user);
+            console.log(followers);
+            for (i = 0; i < followers.length; i++){
+                var follower = followers[i];
+                console.log("follower");
+                console.log(follower);
+                var index = follower.following.indexOf(follower._id);
+                follower.following.splice(index, 1);
+                console.log(follower);
+                follower.save();
+            }
+            user.followers = [];
+            console.log(user);
+            return user.save();
+        })
+}
 //song
 
 function removeSong(userId, songId) {
@@ -134,16 +158,7 @@ function findFollowingByTypeByUser(userId, usertype){
 function addFollowersByUser(userId, followerId) {
     return userModel.findUserById(userId)
         .then(function (user) {
-            var flag = '0';
-            for(var i = 0; i < user.followers.length; i ++) {
-                if(user.followers[i] == followerId) {
-                    flag = '1';
-                    break;
-                }
-            }
-            if(flag === '0') {
-                user.followers.push(followerId);
-            }
+            user.followers.push(followerId);
             return user.save();
         })
 }
@@ -151,16 +166,7 @@ function addFollowersByUser(userId, followerId) {
 function addFollowingByUser(userId, followingId) {
     return userModel.findUserById(userId)
         .then(function (user) {
-            var flag = '0';
-            for(var i = 0; i < user.following.length; i ++) {
-                if(user.following[i] == followingId) {
-                    flag = '1';
-                    break;
-                }
-            }
-            if(flag === '0') {
-                user.following.push(followingId);
-            }
+            user.following.push(followingId);
             return user.save();
         })
 }

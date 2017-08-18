@@ -24,6 +24,8 @@
         model.accecptTransaction = accecptTransaction;
         model.rejectTransaction = rejectTransaction;
         model.cancelTransaction = cancelTransaction;
+        model.findAllUsers = findAllUsers;
+        model.findAllSongs = findAllSongs;
         model.addSongToLocal = addSongToLocal;
 
         function init() {
@@ -38,6 +40,8 @@
             findMusicians();
             findPlaylists();
             findCritics();
+            findAllUsers();
+            findAllSongs();
         }
         init();
 
@@ -195,6 +199,22 @@
             return songService.createSongFromApi(newSong)
                 .then(function (response) {
                     return response.data;
+                })
+        }
+
+        function findAllUsers() {
+            userService.findAllUsers()
+                .then(function (response) {
+                    model.allUsers = response.data;
+                    console.log(response);
+                })
+        }
+
+        function findAllSongs() {
+            songService.findAllSongs()
+                .then(function (response) {
+                    model.allSongs = response.data;
+                    console.log(response);
                 })
         }
 

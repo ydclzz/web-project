@@ -1,0 +1,25 @@
+
+<div class="fixed-top fix-header grey-header">
+    <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page">
+        <span class="glyphicon glyphicon-chevron-left icon-left blackicon"></span>
+    </a>
+    <h2>Widget List</h2>
+    <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new">
+        <span class="glyphicon glyphicon-plus icon-right blackicon"></span>
+    </a>
+</div>
+
+<div class="container-fluid full-height">
+    <div sortable-list class="container-fluid" >
+        <div ng-repeat="widget in model.widgets">
+            <div ng-include="model.getWidget(widget.type)"></div>
+        </div>
+    </div>
+</div>
+
+
+<div class="navbar-fixed-bottom fix-header grey-header">
+    <span class="glyphicon glyphicon-play icon-left blackicon"></span>
+    <span class="glyphicon glyphicon-eye-open icon-left blackicon"></span>
+    <a href="#!/user/{{model.userId}}"><span class="glyphicon glyphicon-user icon-right blueicon"></span></a>
+</div>

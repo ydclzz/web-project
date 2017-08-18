@@ -34,6 +34,7 @@ app.get("/projectapi/user/:userId/following/:followingtype", findFollowingByType
 app.get("/projectapi/user/:userId/following", findFollowingByUser);
 app.get("/projectapi/user/:userId/following", findFollowingByUser);
 app.get("/projectapi/user/:userId/follower", findFollowersByUser);
+app.get("/projectapi/users", findAllUsers);
 app.get("/projectapi/checkLogin", checkLogin);
 app.put("/projectapi/user/:userId", updateUser);
 app.put("/projectapi/user/:userId/song/:songId", addSong);
@@ -44,6 +45,19 @@ app.delete("/projectapi/user/:userId", deleteUser);
 app.post("/projectapi/avatar", upload.single('avatar'), uploadAvatar);
 // app.delete("/projectapi/user/song/:songId", removeSong);
 
+function findAllUsers(req,res) {
+    var publicUsers = [];
+    userModel
+        .findAllUsers()
+        .then(function (users) {
+            for(i = 0; i < users.length; i++){
+                if (users[i].type !== 'ADMIN'){
+                    publicUsers.push(users[i]);
+                }
+            }
+            return res.json(publicUsers);
+        });
+}
 
 function uploadAvatar(req, res) {
     var myFile = req.file;
@@ -115,14 +129,21 @@ function updateUser(req,res) {
 }
 
 function deleteUser(req,res) {
+    console.log("deleteUser");
     var userId = req.params.userId;
+    console.log(userId);
     userModel
-        .deleteUserById(userId)
+        .deleteUserFromOthers(userId)
         .then(function (user) {
-            res.send("1");
-        }, function (err) {
-            res.send("0");
-        });
+            userModel
+                .deleteUserById(userId)
+                .then(function (user) {
+                    res.send("1");
+                }, function (err) {
+                    res.send("0");
+                });
+        })
+
 }
 
 function removeSong(req,res) {

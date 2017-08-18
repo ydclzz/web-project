@@ -1,0 +1,46 @@
+
+<div class="fixed-top fix-header blue-header hidden-xs col-sm-4">
+    <a href="#!/user/{{model.userId}}/website/"><span class="glyphicon glyphicon-chevron-left icon-left whiteicon"></span></a>
+    <h2>Websites</h2>
+</div>
+
+<div class="fixed-top fix-header blue-header col-xs-12 col-sm-8">
+    <a href="#!/user/{{model.userId}}/website/"><span class="glyphicon glyphicon-chevron-left icon-left whiteicon"></span></a>
+    <h2>New Website</h2>
+    <a href="" ng-click="model.newWebsite()"><span class="glyphicon glyphicon-ok icon-right whiteicon"></span></a>
+</div>
+
+<div class="container-fluid full-height">
+    <div class="container col-sm-4 hidden-xs full-height">
+        <ul class="list-group white-list">
+            <li ng-repeat="website in model.websites" class="list-group-item">
+                <a href="#!/user/{{model.userId}}/website/{{website._id}}/page">
+                    <h3>{{website.name}}</h3>
+                </a>
+                <a href="#!/user/{{model.userId}}/website/{{website._id}}">
+                    <span class="glyphicon glyphicon-cog icon-right"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="container col-sm-8 col-xs-12 left-line full-height">
+        <form class="form-titled form-horizontal">
+            <h5>Name</h5>
+            <input type="text"
+                   class="form-control input-block"
+                   placeholder="Name"
+                   ng-model="model.newwebsite.name">
+            <h5>Description</h5>
+            <textarea rows="3"
+                      class="form-control input-block"
+                      placeholder="Description"
+                      ng-model="model.newwebsite.description"></textarea>
+        </form>
+    </div>
+
+</div>
+
+<div class="navbar-fixed-bottom fix-header blue-header">
+    <a href="#!/user/{{model.userId}}"><span class="glyphicon glyphicon-user icon-right whiteicon"></span></a>
+</div>

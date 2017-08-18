@@ -1,4 +1,4 @@
 (function () {
     angular
-        .module("Musiker", ["ngRoute", "customScrollbar"])
+        .module("Musiker", ["ngRoute"])
 })();

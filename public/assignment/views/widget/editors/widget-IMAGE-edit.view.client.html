@@ -1,0 +1,43 @@
+<div class="container full-height">
+    <div class="form-titled form-horizontal">
+        <h5>Id</h5>
+        <input type="text" class="form-control input-block"
+               ng-model="model.thiswidget._id"
+               readonly/>
+        <h5>Type</h5>
+        <input type="text" class="form-control input-block"
+               ng-model="model.thiswidget.type"
+               readonly/>
+        <h5>Width</h5>
+        <input type="text" class="form-control input-block"
+               placeholder="size"
+               ng-model="model.thiswidget.width"
+        />
+
+        <h5>Url</h5>
+        <textarea rows="5"
+                  class="form-control input-block"
+                  placeholder="url"
+                  ng-model="model.thiswidget.url">
+            </textarea>
+
+        <h5>Upload</h5>
+        <form action="/api/upload"   method="post" enctype="multipart/form-data" class="form-upload">
+            <input  name="myFile"    type="file" class="form-control"/>
+            <input  name="width"     value="{{model.thiswidget.width}}" style="display: none"/>
+            <input  name="userId"    value="{{model.userId}}"   style="display: none"/>
+            <input  name="websiteId" value="{{model.websiteId}}"   style="display: none"/>
+            <input  name="pageId"    value="{{model.pageId}}"   style="display: none"/>
+            <input  name="widgetId"  value="{{model.widgetId}}"   style="display: none"/>
+            <button type="submit"    class="btn btn-block btn-primary" id="upload-btn">Upload Image</button>
+        </form>
+
+
+        <a class="btn btn-info btn-block"
+           href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widgetId}}/search">Search</a>
+        <a class="btn btn-danger btn-block"
+           href=""
+           role="button"
+           ng-click="model.deleteWidget()">Delete</a>
+    </div>
+</div>
