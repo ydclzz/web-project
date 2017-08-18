@@ -31,14 +31,19 @@
         }
         
         function followMusician() {
-            userService.addFollowingByUser(model.user._id, musicianId)
-                .then(function (response) {
-                    userService.addFollowersByUser(musicianId, model.user._id)
-                        .then(function (response) {
-                            alert("follow scceuss");
-                        })
+            if(model.user._id != musicianId) {
+                userService.addFollowingByUser(model.user._id, musicianId)
+                    .then(function (response) {
+                        userService.addFollowersByUser(musicianId, model.user._id)
+                            .then(function (response) {
+                                alert("follow scceuss");
+                            })
 
-                })
+                    })
+            }
+            else{
+                alert("cannot follow yourself");
+            }
         }
     }
 })();

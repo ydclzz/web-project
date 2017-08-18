@@ -31,14 +31,19 @@
         }
         
         function followCritic() {
-            userService.addFollowingByUser(model.user._id, criticId)
-                .then(function (response) {
-                    userService.addFollowersByUser(criticId, model.user._id)
-                        .then(function (response) {
-                            alert("follow scceuss");
-                        })
+            if (model.user._id != criticId) {
+                userService.addFollowingByUser(model.user._id, criticId)
+                    .then(function (response) {
+                        userService.addFollowersByUser(criticId, model.user._id)
+                            .then(function (response) {
+                                alert("follow scceuss");
+                            })
 
-                })
+                    })
+            }
+            else {
+                alert("cannot follow yourself");
+            }
         }
     }
 })();
