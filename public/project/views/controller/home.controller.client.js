@@ -4,7 +4,7 @@
         .controller("homeController", homeController);
 
 
-    function homeController(songService,user,$location,userService, reviewService,searchService, playlistService,transactionService) {
+    function homeController(songService,user,$location,userService, $route, reviewService,searchService, playlistService,transactionService) {
         var model = this;
         model.rightPanel = 'musicians';
         model.user = user;
@@ -45,7 +45,7 @@
             findMusicians();
             findPlaylists();
             findCritics();
-            findAllUsers();
+            // findAllUsers();
             findAllSongs();
             findAllReviews();
         }
@@ -116,11 +116,11 @@
         function createPlaylistForUser(playlist) {
             playlistService.createPlaylistForUser(model.user._id, playlist)
                 .then(function (response) {
-                    model.playlists = response.data;
-                    // console.log(model.playlists);
+                    // model.playlists = response.data;
                     model.rightPanel = 'search';
-                    $location.url('#!/home');
-                })
+                }, function (err) {
+            });
+            $route.reload();
         }
 
         function getAllSongsFromPlaylist(playlistId) {
@@ -259,22 +259,9 @@
             userService
                 .removePlaylist(user._id,playlistId)
                 .then(function (status) {
-                    model.user = user;
-                    init();
-                })
-            // playlistService
-            //     .deletePlaylist(playlistId)
-            //     .then(
-            //         function (status) {
-            //             model.user = user;
-            //             init();
-                        // userService.removePlaylist(user._id, playlistId)
-                        //     .then(function (user) {
-                        //         model.user = user;
-                        //         init();
-                        //     })
-                    // }
-                // )
+                }, function (err) {
+                });
+            $route.reload();
         }
 
     }

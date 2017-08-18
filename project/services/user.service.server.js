@@ -174,18 +174,10 @@ function removeSong(req,res) {
 function removePlaylist(req, res) {
     var userId = req.params.userId;
     var playlistId = req.params.playlistId;
-    console.log(playlistId);
     userModel
         .removePlaylist(userId, playlistId)
         .then(function (res) {
-            // res.json(user)
-            return playlistModel.deletePlaylist(playlistId);
-        }, function (err) {
-            res.send("0");
-        })
-
-        .then(function (res) {
-            res.json("1");
+            res.json(user)
         }, function (err) {
             res.send("0");
         })

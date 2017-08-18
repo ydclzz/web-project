@@ -2,6 +2,7 @@ var mongoose = require("mongoose");
 var userSchema = require("./user.schema.server");
 var songModel = require("./song.model.server");
 var userModel = mongoose.model("ProjectUserModel", userSchema);
+var playlistModel = require('./playlist.model.server');
 
 userModel.createUser = createUser;
 userModel.findUserById = findUserById;
@@ -262,7 +263,8 @@ function removePlaylist(userId, playlistId) {
         .then(function (user) {
             var index = user.transactions.indexOf(playlistId);
             user.playlists.splice(index, 1);
-            return user.save();
+            user.save();
+            return playlistModel.deletePlaylist(playlistId);
         })
 }
 
