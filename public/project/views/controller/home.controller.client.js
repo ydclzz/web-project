@@ -121,7 +121,7 @@
             playlistService.createPlaylistForUser(model.user._id, playlist)
                 .then(function (response) {
                     // model.playlists = response.data;
-                    model.rightPanel = 'search';
+                    // model.rightPanel = 'search';
                 }, function (err) {
                 });
             $route.reload();

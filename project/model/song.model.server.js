@@ -18,6 +18,7 @@ songModel.removeReview = removeReview;
 songModel.findSongByThridPartyId = findSongByThridPartyId;
 songModel.createSongFromApi = createSongFromApi;
 songModel.findSongByIdWithReview = findSongByIdWithReview;
+songModel.addPlaylistToSong = addPlaylistToSong;
 module.exports = songModel;
 
 function createSongForUser(userId, song) {
@@ -86,6 +87,15 @@ function getSongCreator(songId) {
         //         .populate('_creator')
         //         .exec();
         // })
+}
+
+function addPlaylistToSong(playlistId, songId) {
+    return songModel
+        .findById(songId)
+        .then(function (song) {
+            song.playlists.push(playlistId);
+            return song.save();
+        });
 }
 
 //review

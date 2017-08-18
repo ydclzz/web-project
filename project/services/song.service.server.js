@@ -16,6 +16,7 @@ app.get("/projectapi/song/:songId/creator", getSongCreator);
 app.put("/projectapi/song/:songId/owner/:ownerId/price/:priceNum", addSongOwner);
 app.post("/projectapi/song/api", createSongFromApi);
 app.get("/projectapi/review/song/:songId", findSongByIdWithReview);
+app.put("/projectapi/song/:songId/playlist/:playlistId", addPlaylistToSong);
 
 function findSongByIdWithReview(req, res) {
     var songId = req.params.songId;
@@ -23,7 +24,7 @@ function findSongByIdWithReview(req, res) {
         .then(function (songs) {
             res.json(songs);
         }, function (err) {
-            res.sendStatus(500).send(err);
+            res.sendStatus(500).send(err);;
         })
 }
 
@@ -170,6 +171,16 @@ function addSongOwner(req, res) {
         .then(function (songDoc) {
             res.json(songDoc);
         })
+}
+
+function addPlaylistToSong(req,res) {
+    var songId = req.params.songId;
+    var playlistId = req.params.playlistId;
+    return songModel
+        .addPlaylistToSong(playlistId,songId)
+        .then(function (song) {
+            res.json(song);
+        });
 }
 
 function createSongFromApi(req, res) {

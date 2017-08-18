@@ -209,7 +209,7 @@ function findFollowingByUser(req, res) {
 function findFollowingByTypeByUser(req,res){
     var userId = req.params.userId;
     var type = req.params.followingtype;
-    console.log(type);
+    // console.log(type);
     userModel
         .findFollowingByTypeByUser(userId,type)
         .then(function (follwings) {

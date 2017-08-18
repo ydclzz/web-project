@@ -41,7 +41,7 @@ function findPlaylistById(req,res) {
     playlistModel
         .findPlaylistById(listId)
         .then(function (list) {
-            res.json(list);
+            return res.json(list);
         }, function (err) {
             res.sendStatus(404).send(err);
         });
@@ -102,7 +102,7 @@ function deletePlaylist(req, res) {
 function addSongToPlaylist(req,res) {
     var playlistId = req.params.playlistId;
     var songId = req.params.songId;
-    // console.log("playlist server");
+    console.log("playlist server");
     // console.log(playlistId);
     // console.log(songId);
     playlistModel

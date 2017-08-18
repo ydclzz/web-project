@@ -3,7 +3,7 @@
         .module("Musiker")
         .controller("songController", songController);
 
-    function songController(songService, playlistService,reviewService, transactionService,$routeParams,$location, user) {
+    function songController(songService, playlistService,reviewService,songService, transactionService,$routeParams,$location, user) {
         var model = this;
         model.user = user;
         model.errorPurchaseMessage = '1';
@@ -116,6 +116,10 @@
         function addSongToPlaylist() {
             playlistService.addSongToPlaylist(model.playlistId, songId)
                 .then(function (response) {
+                })
+            songService.addPlaylistToSong(model.playlistId, songId)
+                .then(function (response) {
+                    alert("add to playlist success");
                     $location.url('/explore');
                 })
         }

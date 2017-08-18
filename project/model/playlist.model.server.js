@@ -1,9 +1,9 @@
 var mongoose = require("mongoose");
 var playlistSchema = require("./playlist.schema.server");
 var playlistModel = mongoose.model("PlaylistModel", playlistSchema);
-var userModel = require("./user.model.server")
-var songModel = require("./song.model.server")
-var db = require("./database");
+var userModel = require("./user.model.server");
+var songModel = require("./song.model.server");
+// var db = require("./database");
 
 playlistModel.createPlaylistForUser = createPlaylistForUser;
 playlistModel.findPlaylistById = findPlaylistById;
@@ -63,6 +63,7 @@ function updatePlaylist(playlistId,playlist) {
 function addSongToPlaylist(playlistId,songId) {
     return playlistModel.findPlaylistById(playlistId)
         .then(function (list) {
+            console.log("list");
             var flag = '0';
             for(var i = 0; i < list.songlist.length; i ++) {
                 if(list.songlist[i] == songId) {
