@@ -132,7 +132,16 @@ function findFollowingByTypeByUser(userId, usertype){
 function addFollowersByUser(userId, followerId) {
     return userModel.findUserById(userId)
         .then(function (user) {
-            user.followers.push(followerId);
+            var flag = '0';
+            for(var i = 0; i < user.followers.length; i ++) {
+                if(user.followers[i] == followerId) {
+                    flag = '1';
+                    break;
+                }
+            }
+            if(flag === '0') {
+                user.followers.push(followerId);
+            }
             return user.save();
         })
 }
@@ -140,7 +149,16 @@ function addFollowersByUser(userId, followerId) {
 function addFollowingByUser(userId, followingId) {
     return userModel.findUserById(userId)
         .then(function (user) {
-            user.following.push(followingId);
+            var flag = '0';
+            for(var i = 0; i < user.following.length; i ++) {
+                if(user.following[i] == followingId) {
+                    flag = '1';
+                    break;
+                }
+            }
+            if(flag === '0') {
+                user.following.push(followingId);
+            }
             return user.save();
         })
 }

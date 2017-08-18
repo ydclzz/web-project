@@ -1,0 +1,25 @@
+<div class="visible-lg visible-md visible-sm" ng-include="'views/templates/footer-explore.html'"></div>
+<div class="visible-xs" ng-include="'views/templates/footer-explore-mobile.html'"></div>
+<div ng-include="'views/templates/header.html'"></div></nav>
+<div class="main-wrap">
+    <input id="slide-sidebar" type="checkbox" role="button" />
+    <label class="myslide-label" for="slide-sidebar"><span class="glyphicon glyphicon-align-justify"></span></label>
+    <div class="mysidebar">
+        <div class="list-menu">
+            <ul class="list-group">
+                <a ng-click="model.findTransactionsByPublisher()">
+                    <li class="list-group-item">My Transactions</li >
+                </a>
+                <a ng-click="model.changeRightPanel('following')">
+                    <li class="ng-binding list-group-item">Following</li>
+                </a>
+            </ul>
+        </div>
+    </div>
+    <div class="portfolio">
+        <div ng-show="model.rightPanel==='transactions'" ng-include="'views/templates/upload-song.html'"></div>
+        <div ng-show="model.rightPanel === 'following'" ng-include src="'views/templates/following-musicians.html'"></div>
+    </div>
+
+</div>
+

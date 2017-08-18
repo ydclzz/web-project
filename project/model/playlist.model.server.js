@@ -62,7 +62,16 @@ function updatePlaylist(playlistId,playlist) {
 function addSongToPlaylist(playlistId,songId) {
     return playlistModel.findPlaylistById(playlistId)
         .then(function (list) {
-            list.songlist.push(songId);
+            var flag = '0';
+            for(var i = 0; i < list.songlist.length; i ++) {
+                if(list.songlist[i] == songId) {
+                    flag = '1';
+                    break;
+                }
+            }
+            if(flag === '0') {
+                list.songlist.push(songId);
+            }
             return list.save();
         })
 }
