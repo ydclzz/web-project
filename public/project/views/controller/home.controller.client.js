@@ -187,7 +187,6 @@
 
         function addSongToLocal(song) {
             var newSong= {
-                // "url":'/public/uploads/' + filename,
                 "name": song.name,
                 "artist" : song.artists[0].name,
                 "cover" : song.album.cover,
@@ -197,13 +196,6 @@
                 .then(function (response) {
                     return response.data;
                 })
-            // songService.findSongById(newSong._id)
-            //     .then(function (response) {
-            //         if(response.data.length == 0) {
-            //             songService.createSongFromApi(song);
-            //         }
-            //         console.log(response.data);
-            //     })
         }
 
     }

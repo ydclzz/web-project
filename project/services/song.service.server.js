@@ -156,24 +156,17 @@ function addSongOwner(req, res) {
 
 function createSongFromApi(req, res) {
     var song = req.body;
-    // console.log(song);
     songModel
-        .findOne({thirdPartyApi: 451703096})
-        // .findOne({'thirdPartyApi': song.thridPartyId})
-        // .findSongByThridPartyId(song.thirdPartyId)
+        .findOne({thridPartyId: song.thridPartyId})
         .then(
             function (user) {
-                console.log("user:")
-                console.log(user);
                 if (user) {//.length !== 0
-                    console.log(user);
                     res.json(user);
                 } else {
-                    console.log("creating");
-                    // songModel.createSongFromApi(song)
-                    //     .then(function (songTmp) {
-                    //         res.json(songTmp);
-                    //     })
+                    songModel.createSongFromApi(song)
+                        .then(function (songTmp) {
+                            res.json(songTmp);
+                        })
                 }
             })
 }
