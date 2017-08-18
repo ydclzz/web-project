@@ -44,10 +44,12 @@
             }
             findMusicians();
             findPlaylists();
-            findCritics();
-            // findAllUsers();
-            findAllSongs();
-            findAllReviews();
+            if(model.user.type === 'ADMIN') {
+                findCritics();
+                findAllUsers();
+                findAllSongs();
+                findAllReviews();
+            }
         }
         init();
 
@@ -223,7 +225,6 @@
             userService.findAllUsers()
                 .then(function (response) {
                     model.allUsers = response.data;
-                    console.log(response);
                 })
         }
 
@@ -231,7 +232,6 @@
             songService.findAllSongs()
                 .then(function (response) {
                     model.allSongs = response.data;
-                    console.log(response);
                 })
         }
 
@@ -239,7 +239,6 @@
             reviewService.findAllReviews()
                 .then(function (response) {
                     model.allReviews = response.data;
-                    console.log(response);
                 })
         }
 
