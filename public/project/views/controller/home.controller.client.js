@@ -120,10 +120,15 @@
         function createPlaylistForUser(playlist) {
             playlistService.createPlaylistForUser(model.user._id, playlist)
                 .then(function (response) {
-                    // model.playlists = response.data;
-                    // model.rightPanel = 'search';
-                }, function (err) {
-                });
+                    var newPlaylistId = response.data._id;
+                    console.log(response);
+                    userService.addPlaylistToUser(model.user._id, newPlaylistId)
+                        .then(function (response) {
+                            console.log("hahahah");
+                            init();
+                        });
+                })
+
             $route.reload();
 
         }
