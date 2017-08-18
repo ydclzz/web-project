@@ -11,9 +11,9 @@
             "createReviewForMusician": createReviewForMusician,
             "createReviewForPlaylist": createReviewForPlaylist,
 
-            "findReviewByPlaylistId": findReviewByPlaylistId,
-            "findReviewByMusicianId": findReviewByMusicianId,
-            "findReviewBySongId":findReviewByPlaylistId,
+            // "findReviewByPlaylistId": findReviewByPlaylistId,
+            // "findReviewByMusicianId": findReviewByMusicianId,
+            // "findReviewBySongId":findReviewByPlaylistId,
             "findAllReviewsByUser": findAllReviewsByUser,
             "findReviewById": findReviewById,
 

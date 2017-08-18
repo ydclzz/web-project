@@ -8,7 +8,7 @@ var songSchema = mongoose.Schema({
     playlists: {type: mongoose.Schema.Types.ObjectId, ref: "PlaylistModel"},
     coverUrl: String,
     description: String,
-    reviews: {type: mongoose.Schema.Types.ObjectId, ref: "ReviewModel"},
+    reviews: [{type: mongoose.Schema.Types.ObjectId, ref: "ReviewModel"}],
     dateCreated: {type: Date, default: Date.now}
 
 }, {collection: "song"});

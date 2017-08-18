@@ -3,7 +3,7 @@
         .module("Musiker")
         .controller("songController", songController);
 
-    function songController(songService, playlistService, $routeParams,$location, user) {
+    function songController(songService, playlistService,reviewService, $routeParams,$location, user) {
         var model = this;
         model.user = user;
         model.findSongInfo = findSongInfo;
@@ -16,6 +16,7 @@
         model.getSongCreator = getSongCreator;
         model.getPlaylist = getPlaylist;
         model.deleteSong = deleteSong;
+        model.addReviewToSong = addReviewToSong;
         var songId = $routeParams["songId"];
         model.favourite = "no";
         model.playlistId = "";
@@ -41,7 +42,19 @@
         }
 
         function reviewSong(review) {
+            model.editreview = 'yes';
+        }
 
+        function addReviewToSong(){
+            if(model.newreview.title && model.newreview.comment){
+                reviewService.createReviewForSong(user._id, model.song._id, model.newreview)
+                    .then(function (res) {
+                        alert("success")
+                        $location.url('/explore');
+                    })
+            }else{
+                alert("please fill in review");
+            }
         }
 
         function addSongToPlaylist() {

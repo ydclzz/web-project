@@ -87,14 +87,15 @@ function getSongCreator(songId) {
 }
 
 //review
-function addReview(songId, reviewId) {
+function addReview(songId,rId) {
     return songModel
         .findById(songId)
         .then(function (song) {
-            song.reviews.push(reviewId);
+            song.reviews.push(rId);
             return song.save();
         });
 }
+
 
 function removeReview(songId, reviewId) {
     return songModel
