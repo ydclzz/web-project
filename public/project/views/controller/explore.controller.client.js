@@ -3,16 +3,17 @@
         .module("Musiker")
         .controller("exploreController", exploreController)
 
-    function exploreController(user, songService, playlistService, $location) {
+    function exploreController(user, songService, playlistService, reviewService,$location) {
         var model = this;
         model.user = user;
         model.getAllSongs = getAllSongs;
-        model.findAllCritics = findAllCritics;
+        model.getAllReviews = getAllReviews;
         model.getPlaylist = getPlaylist;
 
         function init() {
             getAllSongs();
             getPlaylist();
+            getAllReviews();
         }
         init();
 
@@ -24,8 +25,12 @@
                 })
         }
 
-        function findAllCritics() {
-            // model.reviews = reviewService.findAllReviews();
+        function getAllReviews() {
+            reviewService.findAllReviews()
+                .then(function (response) {
+                    // console.log(response.data);
+                    return model.reviews = response.data;
+                })
         }
 
         // function addSongToPlaylist() {

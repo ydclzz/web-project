@@ -19,7 +19,8 @@
 
             "updateReview": updateReview,
             "deleteReview": deleteReview,
-            "isReviewed": isReviewed
+            "isReviewed": isReviewed,
+            "findAllReviews": findAllReviews
         };
 
         return api;
@@ -62,6 +63,11 @@
 
         function isReviewed(userId, songId){
             var url = "/projectapi/userreview/"+ userId + "/" + songId;
+            return $http.get(url);
+        }
+
+        function findAllReviews(){
+            var url = "/projectapi/reviews";
             return $http.get(url);
         }
 

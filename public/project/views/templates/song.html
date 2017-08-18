@@ -25,7 +25,7 @@
 <div class="song-detail-div container-fluid">
     <div ng-show="model.favourite === 'no'" class="song-detail-header-div">
         <div class="song-detail-header-img-div">
-            <img class="song-artist-photo-large" ng-src="{{model.song._creator.avatar}}">
+            <img class="song-artist-photo-large"  ng-src="{{model.song._creator.avatar}}">
         </div>
         <div class="song-detail-header-description-div">
             <div>
@@ -40,6 +40,7 @@
         <div class="song-detail-header-control-div">
             <div ng-show="model.user.type === 'CRITIC'">
                 <a class="detail-operator" ng-click="model.reviewSong(song)"><span class="glyphicon glyphicon-pencil"></span></a>
+                <a class="detail-operator" ng-click="model.favouriteSong('yes')"><span class="glyphicon glyphicon-plus"></span></a>
             </div>
             <div ng-show="model.user._id === model.song._creator._id">
                 <a class="detail-operator" ng-click="model.edit = 'yes'"><span class="glyphicon glyphicon-cog"></span></a>
@@ -48,7 +49,7 @@
                 <a class="detail-operator" ng-click="model.favourite = 'yes'"><span class="glyphicon glyphicon-plus"></span></a>
             </div>
             <div ng-show="model.user.type === 'PUBLISHER'">
-                <a class="detail-operator" ng-click="model.buy = 'yes'"><span class="glyphicon glyphicon-envelope"></span></a>
+                 <a class="detail-operator" ng-click="model.buy = 'yes'"><span class="glyphicon glyphicon-envelope"></span></a>
             </div>
         </div>
     </div>

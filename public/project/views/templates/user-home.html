@@ -1,33 +1,13 @@
 <div class="visible-lg visible-md visible-sm" ng-include="'views/templates/footer-explore.html'"></div>
 <div class="visible-xs" ng-include="'views/templates/footer-explore-mobile.html'"></div>
+<div ng-include="'views/templates/header.html'"></div></nav>
 
-<nav class="user navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" ng-click="model.changeRightPanel('search')" href="" >Musiker</a>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav">
-                <li><a ng-click="model.changeRightPanel('search')">Home</a></li>
-                <!--<li><a href="#!/play">PLAY</a></li>-->
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
 
-                <li><a href="#!/profile"><span class="glyphicon glyphicon-user"></span> {{model.user.username}}</a></li>
-                <li><a href="#!/"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
 
-            </ul>
-        </div>
-    </div>
-</nav>
-
-<div class="user-home container-fluid ">
-    <div class="left-menu  col-xs-5 col-sm-3 col-md-3 col-lg-3">
+<div class="main-wrap">
+    <input id="slide-sidebar" type="checkbox" role="button" />
+    <label class="myslide-label" for="slide-sidebar"><span class="glyphicon glyphicon-align-justify"></span></label>
+    <div class="mysidebar">
         <h5>My Account</h5>
         People
         <div class="people">
@@ -36,7 +16,7 @@
                     <a ng-click="model.changeRightPanel('musicians')" href="">Musicians</a>
                 </li >
                 <li class="list-group-item">
-                    Critics
+                    <a ng-click="model.changeRightPanel('critics')" href="">Critics</a>
                 </li >
             </ul>
         </div>
@@ -44,24 +24,22 @@
         <a ng-click="model.changeRightPanel('create-playlist')" href="">
             <span class="glyphicon glyphicon-plus pull-right"></span>
         </a>
-        <div class=" playlists ">
+        <div class="content mCustomScrollbar playlists ">
             <div ng-show= "model.playlists" ng-repeat="playlist in model.playlists" class="list-group">
                 <div class="list-group-item">
                     <a ng-click="model.getAllSongsFromPlaylist(playlist._id)" href="">{{playlist.name}}</a>
                 </div >
             </div>
-
         </div>
     </div>
 
-    <div class="right-table col-xs-7 col-sm-9 col-md-9 col-lg-9">
 
+    <div class="portfolio">
         <div ng-show="model.rightPanel==='search'" ng-include src="'views/templates/search.html'"></div>
         <div ng-show="model.rightPanel === 'create-playlist'" ng-include src="'views/templates/playlist-new.html'"></div>
         <div ng-show="model.rightPanel === 'songlist'" ng-include src="'views/templates/playlist-detail.html'"></div>
         <div ng-show="model.rightPanel === 'musicians'" ng-include src="'views/templates/following-musicians.html'"></div>
-
+        <div ng-show="model.rightPanel === 'critics'" ng-include src="'views/templates/following-critics.html'"></div>
     </div>
-
-
 </div>
+

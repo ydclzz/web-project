@@ -7,6 +7,7 @@ app.post("/projectapi/user/:userId/song/:songId/review", createReviewForSong);
 app.post("/projectapi/user/:userId/playlist/:playlistId/review", createReviewForPlaylist);
 app.post("/projectapi/user/:userId/musician/:musicianId/review", createReviewForMusician);
 app.get("projectapi/review/:reviewId", findReviewById);
+app.get("/projectapi/reviews", findAllReviews);
 app.get("/projectapi/musician/:musicianId/review", findReviewByMusicianId);
 app.get("/projectapi/playlist/:playlistId/review", findReviewByPlaylistId);
 app.get("/projectapi/song/:songId/review", findReviewBySongId);
@@ -14,6 +15,7 @@ app.get("/projectapi/user/:userId/review", findAllReviewsByUser);
 app.put("/projectapi/review/:reviewId", updateReview);
 app.delete("/projectapi/review/:reviewId", deleteReview);
 app.get("/projectapi/userreview/:userid/:songid", isReviewed);
+
 
 
 function createReviewForSong(req,res) {
@@ -142,5 +144,14 @@ function isReviewed(req,res){
                 });
             }
             res.send("0");
+        })
+}
+
+function findAllReviews(req, res) {
+    return reviewModel.findAllReviews()
+        .then(function (reviews) {
+            res.json(reviews);
+        }, function (err) {
+            res.sendStatus(500).send(err);
         })
 }

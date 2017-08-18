@@ -15,7 +15,7 @@
             "deleteSong": deleteSong,
             "findAllSongs": findAllSongs,
             "getSongCreator":getSongCreator,
-            "addSongOwner": addSongOwner,
+            "addSongOwner": addSongOwner
         };
         return api;
 
@@ -59,13 +59,12 @@
             var url = "/projectapi/song/" + songId + "/creator";
             return $http.get(url);
         }
-
-
         function addSongOwner(songId, ownerId, price) {
             var url = "/projectapi/song/" + songId + "/owner/" + ownerId + "/price/" + price;
             console.log(url);
             return $http.put(url);
         }
+
     }
 
 })();

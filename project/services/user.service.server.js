@@ -28,7 +28,6 @@ app.get('/auth/google/callback',
 app.post("/projectapi/user", createUser);
 app.post("/projectapi/login", passport.authenticate('local'), login);
 app.get("/projectapi/user", findUser);
-app.get("/projectapi/users", findAllUsers);
 app.get("/projectapi/user/:userId", findUserById);
 app.get("/projectapi/user/:userId/following", findFollowingByUser);
 app.get("/projectapi/user/:userId/following/:followingtype", findFollowingByTypeByUser);
@@ -101,20 +100,6 @@ function findUser(req,res) {
         });
 }
 
-function findAllUsers(req,res) {
-    var publicUsers = [];
-    userModel
-        .findAllUsers()
-        .then(function (users) {
-            for(i = 0; i < users.length; i++){
-                if (users[i].type !== 'ADMIN'){
-                    publicUsers.push(users[i]);
-                }
-            }
-            return res.json(publicUsers);
-        });
-}
-
 function updateUser(req,res) {
     var userId = req.params.userId;
     var user = req.body;
@@ -129,21 +114,14 @@ function updateUser(req,res) {
 }
 
 function deleteUser(req,res) {
-    console.log("deleteUser");
     var userId = req.params.userId;
-    console.log(userId);
     userModel
-        .deleteUserFromOthers(userId)
+        .deleteUserById(userId)
         .then(function (user) {
-            userModel
-                .deleteUserById(userId)
-                .then(function (user) {
-                    res.send("1");
-                }, function (err) {
-                    res.send("0");
-                });
-        })
-
+            res.send("1");
+        }, function (err) {
+            res.send("0");
+        });
 }
 
 function removeSong(req,res) {

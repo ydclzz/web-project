@@ -4,11 +4,12 @@
         .controller("homeController", homeController);
 
 
-    function homeController(user,$location,userService,searchService,transactionService, playlistService, songService) {
+    function homeController(user,$location,userService,searchService, playlistService,transactionService, songService) {
         var model = this;
         model.rightPanel = 'search';
         model.user = user;
         model.findMusicians = findMusicians;
+        model.findCritics = findCritics;
         model.changeRightPanel = changeRightPanel;
         model.createPlaylistForUser = createPlaylistForUser;
         model.searchTrack = searchTrack;
@@ -16,8 +17,7 @@
         model.getAllSongsFromPlaylist = getAllSongsFromPlaylist;
         model.findFollowers = findFollowers;
         model.findSongsByMusician = findSongsByMusician;
-        model.findAllUsers = findAllUsers;
-        model.findAllSongs = findAllSongs;
+
         model.findTransactionsByPublisher = findTransactionsByPublisher;
         model.findTransactionsByMusician = findTransactionsByMusician;
         model.accecptTransaction = accecptTransaction;
@@ -35,8 +35,7 @@
             }
             findMusicians();
             findPlaylists();
-            findAllUsers();
-            findAllSongs();
+            findCritics();
         }
         init();
 
@@ -45,6 +44,14 @@
             userService.findFollowingByTypeByUser(user._id, 'MUSICIAN')
                 .then(function (response) {
                     model.followingMusicians = response.data;
+                    // console.log(model.followingMusicians);
+                })
+        }
+
+        function findCritics() {
+            userService.findFollowingByTypeByUser(user._id, 'CRITIC')
+                .then(function (response) {
+                    model.followingCritics = response.data;
                     // console.log(model.followingMusicians);
                 })
         }
@@ -114,22 +121,6 @@
                 })
         }
 
-        function findAllUsers() {
-            userService.findAllUsers()
-                .then(function (response) {
-                    model.allUsers = response.data;
-                    console.log(response);
-                })
-        }
-
-        function findAllSongs() {
-            songService.findAllSongs()
-                .then(function (response) {
-                    model.allSongs = response.data;
-                    console.log(response);
-                })
-        }
-
         function findTransactionsByPublisher() {
             model.rightPanel = 'transactions';
             transactionService.findTransactionsByBuyer(model.user._id)
@@ -174,5 +165,8 @@
                     $location.url("/home");
                 })
         }
+
+
+
     }
 })();

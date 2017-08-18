@@ -219,6 +219,8 @@ a.song-name:hover {
     font-size: x-large;
 }
 
+
+
 .song-artist-photo.btn-default{
     background: transparent;
  }
@@ -303,6 +305,19 @@ label.musician-detail-label {
 
 .row {
     margin: 5px;
+}
+
+
+.review-item h2{
+    font-size: 15px;
+    color: white;
+    display: inline-block;
+}
+
+.reivew-content{
+    font-size: 25px !important;
+    color: mediumaquamarine !important;
+    display:inline-block;
 }
 
 .transaction-operator-combination {

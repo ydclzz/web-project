@@ -3,7 +3,7 @@
         .module("Musiker")
         .controller("songController", songController);
 
-    function songController(songService, playlistService,transactionService,reviewService, $routeParams,$location, user) {
+    function songController(songService, playlistService,reviewService, transactonService,$routeParams,$location, user) {
         var model = this;
         model.user = user;
         model.errorPurchaseMessage = '1';
@@ -22,13 +22,11 @@
         model.purchaseSong = purchaseSong;
         model.cancelPurchase = cancelPurchase;
         model.defaultMessage = defaultMessage;
-
         var songId = $routeParams["songId"];
         var hasreviewed = false;
         model.favourite = "no";
-        model.playlistId = "";
         model.buy = "no";
-
+        model.playlistId = "";
         function init() {
             findSongInfo();
             getPlaylist();
@@ -156,6 +154,5 @@
                     model.playlists = response.data;
                 });
         }
-
     }
 })();

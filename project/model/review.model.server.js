@@ -1,4 +1,5 @@
 var mongoose = require("mongoose");
+var where = require("lodash.where");
 var reviewSchema = require("./review.schema.server");
 var reviewModel = mongoose.model("ReviewModel", reviewSchema);
 var songModel = require("./song.model.server");
@@ -16,6 +17,7 @@ reviewModel.findReviewByMusicianId = findReviewByMusicianId;
 reviewModel.findAllReviewsByUser = findAllReviewsByUser;
 reviewModel.deleteReview = deleteReview;
 reviewModel.updateReview = updateReview;
+reviewModel.findAllReviews= findAllReviews;
 
 module.exports = reviewModel;
 
@@ -88,7 +90,10 @@ function findReviewByMusicianId(musicianId) {
 
 
 function findAllReviewsByUser(userId) {
-    return reviewModel.find({_critic: userId});
+    return reviewModel
+        .find({_critic: userId})
+        .populate('_song')
+        .exec()
 }
 
 function deleteReview(reviewId, targetId) {
@@ -115,4 +120,12 @@ function updateReview(reviewId, review) {
     return reviewModel
         .updateOne({_id: reviewId},
             {$set: review});
+}
+
+function findAllReviews() {
+    return reviewModel
+        .find()
+        .populate('_critic')
+        .populate('_song')
+        .exec();
 }

@@ -9,7 +9,6 @@
             "createUser": createUser,
             "findUserById": findUserById,
             "findUserByUsername":findUserByUsername,
-            "findAllUsers": findAllUsers,
             "findUserByCredentials": login,
             "updateUser": updateUser,
             "deleteUser": deleteUser,
@@ -99,10 +98,6 @@
                 .then(function (response) {
                     return response.data;
                 })
-        }
-        function findAllUsers() {
-            var url = "/projectapi/users";
-            return $http.get(url);
         }
     }
 

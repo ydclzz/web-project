@@ -5,15 +5,15 @@ var songSchema = mongoose.Schema({
     name: String,
     url: String,
     artist: String,
-    price: {
-        type: Number,
-        default: 0,
-    },
     playlists: {type: mongoose.Schema.Types.ObjectId, ref: "PlaylistModel"},
     coverUrl: String,
     description: String,
     reviews: [{type: mongoose.Schema.Types.ObjectId, ref: "ReviewModel"}],
-    dateCreated: {type: Date, default: Date.now}
+    dateCreated: {type: Date, default: Date.now},
+    price: {
+        type: Number,
+        default: 0,
+    },
 
 }, {collection: "song"});
 module.exports = songSchema;

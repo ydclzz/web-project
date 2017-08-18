@@ -1,15 +1,36 @@
 <div class="new-reviews container-fluid">
     <h2>Reviews</h2>
     <ul  class="list-group list-div active">
-        <li ng-repeat="song in model.songs" class="list-group-item">
+        <li ng-repeat="review in model.reviews" class="list-group-item">
             <div class="row">
+
                 <div>
-                    <div><label>Name:</label><a>{{song.name}}</a></div>
-                    <div><label>Artist:</label>{{song._creator.username}}</div>
+                    <div class="review-item">
+                        <h2>Critic Name:</h2>
+                        <a class="reivew-content" href="#!/critic/{{review._critic._id}}">{{review._critic.username}}</a>
+                    </div>
+                    <div class="review-item">
+                        <h2>Song:</h2>
+                        <a class="reivew-content song-name" href="#!/song/{{review._song._id}}">{{review._song.name}}</a>
+                    </div>
+                    <div class="review-item">
+                        <h2>Review Title:</h2>
+                        <a class="reivew-content">{{review.title}}</a>
+                    </div>
+                    <div class="review-item">
+                        <h2>comment:</h2>
+                        <a class="reivew-content">{{review.comment}}</a>
+                    </div>
+                    <div class="review-item">
+                        <h2>Rating:</h2>
+                        <h3 class="reivew-content">{{review.rating}}</h3>
+                    </div>
+
+
                 </div>
                 <div class="song-artist-photo-div">
                     <img class="song-artist-photo"
-                         src="https://static1.squarespace.com/static/5391fac1e4b07b6926545c34/t/54b948f4e4b0567044b6c023/1421428991081/">
+                         ng-src={{review._critic.avatar}}>
                 </div>
             </div>
         </li>

@@ -5,6 +5,7 @@ var reviewSchema = mongoose.Schema({
     _playlist: {type: mongoose.Schema.Types.ObjectId, ref: "PlaylistModel"},
     _musician: {type: mongoose.Schema.Types.ObjectId, ref: "ProjectUserModel"},
     type: {type: String, enum: ['FORSONG', 'FORPLAYLIST', 'FORMUSICIAN']},
+    title: String,
     comment: String,
     rating: Number,
     dateCreated: {type: Date, default: Date.now}
