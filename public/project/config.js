@@ -42,6 +42,14 @@
                     user: checkLogin
                 }
             })
+            .when("/user/:uid", {
+                templateUrl: "views/templates/home.html",
+                controller: "homeController",
+                controllerAs: "model",
+                resolve: {
+                    user: checkLogin
+                }
+            })
             .when("/user/:uid/follow", {
                 templateUrl: "views/templates/follow.html",
                 controller: "followController",

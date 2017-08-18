@@ -6,7 +6,7 @@ var reviewModel = require("../model/review.model.server");
 app.post("/projectapi/user/:userId/song/:songId/review", createReviewForSong);
 app.post("/projectapi/user/:userId/playlist/:playlistId/review", createReviewForPlaylist);
 app.post("/projectapi/user/:userId/musician/:musicianId/review", createReviewForMusician);
-app.get("projectapi/review/:reviewId", findReviewById);
+app.get("/projectapi/search/review/:reviewId", findReviewById);
 app.get("/projectapi/reviews", findAllReviews);
 app.get("/projectapi/musician/:musicianId/review", findReviewByMusicianId);
 app.get("/projectapi/playlist/:playlistId/review", findReviewByPlaylistId);
@@ -52,6 +52,7 @@ function createReviewForMusician(req,res) {
 }
 
 function findReviewById(req,res) {
+    console.log("aaaaa");
     var reviewId = req.params.reviewId;
     reviewModel
         .findReviewById(reviewId)

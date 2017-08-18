@@ -17,25 +17,45 @@
 
         //initial function
         function init() {
-            reviewService.findReviewById(model.reviewId)
+            reviewService
+                .findReviewById(model.reviewId)
                 .then(function (response) {
-                    model.editReview = response.data;
+                    console.log(response);
+                    model.review = response.data;
                     console.log(model.editReview);
+                    model.editReview = {
+                        "_critic": model.review._critic,
+                        "_song": model.review._song,
+                        "_playlist": model.review._playlist,
+                        "_musician": model.review._musician,
+                        "type": model.review.type,
+                        "title": model.review.title,
+                        "comment": model.review.comment,
+                        "rating": model.review.rating,
+                        "dateCreated": model.review.dateCreated
+                    }
                 });
+
         }
         init();
 
         //functions
+
+        // function initReview() {
+        //
+        // }
         function updateReview(review){
-            userService.updateReview(model.reviewId, review)
+            reviewService.updateReview(model.reviewId, review)
                 .then(function (response) {
                     alert("update scceuss")
                 });
         }
 
         function deleteReview(){
-            reviewService.deleteReview(model.reviewId);
-            $location.url("#!/home");
+            reviewService.deleteReview(model.reviewId)
+                .then(function (response) {
+                    alert("delete scceuss")
+                });
         }
 
     }
