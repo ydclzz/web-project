@@ -10,9 +10,20 @@ app.get("/projectapi/playlist/:playlistId", findPlaylistById);
 app.put("/projectapi/playlist/:playlistId", updatePlaylist);
 app.delete("/projectapi/playlist/:playlistId", deletePlaylist);
 app.put("/projectapi/playlist/:playlistId/song/:songId", addSongToPlaylist);
+app.put("/projectapi/playlist/:playlistId/song/:songId/remove", removeSongFromPlaylist);
 app.get("/projectapi/playlist/:playlistId/song", getAllSongsFromPlaylist);
 
-
+function removeSongFromPlaylist(req,res) {
+    var playlistid = req.params.playlistId;
+    var songid = req.params.songId;
+    playlistModel
+        .removeSongFromPlaylist(playlistid,songid)
+        .then(function (list) {
+            res.send("1");
+        }, function (err) {
+            res.send("0");
+        });
+}
 
 function createPlaylistForUser(req,res) {
     var playlist = req.body;

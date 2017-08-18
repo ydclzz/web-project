@@ -8,6 +8,7 @@
         var model = this;
         model.rightPanel = 'musicians';
         model.user = user;
+        model.currentPlaylistId = "";
         model.findMusicians = findMusicians;
         model.findCritics = findCritics;
         model.changeRightPanel = changeRightPanel;
@@ -30,6 +31,7 @@
         model.findAllReviews = findAllReviews;
         model.addSongToLocal = addSongToLocal;
         model.deletePlaylistForUser = deletePlaylistForUser;
+        model.removeSongFromPlaylist = removeSongFromPlaylist;
 
         function init() {
             if(model.user.type === 'MUSICIAN') {
@@ -122,6 +124,7 @@
         }
 
         function getAllSongsFromPlaylist(playlistId) {
+            model.currentPlaylistId = playlistId;
             playlistService.getAllSongsFromPlaylist(playlistId)
                 .then(function (response) {
                     model.songs = response.data;
@@ -237,6 +240,18 @@
                 .then(function (response) {
                     model.allReviews = response.data;
                     console.log(response);
+                })
+        }
+
+        function removeSongFromPlaylist(songId) {
+            playlistService
+                .removeSongFromPlaylist(model.currentPlaylistId,songId)
+                .then(function (res) {
+                    if(res.data != "0")
+                    {
+                        getAllSongsFromPlaylist(model.currentPlaylistId);
+                    }
+
                 })
         }
 
