@@ -19,6 +19,7 @@
             "findFollowersByUser":findFollowersByUser,
             "addFollowingByUser":addFollowingByUser,
             "addFollowersByUser":addFollowersByUser,
+            "unFollow": unFollow,
             "checkLogin": checkLogin
         };
 
@@ -89,6 +90,10 @@
 
         function addFollowersByUser(userId, followerId) {
             var url = "/projectapi/user/" + userId + "/follower/" + followerId;
+            return $http.put(url);
+        }
+        function unFollow(userId, followingId) {
+            var url = "/projectapi/user/" + userId + "/unfollowuser/" + followingId;
             return $http.put(url);
         }
 

@@ -16,6 +16,7 @@
         model.showDetails = showDetails;
         model.getAllSongsFromPlaylist = getAllSongsFromPlaylist;
         model.findFollowers = findFollowers;
+        model.unFollow = unFollow;
         model.findSongsByMusician = findSongsByMusician;
 
         model.findTransactionsByPublisher = findTransactionsByPublisher;
@@ -62,6 +63,16 @@
                 .then(function (response) {
                     model.followers = response.data;
                     console.log(model.followers);
+                })
+        }
+
+        function unFollow(followingid) {
+            userService.unFollow(user._id, followingid)
+                .then(function (response) {
+                    if(response){
+                        findMusicians();
+                        findCritics();
+                    }
                 })
         }
 

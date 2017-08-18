@@ -39,6 +39,7 @@ app.put("/projectapi/user/:userId", updateUser);
 app.put("/projectapi/user/:userId/song/:songId", addSong);
 app.put("/projectapi/user/:userId/following/:followingId", addFollowingByUser);
 app.put("/projectapi/user/:userId/follower/:followerId", addFollowerByUser);
+app.put("/projectapi/user/:userId/unfollowuser/:followingId", unFollowUser);
 app.delete("/projectapi/user/:userId", deleteUser);
 app.post("/projectapi/avatar", upload.single('avatar'), uploadAvatar);
 // app.delete("/projectapi/user/song/:songId", removeSong);
@@ -209,6 +210,22 @@ function addFollowingByUser(req,res) {
         });
 }
 
+function unFollowUser(req, res) {
+    var userid = req.params.userId;
+    var followingid = req.params.followingId;
+    userModel
+        .removeFollowerUser(userid, followingid)
+        .then(function (user) {
+          userModel
+              .removeFollowingUser(userid,followingid)
+        })
+        .then(function (user) {
+            res.send("1");
+        }, function (err) {
+            res.send("0");
+        })
+}
+
 function login(req, res) {
         var user = req.user;
         res.json(user);
@@ -291,3 +308,4 @@ function googleStrategy(token, refreshToken, profile, done) {
             }
         );
 }
+

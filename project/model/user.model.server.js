@@ -23,6 +23,8 @@ userModel.addPlaylist = addPlaylist;
 userModel.removePlaylist = removePlaylist;
 userModel.findUserByGoogleId = findUserByGoogleId;
 userModel.updateUserAvatar = updateUserAvatar;
+userModel.removeFollowingUser = removeFollowingUser;
+userModel.removeFollowerUser  = removeFollowerUser;
 module.exports = userModel;
 
 function findUserByGoogleId(googleId) {
@@ -209,6 +211,26 @@ function removePlaylist(userId, playlistId) {
         .then(function (user) {
             var index = user.transactions.indexOf(playlistId);
             user.playlists.splice(index, 1);
+            return user.save();
+        })
+}
+
+function removeFollowingUser(userId, followingId) {
+    return userModel
+        .findById(userId)
+        .then(function (user) {
+            var index = user.following.indexOf(followingId);
+            user.following.splice(index, 1);
+            return user.save();
+        })
+}
+
+function removeFollowerUser(userId, followingId) {
+    return userModel
+        .findById(followingId)
+        .then(function (user) {
+            var index = user.followers.indexOf(userId);
+            user.followers.splice(index, 1);
             return user.save();
         })
 }

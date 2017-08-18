@@ -3,16 +3,24 @@
     <ul  class="list-group list-div active">
         <li ng-repeat="review in model.reviews" class="list-group-item">
             <div class="row">
+                <div class="song-info-div">
+                    <!--<div class="review-item">-->
+                        <!--<h2>Critic Name:</h2>-->
+                        <!--<a class="reivew-content" href="#!/critic/{{review._critic._id}}">{{review._critic.username}}</a>-->
+                    <!--</div>-->
+                    <div>
+                        <label class="explore-label">Critic Name:</label><span></span>
+                        <a href="#!/critic/{{review._critic._id}}"
+                           class="song-name">{{review._critic.username}}</a>
+                    </div>
 
-                <div>
-                    <div class="review-item">
-                        <h2>Critic Name:</h2>
-                        <a class="reivew-content" href="#!/critic/{{review._critic._id}}">{{review._critic.username}}</a>
+                    <div>
+                        <label class="explore-label">Song:</label><span></span>
+                        <a href="#!/song/{{review._song._id}}"
+                           class="song-name">{{review._song.name}}</a>
                     </div>
-                    <div class="review-item">
-                        <h2>Song:</h2>
-                        <a class="reivew-content song-name" href="#!/song/{{review._song._id}}">{{review._song.name}}</a>
-                    </div>
+
+
                     <div class="review-item">
                         <h2>Review Title:</h2>
                         <a class="reivew-content">{{review.title}}</a>

@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <h2>Musicians</h2>
+    <h2>Critics</h2>
     <ul class="list-group list-div active">
         <li ng-repeat="critic in model.followingCritics" class="list-group-item">
             <div class="row" ng-show="critic">
@@ -9,6 +9,9 @@
                         <span></span>
                         <a class="song-name">{{critic.username}}</a></div>
                 </div>
+
+                    <a ng-click="model.unFollow(critic._id)" href=""><span class="glyphicon glyphicon-remove delete-follow"></span></a>
+
             </div>
         </li>
     </ul>

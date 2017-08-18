@@ -1,5 +1,4 @@
 var mongoose = require("mongoose");
-var where = require("lodash.where");
 var reviewSchema = require("./review.schema.server");
 var reviewModel = mongoose.model("ReviewModel", reviewSchema);
 var songModel = require("./song.model.server");

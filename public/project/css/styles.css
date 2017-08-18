@@ -167,8 +167,7 @@ article {
 }
 
 li:hover {
-    background: #777777;
-    opacity: 0.5;
+    background-color: rgba(0, 0, 0, 0.5);;
 }
 
 .song-artist-photo {
@@ -253,6 +252,8 @@ a.song-name:hover {
 
 .musician-detail-div {
     margin: 20px;
+    padding-top: 25px;
+    padding-bottom: 25px;
 }
 
 .musician-detail-header-div {
@@ -309,7 +310,7 @@ label.musician-detail-label {
 
 
 .review-item h2{
-    font-size: 15px;
+    font-size: 25px;
     color: white;
     display: inline-block;
 }
@@ -360,3 +361,11 @@ label.musician-detail-label {
     color: #e74c3c;
 }
 
+
+.delete-follow{
+    position: absolute;
+    right: 10px;
+    margin-top:30px;
+
+
+}
