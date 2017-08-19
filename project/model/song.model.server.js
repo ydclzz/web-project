@@ -2,9 +2,6 @@ var mongoose = require("mongoose");
 var songSchema = require("./song.schema.server");
 var songModel = mongoose.model("SongModel", songSchema);
 // var userModel = require("./user.model.server");
-
-
-
 songModel.findSongById = findSongById;
 songModel.findSongBySongName = findSongBySongName;
 songModel.findAllSongsByUser = findAllSongsByUser;
@@ -18,11 +15,13 @@ songModel.findSongByThridPartyId = findSongByThridPartyId;
 songModel.createSongFromApi = createSongFromApi;
 songModel.findSongByIdWithReview = findSongByIdWithReview;
 songModel.addPlaylistToSong = addPlaylistToSong;
+songModel.removePlaylistFromSong = removePlaylistFromSong;
 module.exports = songModel;
 
 
 
 function findSongById(songId) {
+    console.log("find song by id")
     return songModel
         .findOne({_id: songId})
         .populate('_creator')
@@ -72,6 +71,18 @@ function addPlaylistToSong(playlistId, songId) {
             song.playlists.push(playlistId);
             return song.save();
         });
+}
+
+function removePlaylistFromSong(playlistId, songId) {
+    console.log("hahahaha");
+    return songModel
+        .findById(songId)
+        .then(function (song) {
+            console.log("gagagga");
+            var index = song.playlists.indexOf(playlistId);
+            song.playlists.splice(index,1);
+            return song.save();
+        })
 }
 
 //review
