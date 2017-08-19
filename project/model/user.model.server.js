@@ -27,8 +27,7 @@ userModel.findUserByGoogleId = findUserByGoogleId;
 userModel.updateUserAvatar = updateUserAvatar;
 userModel.removeFollowingUser = removeFollowingUser;
 userModel.removeFollowerUser  = removeFollowerUser;
-userModel.deleteUserFromOthers = deleteUserFromOthers;
-userModel.deleteUserSongFromOthers = deleteUserSongFromOthers;
+userModel.deleteTransaction = deleteTransaction;
 module.exports = userModel;
 
 function findUserByGoogleId(googleId) {
@@ -243,6 +242,15 @@ function removeFollowerUser(userId, followingId) {
         .then(function (user) {
             var index = user.followers.indexOf(userId);
             user.followers.splice(index, 1);
+            return user.save();
+        })
+}
+
+function deleteTransaction(userId, transactionId) {
+    return userModel.findById(userId)
+        .then(function (user) {
+            var index = user.transactions.indexOf(transactionId);
+            user.transactions.splice(index, 1);
             return user.save();
         })
 }
