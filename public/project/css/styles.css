@@ -15,6 +15,10 @@ body {
     background-size: cover
 }
 
+h2 {
+    text-align: center;
+    margin-top: 60px;
+}
 .view{
     height: 100%;
 }
@@ -138,6 +142,14 @@ body {
     z-index: -100;
 }
 
+#video-background source{
+
+    min-width: 100%;
+    min-height: 100%;
+    height: auto;
+    width: auto;
+}
+
 /* These just style the content */
 article {
     /*  just a fancy border  */
@@ -178,7 +190,8 @@ article {
 }
 
 li:hover {
-    background-color: rgba(0, 0, 0, 0.5);;
+    color: aquamarine;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .song-artist-photo {
@@ -236,7 +249,7 @@ a.song-name:hover {
  }
 
 .song-detail-div {
-    margin: 20px;
+    margin: 50px 15px 15px 15px;
 }
 
 .song-detail-header-div {
@@ -397,3 +410,8 @@ a.api-song-name:hover {
     font-size: 20px;
     color: lightgoldenrodyellow;
 }
+
+.footer-explore{
+    height: 10px;
+}
+

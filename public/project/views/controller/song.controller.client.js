@@ -121,7 +121,7 @@
             songService.addPlaylistToSong(model.playlistId, songId)
                 .then(function (response) {
                     alert("add to playlist success");
-                    $location.url('/explore');
+                    $location.url('/home');
                 })
         }
 

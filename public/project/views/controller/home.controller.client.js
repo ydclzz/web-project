@@ -36,10 +36,12 @@
         model.deleteSong = deleteSong;
         model.reviewSong = reviewSong;
         model.deleteTransaction = deleteTransaction;
+        model.findCritics = findCritics;
         function init() {
             if (model.user.type === 'MUSICIAN') {
                 model.rightPanel = 'my-songs';
                 findSongsByMusician();
+                findCritics();
             }
             if (model.user.type === 'PUBLISHER') {
                 model.rightPanel = 'transactions';
@@ -48,6 +50,13 @@
             findMusicians();
             findCritics();
             findPlaylists();
+            if (model.user.type === 'CRITIC') {
+                model.rightPanel = 'my-reviews';
+                findMusicians();
+                findPlaylists();
+                findReviewsByCritic();
+            }
+
             if (model.user.type === 'ADMIN') {
                 findCritics();
                 findAllUsers();
