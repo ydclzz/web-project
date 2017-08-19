@@ -1,5 +1,6 @@
 var app = require("../../express");
 var songModel = require("../model/song.model.server");
+var userModel = require("../model/user.model.server");
 var multer = require('multer'); // npm install multer --save
 var upload = multer({dest: __dirname + '/../../public/uploads'});
 var fs = require('fs');
@@ -50,7 +51,7 @@ function uploadSong(req, res) {
                 "cover" : cover,
     };
 
-    songModel.createSongForUser(userId,song)
+    userModel.createSongForUser(userId,song)
         .then(function () {
             var callbackUrl = "/project/#!/home";
             res.redirect(callbackUrl);
@@ -60,7 +61,7 @@ function uploadSong(req, res) {
 function createSongForUser(req,res) {
     var song = req.body;
     var userId = req.params.userId;
-    songModel
+    userModel
         .createSongForUser(userId, song)
         .then(function (song) {
             res.json(song);
@@ -128,7 +129,7 @@ function deleteSong(req, res) {
             fs.unlinkSync(filePath);
             console.log('successfully deleted ');
         })
-    songModel
+    userModel
         .deleteSong(userId, songId)
         .then(function (song) {
             res.json(song);

@@ -28,6 +28,8 @@ userModel.updateUserAvatar = updateUserAvatar;
 userModel.removeFollowingUser = removeFollowingUser;
 userModel.removeFollowerUser  = removeFollowerUser;
 userModel.deleteTransaction = deleteTransaction;
+userModel.createSongForUser = createSongForUser;
+userModel.deleteSong = deleteSong;
 module.exports = userModel;
 
 function findUserByGoogleId(googleId) {
@@ -53,6 +55,8 @@ function updateUserAvatar(userId, avatarUrl) {
 }
 
 function createUser(user) {
+    var promise = playlistModel.findPlaylistById("88888");
+    var promise2 = songModel.findSongById("88888");
     return userModel.create(user);
 }
 
@@ -252,5 +256,32 @@ function deleteTransaction(userId, transactionId) {
             var index = user.transactions.indexOf(transactionId);
             user.transactions.splice(index, 1);
             return user.save();
+        })
+}
+
+function createSongForUser(userId, song) {
+    song._user = userId;
+    var songTmp = null;
+    return songModel
+        .create(song)
+        .then(function (songDoc) {
+            songTmp = songDoc;
+            return userModel.addSong(userId, songTmp._id)
+        })
+        .then(function (userDoc) {
+            return songTmp;
+        })
+}
+
+function deleteSong(userId, songId) {
+    var songTmp = null;
+    return songModel
+        .remove({_id: songId})
+        .then(function (song) {
+            songTmp = song;
+            return userModel.removeSong(userId, songId);
+        })
+        .then(function (userDoc) {
+            return songTmp;
         })
 }
