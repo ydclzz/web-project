@@ -39,6 +39,9 @@ function uploadSong(req, res) {
     var originalname = myFile.originalname; // file name on user's computer
     var index = originalname.indexOf(".");
     originalname = originalname.substring(0, index);
+    if(songName === "") {
+        songName = originalname;
+    }
     var filename = myFile.filename;     // new file name in upload folder
     var path = myFile.path;         // full path of uploaded file
     var destination = myFile.destination;  // folder where file is saved to

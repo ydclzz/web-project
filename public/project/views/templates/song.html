@@ -17,7 +17,7 @@
             </div>
             <div ng-hide="model.song._creator">
                 <label class="song-detail-label">Artist:</label><span></span>
-                <span>{{model.song._creator.username}}</span>
+                <span>{{model.song.artist}}</span>
             </div>
         </div>
         <div class="song-detail-header-control-div">
@@ -31,7 +31,7 @@
             <div ng-show="model.user.type === 'GENERAL'">
                 <a class="detail-operator" ng-click="model.favourite = 'yes'"><span class="glyphicon glyphicon-plus"></span></a>
             </div>
-            <div ng-show="model.user.type === 'PUBLISHER'">
+            <div ng-show="model.user.type === 'PUBLISHER' && model.song._creator">
                  <a class="detail-operator" ng-click="model.buy = 'yes'"><span class="glyphicon glyphicon-envelope"></span></a>
             </div>
         </div>

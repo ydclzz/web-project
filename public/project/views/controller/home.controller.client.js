@@ -250,6 +250,7 @@
                 "_owner": model.user._id,
                 "url": "http://music.163.com/#/song?id=" + song.id
             };
+            alert("successfully added to local database!")
             return songService.createSongFromApi(newSong)
                 .then(function (response) {
                     return response.data;
