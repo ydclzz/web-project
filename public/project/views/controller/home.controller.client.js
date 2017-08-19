@@ -39,13 +39,19 @@
             if (model.user.type === 'MUSICIAN') {
                 model.rightPanel = 'my-songs';
                 findSongsByMusician();
+                findCritics();
             }
             if (model.user.type === 'PUBLISHER') {
                 model.rightPanel = 'transactions';
                 findTransactionsByPublisher();
             }
-            findMusicians();
-            findPlaylists();
+            if (model.user.type === 'CRITIC') {
+                model.rightPanel = 'my-reviews';
+                findMusicians();
+                findPlaylists();
+                findReviewsByCritic();
+            }
+
             if (model.user.type === 'ADMIN') {
                 findCritics();
                 findAllUsers();

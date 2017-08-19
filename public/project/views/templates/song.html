@@ -11,13 +11,10 @@
                 <label class="song-detail-label">Song Name:</label><span></span>
                 <span>{{model.song.name}}</span>
             </div>
-            <div ng-show="song._creator">
-                <label class="song-detail-label">Artist:</label><span></span>
-                <span>{{model.song._creator.username}}</span>
-            </div>
+
             <div ng-hide="song._creator">
                 <label class="song-detail-label">Artist:</label><span></span>
-                <span>{{model.song.artist}}</span>
+                <span>{{model.song._creator.username}}</span>
             </div>
         </div>
         <div class="song-detail-header-control-div">

@@ -45,6 +45,7 @@
             reviewService.updateReview(model.reviewId, review)
                 .then(function (response) {
                     alert("update scceuss")
+                    $location.url("/home");
                 });
         }
 
@@ -52,6 +53,7 @@
             reviewService.deleteReview(model.reviewId)
                 .then(function (response) {
                     alert("delete scceuss")
+                    $location.url("/home");
                 });
         }
 
