@@ -136,27 +136,11 @@ function deleteUser(req,res) {
     var userId = req.params.userId;
     console.log(userId);
     userModel
-        .deleteUserFromOthers(userId)
+        .deleteUserById(userId)
         .then(function (user) {
-            userModel
-                .deleteUserById(userId)
-                .then(function (user) {
-                    res.send("1");
-                }, function (err) {
-                    res.send("0");
-                });
-            // userModel
-            //     .deleteUserSongFromOthers(userId)
-            //     .then(function (user) {
-            //         userModel
-            //             .deleteUserById(userId)
-            //             .then(function (user) {
-            //                 res.send("1");
-            //             }, function (err) {
-            //                 res.send("0");
-            //             });
-            //     })
-
+            res.json(user)
+        }, function (err) {
+            res.sendStatus(500).send(err);
         })
 }
 

@@ -34,7 +34,7 @@
         model.removeSongFromPlaylist = removeSongFromPlaylist;
         model.deleteSong = deleteSong;
         model.reviewSong = reviewSong;
-
+        model.deleteTransaction = deleteTransaction;
         function init() {
             if (model.user.type === 'MUSICIAN') {
                 model.rightPanel = 'my-songs';
@@ -212,6 +212,13 @@
             transactionService.updateTransaction(transaction._id, transaction)
                 .then(function (response) {
                     $location.url("/home");
+                })
+        }
+
+        function deleteTransaction(transaction) {
+            transactionService.deleteTransaction(transaction._id)
+                .then(function (response) {
+                    $route.reload();
                 })
         }
 
