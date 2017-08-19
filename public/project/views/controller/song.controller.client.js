@@ -18,6 +18,7 @@
         model.getPlaylist = getPlaylist;
         model.deleteSong = deleteSong;
         model.addReviewToSong = addReviewToSong;
+        model.deleteReview = deleteReview;
         model.getReview = getReview;
         model.purchaseSong = purchaseSong;
         model.cancelPurchase = cancelPurchase;
@@ -166,6 +167,20 @@
                 .then(function (response) {
                     console.log(response.data);
                     model.reviews = response.data[0].reviews;
+                })
+        }
+
+        function deleteReview() {
+            reviewService
+                .deleteReview(model.newreview._id)
+                .then(function (res) {
+                    if(res.data === "1"){
+                        alert("delete success");
+                        $location.url('/home');
+                    }else{
+                        alert("delete fail");
+                    }
+
                 })
         }
     }

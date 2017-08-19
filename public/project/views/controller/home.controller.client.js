@@ -33,6 +33,7 @@
         model.deletePlaylistForUser = deletePlaylistForUser;
         model.removeSongFromPlaylist = removeSongFromPlaylist;
         model.deleteSong = deleteSong;
+        model.reviewSong = reviewSong;
 
         function init() {
             if (model.user.type === 'MUSICIAN') {
@@ -277,6 +278,15 @@
                     if (res.data !== "0")
                         findSongsByMusician();
                 })
+        }
+
+        function  reviewSong(reviewId) {
+            reviewService
+                .findReviewById(reviewId)
+                .then(function (res) {
+                    model.newreview = res.data;
+                })
+            model.rightPanel = 'edit-review';
         }
     }
 

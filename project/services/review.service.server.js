@@ -1,7 +1,7 @@
 var app = require("../../express");
 var reviewModel = require("../model/review.model.server");
-
-
+var songModel = require("../model/song.model.server");
+var userModel = require("../model/user.model.server");
 
 app.post("/projectapi/user/:userId/song/:songId/review", createReviewForSong);
 app.post("/projectapi/user/:userId/playlist/:playlistId/review", createReviewForPlaylist);
@@ -54,7 +54,7 @@ function createReviewForMusician(req,res) {
 function findReviewById(req,res) {
     var reviewId = req.params.reviewId;
     reviewModel
-        .findReviewById(reviewId)
+        .findById(reviewId)
         .then(function (review) {
             res.json(review);
         }, function (err) {
@@ -120,13 +120,30 @@ function updateReview(req, res){
 
 function deleteReview(req, res) {
     var reviewId = req.params.reviewId;
-    reviewModel
-        .deleteReview(reviewId)
+    var songId = "";
+    var userId = "";
+    reviewModel.findById(reviewId)
         .then(function (review) {
-            res.send("1");
-        }, function (err) {
-            res.send("0");
-        });
+            songId = review._song;
+            userId = review._critic;
+            reviewModel
+                .remove({_id: reviewId})
+                .then(function (review) {
+                    return songModel
+                        .removeReview(songId,reviewId)
+                        .then(function () {
+                            return userModel
+                                .removeReview(userId,reviewId)
+                                .then(function () {
+                                    res.send("1")
+                                })
+                        })
+
+                }, function (err) {
+                    res.send("0");
+                });
+        })
+
 }
 
 function isReviewed(req,res){
