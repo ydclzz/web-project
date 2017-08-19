@@ -1,8 +1,10 @@
 var mongoose = require("mongoose");
 var userSchema = require("./user.schema.server");
-var songModel = require("./song.model.server");
 var userModel = mongoose.model("ProjectUserModel", userSchema);
 var playlistModel = require('./playlist.model.server');
+var songModel = require("./song.model.server");
+// var reviewModel = require('./review.model.server');
+// var transactionModel = require('./transaction.model.server');
 
 userModel.createUser = createUser;
 userModel.findUserById = findUserById;
@@ -220,12 +222,31 @@ function addPlaylist(userId, playlistId) {
 }
 
 function removePlaylist(userId, playlistId) {
+    // return playlistModel.findById(playlistId)
+    //     .then(function () {
+    //         console.log("gagag");
+    //     })
     return userModel
         .findById(userId)
         .then(function (user) {
             var index = user.playlists.indexOf(playlistId);
             user.playlists.splice(index, 1);
-            user.save();
+            return user.save();
+        })
+        .then(function (userDoc) {
+            return playlistModel
+                .findById(playlistId);
+        })
+        .then(function (playlist) {
+            console.log(playlist);
+            playlist.songlist.forEach(function (songId) {
+                console.log("songId");
+                console.log(songId);
+                return songModel
+                    .removePlaylistFromSong(playlistId, songId)
+            });
+        })
+        .then(function (songDoc) {
             return playlistModel.deletePlaylist(playlistId);
         })
 }

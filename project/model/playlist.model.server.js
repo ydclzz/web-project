@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 var playlistSchema = require("./playlist.schema.server");
 var playlistModel = mongoose.model("PlaylistModel", playlistSchema);
-var userModel = require("./user.model.server");
+// var userModel = require("./user.model.server");
 var songModel = require("./song.model.server");
 // var db = require("./database");
 
