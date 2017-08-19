@@ -3,8 +3,6 @@ var userSchema = require("./user.schema.server");
 var userModel = mongoose.model("ProjectUserModel", userSchema);
 var playlistModel = require('./playlist.model.server');
 var songModel = require("./song.model.server");
-// var reviewModel = require('./review.model.server');
-// var transactionModel = require('./transaction.model.server');
 
 userModel.createUser = createUser;
 userModel.findUserById = findUserById;
@@ -71,9 +69,21 @@ function findAllUsers() {
 }
 
 function deleteUserById(userId) {
-    return userModel.findOne({_id: userId})
+    return userModel.findOneAndRemove({_id: userId})
         .then(function (user) {
-
+            user.playlists.forEach(function (playlistId) {
+                playlistModel.deletePlaylist(playlistId);
+            });
+            user.songs.forEach(function (songId) {
+                songModel.deleteSong({_id:songId});
+                playlistModel.removeSongFromAllPlaylists(songId);
+            });
+            user.following.forEach(function (followingId) {
+                userModel.removeFollowerUser(user._id, followingId);
+            });
+            user.followers.forEach(function (followerId) {
+                userModel.removeFollowingUser(followerId, user._id);
+            })
         })
 }
 
@@ -215,9 +225,18 @@ function addPlaylist(userId, playlistId) {
     return userModel
         .findById(userId)
         .then(function (user) {
-            user.playlists.push(playlistId);
-            console.log(user.playlists);
-            return user.save();
+            var flag = '0';
+            for(var u in user.playlists) {
+                if(user.playlists[u] == playlistId) {
+                    flag = '1';
+                    break;
+                }
+            }
+            if(flag === '0') {
+                user.playlists.push(playlistId);
+                user.save();
+            }
+            return user;
         })
 }
 
@@ -238,10 +257,7 @@ function removePlaylist(userId, playlistId) {
                 .findById(playlistId);
         })
         .then(function (playlist) {
-            console.log(playlist);
             playlist.songlist.forEach(function (songId) {
-                console.log("songId");
-                console.log(songId);
                 return songModel
                     .removePlaylistFromSong(playlistId, songId)
             });

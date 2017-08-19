@@ -2,6 +2,7 @@ var mongoose = require("mongoose");
 var songSchema = require("./song.schema.server");
 var songModel = mongoose.model("SongModel", songSchema);
 // var userModel = require("./user.model.server");
+
 songModel.findSongById = findSongById;
 songModel.findSongBySongName = findSongBySongName;
 songModel.findAllSongsByUser = findAllSongsByUser;
@@ -16,12 +17,17 @@ songModel.createSongFromApi = createSongFromApi;
 songModel.findSongByIdWithReview = findSongByIdWithReview;
 songModel.addPlaylistToSong = addPlaylistToSong;
 songModel.removePlaylistFromSong = removePlaylistFromSong;
+songModel.deleteSong = deleteSong;
 module.exports = songModel;
 
-
+function deleteSong(songId) {
+    return songModel.findOneAndRemove(songId)
+        .then(function (song) {
+            return song;
+        })
+}
 
 function findSongById(songId) {
-    console.log("find song by id")
     return songModel
         .findOne({_id: songId})
         .populate('_creator')
@@ -57,11 +63,11 @@ function getSongCreator(songId) {
         .findById(songId)
         .populate('_creator')
         .exec();
-        // .then(function (song) {
-        //     return song._creator
-        //         .populate('_creator')
-        //         .exec();
-        // })
+    // .then(function (song) {
+    //     return song._creator
+    //         .populate('_creator')
+    //         .exec();
+    // })
 }
 
 function addPlaylistToSong(playlistId, songId) {
@@ -74,11 +80,9 @@ function addPlaylistToSong(playlistId, songId) {
 }
 
 function removePlaylistFromSong(playlistId, songId) {
-    console.log("hahahaha");
     return songModel
         .findById(songId)
         .then(function (song) {
-            console.log("gagagga");
             var index = song.playlists.indexOf(playlistId);
             song.playlists.splice(index,1);
             return song.save();

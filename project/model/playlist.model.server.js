@@ -1,9 +1,7 @@
 var mongoose = require("mongoose");
 var playlistSchema = require("./playlist.schema.server");
 var playlistModel = mongoose.model("PlaylistModel", playlistSchema);
-// var userModel = require("./user.model.server");
 var songModel = require("./song.model.server");
-// var db = require("./database");
 
 playlistModel.createPlaylistForUser = createPlaylistForUser;
 playlistModel.findPlaylistById = findPlaylistById;
@@ -13,8 +11,6 @@ playlistModel.deletePlaylist = deletePlaylist;
 playlistModel.updatePlaylist = updatePlaylist;
 
 playlistModel.addReview = addReview;
-playlistModel.removeReview = removeReview;
-
 playlistModel.addSongToPlaylist = addSongToPlaylist;
 playlistModel.removeSongFromPlaylist = removeSongFromPlaylist;
 playlistModel.getAllSongsFromPlaylist = getAllSongsFromPlaylist;
@@ -50,6 +46,9 @@ function findAllPlaylistsByUserId(userId) {
 function deletePlaylist(playlistId) {
     return playlistModel
         .remove({_id: playlistId})
+        .then(function (playlists) {
+            return playlists;
+        });
 }
 
 function updatePlaylist(playlistId,playlist) {
@@ -63,7 +62,6 @@ function updatePlaylist(playlistId,playlist) {
 function addSongToPlaylist(playlistId,songId) {
     return playlistModel.findPlaylistById(playlistId)
         .then(function (list) {
-            console.log("list");
             var flag = '0';
             for(var i = 0; i < list.songlist.length; i ++) {
                 if(list.songlist[i] == songId) {
@@ -94,14 +92,6 @@ function removeSongFromAllPlaylists(songId){
             allPlaylists
                 .forEach(function (playlist) {
                     removeSongFromPlaylist(playlist._id, songId);
-                    // var songlist = playlist.songlist;
-                    // for (i = 0 ; i< songlist.length; i++){
-                    //     if (songlist[i] === songId){
-                    //         playlist.songlist.splice(i,1);
-                    //         playlist.save();
-                    //         break;
-                    //     }
-                    // }
                 }
             )
         })
@@ -126,14 +116,4 @@ function addReview(playlistId, reviewId) {
             list.reviews.push(reviewId);
             return list.save();
         });
-}
-
-function removeReview(playlistId, reviewId) {
-    return userModel
-        .findById(playlistId)
-        .then(function (list) {
-            var index = list.reviews.indexOf(reviewId);
-            list.reviews.splice(index, 1);
-            return list.save();
-        })
 }

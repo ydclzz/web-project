@@ -11,6 +11,7 @@
         model.currentPlaylistId = "";
         model.findMusicians = findMusicians;
         model.findCritics = findCritics;
+        model.findCritics = findCritics;
         model.changeRightPanel = changeRightPanel;
         model.createPlaylistForUser = createPlaylistForUser;
         model.searchTrack = searchTrack;
@@ -45,6 +46,7 @@
                 findTransactionsByPublisher();
             }
             findMusicians();
+            findCritics();
             findPlaylists();
             if (model.user.type === 'ADMIN') {
                 findCritics();
@@ -61,6 +63,14 @@
             userService.findFollowingByTypeByUser(user._id, 'MUSICIAN')
                 .then(function (response) {
                     model.followingMusicians = response.data;
+                    // console.log(model.followingMusicians);
+                })
+        }
+
+        function findCritics() {
+            userService.findFollowingByTypeByUser(user._id, 'CRITIC')
+                .then(function (response) {
+                    model.followingCritics = response.data;
                     // console.log(model.followingMusicians);
                 })
         }

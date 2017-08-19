@@ -132,7 +132,6 @@ function updateUser(req,res) {
 }
 
 function deleteUser(req,res) {
-    console.log("deleteUser");
     var userId = req.params.userId;
     console.log(userId);
     userModel
