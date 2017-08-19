@@ -66,75 +66,12 @@ function findAllUsers() {
 }
 
 function deleteUserById(userId) {
-    return userModel.findOneAndRemove({_id: userId});
-}
-function deleteUserFromOthers(userId) {
-    return userModel
-        .findUserById(userId)
-        .populate('followers')
-        .exec()
+    return userModel.findOne({_id: userId})
         .then(function (user) {
-            var followers = user.followers;
-            console.log("user");
-            console.log(user);
-            console.log(followers);
-            for (i = 0; i < followers.length; i++){
-                var follower = followers[i];
-                console.log("follower");
-                console.log(follower);
-                var index = follower.following.indexOf(follower._id);
-                follower.following.splice(index, 1);
-                console.log(follower);
-                follower.save();
-            }
-            user.followers = [];
-            console.log(user);
-            return user.save();
+
         })
 }
 
-function deleteUserSongFromOthers(userId){
-    return userModel
-            .findUserById(userId)
-            .then(function (user) {
-                if (user.type === 'MUSICIAN'){
-                    var songs = user.songs;
-                    console.log("hahahha");
-                    console.log("user");
-                    console.log(songs);
-                    for (i = 0; i < songs.length; i++) {
-                        var song = songs[0];
-                        console.log("song");
-                        console.log(song);
-                        return songModel
-                            .findById(song)
-                            .populate('playlists')
-                            .exec()
-                            .then(function (song2) {
-                                console.log("song2");
-                                console.log(song2);
-                                var playlists = song2.playlists;
-                                console.log("playlists");
-                                console.log(playlists);
-                                for (j = 0; j < playlists.length; j++){
-                                    var playlist = playlists[j];
-                                    var index = playlist.songlist.indexOf(song._id);
-                                    playlist.songlist.splice(index, 1);
-                                    console.log(playlist);
-                                    playlist.save();
-                                }
-                            });
-                    }
-                    user.songs = [];
-                    console.log(user);
-                    return user.save();
-                }
-                else{
-                    return user;
-                }
-
-            })
-}
 //song
 
 function removeSong(userId, songId) {
@@ -205,16 +142,36 @@ function findFollowingByTypeByUser(userId, usertype){
 function addFollowersByUser(userId, followerId) {
     return userModel.findUserById(userId)
         .then(function (user) {
-            user.followers.push(followerId);
-            return user.save();
+            var flag = '1';
+            for(var u in user.followers) {
+                if(user.followers[u] == followerId) {
+                    flag = '0';
+                    break;
+                }
+            }
+            if(flag === '1') {
+                user.followers.push(followerId);
+                user.save();
+            }
+            return user;
         })
 }
 
 function addFollowingByUser(userId, followingId) {
     return userModel.findUserById(userId)
         .then(function (user) {
-            user.following.push(followingId);
-            return user.save();
+            var flag = '1';
+            for(var u in user.following) {
+                if(user.following[u] == followingId) {
+                    flag = '0';
+                    break;
+                }
+            }
+            if(flag === '1') {
+                user.following.push(followingId);
+                user.save();
+            }
+            return user;
         })
 }
 

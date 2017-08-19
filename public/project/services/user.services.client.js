@@ -58,7 +58,6 @@
         function deleteUser(userId){
             var url = "/projectapi/user/" + userId;
             return $http.delete(url);
-
         }
 
         function removeSong(userId, songId) {

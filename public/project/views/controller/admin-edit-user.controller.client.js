@@ -35,7 +35,7 @@
 
         function unregister(){
             userService.deleteUser(model.userId);
-            $location.url("#!/home");
+            $location.url("/home");
         }
 
         function showPassword() {
