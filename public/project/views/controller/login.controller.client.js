@@ -57,12 +57,11 @@
                             return userService.createUser(user);
                         } else {
                             model.errorRegisterMessage = "username already exist";
-                            return "exist";
                         }
                     })
                     .then(function(response){
+                        console.log(response.data);
                         if(response && response !== "exist") {
-                            user = response.data;
                             login(user);
                         }
                         else if(response !== "exist"){

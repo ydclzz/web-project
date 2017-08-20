@@ -9,6 +9,7 @@
         model.rightPanel = 'musicians';
         model.user = user;
         model.currentPlaylistId = "";
+        model.logout = logout;
         model.findMusicians = findMusicians;
         model.findCritics = findCritics;
         model.findCritics = findCritics;
@@ -67,6 +68,14 @@
 
         init();
 
+        function logout() {
+            userService
+                .logout()
+                .then(
+                    function(response) {
+                        $location.url("/");
+                    });
+        }
 
         function findMusicians() {
             userService.findFollowingByTypeByUser(user._id, 'MUSICIAN')
